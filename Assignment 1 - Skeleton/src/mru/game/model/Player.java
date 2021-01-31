@@ -63,4 +63,10 @@ public class Player {
 	public void setWins(int wins) {
 		this.wins = wins;
 	}
+	
+
+	public String format() {
+		return name + "," + score + "," + wins;
+	}
 }
+
