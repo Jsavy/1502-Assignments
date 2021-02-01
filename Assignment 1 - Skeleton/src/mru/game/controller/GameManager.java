@@ -28,7 +28,7 @@ public class GameManager {
 	public GameManager() throws Exception {
 		players = new ArrayList<Player>();
 		appMen = new AppMenu();
-		CasinoInfo();
+		casinoInfo();
 		launchApp();
 	}
 
@@ -45,21 +45,21 @@ public class GameManager {
 				
 				break;
 			case 's':
-				Search();
+				search();
 				break;
 			case 'e':
-				Exit();
+				exit();
 				break;
 			}
 		}
 	}
 
-	private void Search() {
+	private void search() {
 		char option = appMen.showSubMenu();
 		
 		switch (option) {
 		case 't':
-			FindTopPlayer();
+			findTopPlayer();
 			break;
 		case 's':
 			Player plyer = searchByName();
@@ -85,7 +85,7 @@ public class GameManager {
 		return plyer;
 	}
 
-	private void FindTopPlayer() {
+	private void findTopPlayer() {
 		// TODO Auto-generated method stub
 
 	}
@@ -96,7 +96,7 @@ public class GameManager {
 	 * @throws IOException
 	 */
 
-	private void Exit() throws IOException {
+	private void exit() throws IOException {
 		File file = new File(FILE_PATH);
 		PrintWriter pw = new PrintWriter(file);
 
@@ -112,7 +112,7 @@ public class GameManager {
 	 * 
 	 * @throws Exception
 	 */
-	private void CasinoInfo() throws Exception {
+	private void casinoInfo() throws Exception {
 
 		File myFile = new File(FILE_PATH);
 		String currentLine;
@@ -127,7 +127,7 @@ public class GameManager {
 						Integer.parseInt(splittedLine[2]));
 				players.add(p);
 			}
-
+			fileReader.close();
 		} else {
 			myFile.createNewFile();
 		}

@@ -63,4 +63,10 @@ public class AppMenu {
 	public void showPlayer (Player plyer) {
 		System.out.println(plyer);
 	}
+	
+	public int promptBet() {
+		System.out.println("How much do you want to bet this round? ");
+		int bet = scan.nextInt();
+		return bet;
+	}
 }
