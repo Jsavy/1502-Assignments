@@ -63,10 +63,23 @@ public class Player {
 	public void setWins(int wins) {
 		this.wins = wins;
 	}
-	
-
+	/**
+	 * Method to print objects into a readable string
+	 * @return  text     String of specific player object 
+	 */
+	public String toString() {
+		String text;
+		text = "Name: " + name + " Total score: " + score + " # of Wins " + wins;
+		return text;
+	}
+	/**
+	 * Method to print objects into a formatted string for export
+	 * @return  text     String of specific player object
+	 */
 	public String format() {
-		return name + "," + score + "," + wins;
+		String text;
+		text = name + "," + score + "," + wins;
+		return text;
 	}
 }
 

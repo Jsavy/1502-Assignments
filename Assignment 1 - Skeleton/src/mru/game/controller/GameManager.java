@@ -24,6 +24,7 @@ public class GameManager {
 	private static final String FILE_PATH = "res/CasinoInfo.txt";
 	ArrayList<Player> players;
 	AppMenu appMen;
+	ArrayList<Player> topPlayers;
 
 	public GameManager() throws Exception {
 		players = new ArrayList<Player>();
@@ -31,7 +32,10 @@ public class GameManager {
 		casinoInfo();
 		launchApp();
 	}
-
+	/**
+	 * This method assists in the processing of user inputs from the main menu 
+	 * @throws IOException
+	 */
 	private void launchApp() throws IOException {
 
 		boolean flag = true;
@@ -53,7 +57,9 @@ public class GameManager {
 			}
 		}
 	}
-
+	/**
+	 * This method assists in processing the users input for the sub menu if user selected (S)
+	 */
 	private void search() {
 		char option = appMen.showSubMenu();
 		
@@ -70,7 +76,10 @@ public class GameManager {
 		}
 		
 	}
-
+	/**
+	 * This method finds a player object from the inputed name from user 
+	 * @return  plyer   Player object of proper player from user inputted name
+	 */
 	private Player searchByName() {
 		String name = appMen.promptName();
 		Player plyer = null;
@@ -84,9 +93,31 @@ public class GameManager {
 		
 		return plyer;
 	}
-
+	/**
+	 * This method initializes new ArrayList for Top Players goes into the player database 
+	 * searches for the highest wins once highest score is determined goes through the ArrayList 
+	 * again and adds any player that has the highest amount of wins and adds into ArrayList for Top 
+	 * Players then calls method to print topPlayers
+	 *  
+	 */
 	private void findTopPlayer() {
-		// TODO Auto-generated method stub
+		int most = 0;
+		int value = 0;
+		topPlayers = new ArrayList<Player>();
+		
+		for (Player p: players) {
+			value = p.getWins();
+			if(value > most) {
+				most = value;
+			}
+		}
+		for (Player p: players) {
+			value = p.getWins();
+			if(value == most) {
+				topPlayers.add(p);
+			}
+		}
+		appMen.printTop(topPlayers);
 
 	}
 	

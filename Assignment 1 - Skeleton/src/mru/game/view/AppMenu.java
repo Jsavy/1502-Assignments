@@ -1,5 +1,6 @@
 package mru.game.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import mru.game.model.Player;
@@ -63,10 +64,24 @@ public class AppMenu {
 	public void showPlayer (Player plyer) {
 		System.out.println(plyer);
 	}
-	
+	/**
+	 * A prompt for the user to enter the amount they wish to bet
+	 * @return bet     The amount of virtual money the player wished to bet
+	 */
 	public int promptBet() {
 		System.out.println("How much do you want to bet this round? ");
 		int bet = scan.nextInt();
 		return bet;
+	}
+	/**
+	 * A method to print everyone in the ArrayList that has the most amount of wins 
+	 * when user inputs option (T)  
+	 * @param topPlayers  A ArrayList of everyone that has the most amount of wins in the whole player database
+	 */
+	public void printTop(ArrayList<Player> topPlayers) {
+		for (Player p: topPlayers) {
+			System.out.println(p.toString());
+		}
+		
 	}
 }
