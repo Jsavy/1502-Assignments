@@ -9,7 +9,9 @@ import java.util.Scanner;
 
 import mru.game.model.Player;
 import mru.game.view.AppMenu;
+import mru.game.controller.PuntoBancoGame;
 
+import mru.game.controller.PuntoBancoGame;
 public class GameManager {
 
 	/*
@@ -25,6 +27,7 @@ public class GameManager {
 	ArrayList<Player> players;
 	AppMenu appMen;
 	ArrayList<Player> topPlayers;
+	PuntoBancoGame pbg;
 
 	public GameManager() throws Exception {
 		players = new ArrayList<Player>();
@@ -53,7 +56,7 @@ public class GameManager {
 				break;
 			case 'e':
 				exit();
-				break;
+				flag = false;
 			}
 		}
 	}
@@ -67,8 +70,9 @@ public class GameManager {
 		case 't':
 			findTopPlayer();
 			break;
-		case 's':
-			Player plyer = searchByName();
+		case 'n':
+			String name = appMen.promptName();
+			Player plyer = searchByName(name);
 			appMen.showPlayer(plyer);
 			break;
 		case 'b':
@@ -76,16 +80,28 @@ public class GameManager {
 		}
 		
 	}
+	
+	private void playGame() {
+		
+		final int ZERO = 0;
+		String name = appMen.promptName();
+		Player p = searchByName(name);
+		
+		if (p == null) {
+			players.add (new Player (name, ZERO, ZERO));
+		}
+		
+        pbg = new PuntoBancoGame();
+	}
 	/**
 	 * This method finds a player object from the inputed name from user 
 	 * @return  plyer   Player object of proper player from user inputted name
 	 */
-	private Player searchByName() {
-		String name = appMen.promptName();
+	private Player searchByName(String name) {
 		Player plyer = null;
 		
 		for (Player p: players) {
-			if (p.getName().equals(name)) {
+			if (p.getName().equalsIgnoreCase(name)) {
 				plyer = p;
 				break;
 			}

@@ -62,7 +62,8 @@ public class AppMenu {
 	 * @param plyer      The player object
 	 */
 	public void showPlayer (Player plyer) {
-		System.out.println(plyer);
+		Player ply = plyer;
+		System.out.println(ply.toString());
 	}
 	/**
 	 * A prompt for the user to enter the amount they wish to bet
@@ -84,4 +85,5 @@ public class AppMenu {
 		}
 		
 	}
+
 }
