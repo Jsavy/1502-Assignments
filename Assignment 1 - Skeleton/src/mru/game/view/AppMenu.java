@@ -47,6 +47,23 @@ public class AppMenu {
 		return option;
 	}
 	/**
+	 * This menu prompts the users on who he wishes to bet on, then returns the character which the user entered.
+	 * 
+	 * 
+	 * @return selection    The selection which the user has entered.
+	 */
+	public char betWho() {
+		System.out.println("Who do you want to bet on? \n");
+		System.out.println("\t (P) Player Wins");
+		System.out.println("\t (B) Banker Wins");
+		System.out.println("\t (T) Tie Ganme\n");
+		System.out.println("Enter your Choice: ");
+		
+		char selection = scan.nextLine().toLowerCase().charAt(0);
+		return selection;
+	}
+	
+	/**
 	 * A prompt for the user to enter their name
 	 * 
 	 * @return name     The name which the user has entered
