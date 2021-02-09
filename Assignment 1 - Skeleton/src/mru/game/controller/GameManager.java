@@ -166,7 +166,7 @@ public class GameManager {
 		}
 		appMen.printTop(topPlayers);
 		
-		System.out.println("Press \"Enter\" to continue");
+		System.out.println("\nPress \"Enter\" to continue");
 		scan.nextLine();
 
 		launchApp();

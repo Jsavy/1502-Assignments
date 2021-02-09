@@ -26,7 +26,7 @@ public class AppMenu {
 		System.out.println("\t (P) Play Game");
 		System.out.println("\t (S) Search");
 		System.out.println("\t (E) Exit\n");
-		System.out.println("Enter a choice: ");
+		System.out.print("\nEnter a choice: ");
 		
 		char option = scan.nextLine().toLowerCase().charAt(0);
 		return option;
@@ -41,7 +41,7 @@ public class AppMenu {
 		System.out.println("\t (T) Top player (Most number of wins)");
 		System.out.println("\t (N) Looking for a Name");
 		System.out.println("\t (B) Back to Main menu\n");
-		System.out.println("Enter a choice: ");
+		System.out.print("\nEnter a choice: ");
 		
 		char option = scan.nextLine().toLowerCase().charAt(0);
 		return option;
@@ -80,6 +80,8 @@ public class AppMenu {
 	 */
 	public void showPlayer (Player plyer) {
 		Player ply = plyer;
+		System.out.println("            - PLAYER INFO -");
+		System.out.println("+==================+============+===================+");
 		System.out.println(ply.toString());
 	}
 	/**
@@ -97,8 +99,13 @@ public class AppMenu {
 	 * @param topPlayers  A ArrayList of everyone that has the most amount of wins in the whole player database
 	 */
 	public void printTop(ArrayList<Player> topPlayers) {
+		System.out.println("            - TOP PLAYERS -");
+		System.out.println("+==================+==================+");
+		System.out.println("|NAME              |# WINS            |");
+		System.out.println("+==================+==================+");
 		for (Player p: topPlayers) {
-			System.out.println(p.toString());
+			System.out.println(p.ToptoString());
+			System.out.println("+------------------+------------------+");
 		}
 		
 	}

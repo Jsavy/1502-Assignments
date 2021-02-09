@@ -67,9 +67,9 @@ public class Player {
 	 * Method to print objects into a readable string
 	 * @return  text     String of specific player object 
 	 */
-	public String toString() {
+	public String ToptoString() {
 		String text;
-		text = "Name: " + name + " Total score: " + score + " # of Wins " + wins;
+		text = String.format("|%-18s|%-18d|",name, wins);
 		return text;
 	}
 	/**
@@ -85,6 +85,12 @@ public class Player {
 	public String welcomeToString() {
 		String text;
 		text = "Welcome " + name + " Your initial balance is: " + score + " $";
+		return text;
+	}
+	
+	public String toString() {
+		String text;
+		text = String.format("|%-18s|%-12d|%d $              |  ", name, wins, score);
 		return text;
 	}
 	
