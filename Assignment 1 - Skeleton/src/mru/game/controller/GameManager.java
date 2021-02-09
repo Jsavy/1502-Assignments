@@ -49,7 +49,7 @@ public class GameManager {
 
 			switch (option) {
 			case 'p':
-				
+				playGame();
 				break;
 			case 's':
 				search();
@@ -62,9 +62,11 @@ public class GameManager {
 	}
 	/**
 	 * This method assists in processing the users input for the sub menu if user selected (S)
+	 * @throws IOException 
 	 */
-	private void search() {
+	private void search() throws IOException {
 		char option = appMen.showSubMenu();
+		Scanner scan = new Scanner(System.in);
 		
 		switch (option) {
 		case 't':
@@ -73,25 +75,52 @@ public class GameManager {
 		case 'n':
 			String name = appMen.promptName();
 			Player plyer = searchByName(name);
+			
 			appMen.showPlayer(plyer);
+			
+			System.out.println("Press \"Enter\" to continue");
+			scan.nextLine();
+			
 			break;
 		case 'b':
+			launchApp();
 			break;
 		}
 		
 	}
-	
+	/**
+	 * This method is the Play option which initializes the start of a game
+	 * It asks for the player's name and creates a new one if not found.
+	 * A welcome message displays if the player is already in the database
+	 */
 	private void playGame() {
 		
+		final int HUNDRED = 100;
 		final int ZERO = 0;
 		String name = appMen.promptName();
 		Player p = searchByName(name);
 		
 		if (p == null) {
-			players.add (new Player (name, ZERO, ZERO));
+			players.add (new Player (name, HUNDRED, ZERO));
+		}else {
+			System.out.println(p.welcomeToString());
 		}
 		
         pbg = new PuntoBancoGame();
+        
+        char choice = appMen.betWho();
+        int betAmt = appMen.promptBet();
+        
+        boolean win = pbg.launchGame(choice, betAmt);
+        if (win) {
+        	for (Player pl: players) {
+        		if (pl.getName().equalsIgnoreCase(name)) {
+        			int num = pl.getWins();
+        			pl.setWins(num + 1);
+        		}
+        	}
+        }
+  
 	}
 	/**
 	 * This method finds a player object from the inputed name from user 
@@ -114,12 +143,14 @@ public class GameManager {
 	 * searches for the highest wins once highest score is determined goes through the ArrayList 
 	 * again and adds any player that has the highest amount of wins and adds into ArrayList for Top 
 	 * Players then calls method to print topPlayers
+	 * @throws IOException 
 	 *  
 	 */
-	private void findTopPlayer() {
+	private void findTopPlayer() throws IOException {
 		int most = 0;
 		int value = 0;
 		topPlayers = new ArrayList<Player>();
+		Scanner scan = new Scanner(System.in);
 		
 		for (Player p: players) {
 			value = p.getWins();
@@ -134,7 +165,11 @@ public class GameManager {
 			}
 		}
 		appMen.printTop(topPlayers);
+		
+		System.out.println("Press \"Enter\" to continue");
+		scan.nextLine();
 
+		launchApp();
 	}
 	
 	/**

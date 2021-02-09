@@ -82,5 +82,11 @@ public class Player {
 		return text;
 	}
 	
+	public String welcomeToString() {
+		String text;
+		text = "Welcome " + name + " Your initial balance is: " + score + " $";
+		return text;
+	}
+	
 }
 

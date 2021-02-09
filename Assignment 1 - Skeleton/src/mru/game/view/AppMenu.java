@@ -56,8 +56,8 @@ public class AppMenu {
 		System.out.println("Who do you want to bet on? \n");
 		System.out.println("\t (P) Player Wins");
 		System.out.println("\t (B) Banker Wins");
-		System.out.println("\t (T) Tie Ganme\n");
-		System.out.println("Enter your Choice: ");
+		System.out.println("\t (T) Tie Game\n");
+		System.out.print("\nEnter your Choice: ");
 		
 		char selection = scan.nextLine().toLowerCase().charAt(0);
 		return selection;
@@ -87,7 +87,7 @@ public class AppMenu {
 	 * @return bet     The amount of virtual money the player wished to bet
 	 */
 	public int promptBet() {
-		System.out.println("How much do you want to bet this round? ");
+		System.out.print("\nHow much do you want to bet this round? ");
 		int bet = scan.nextInt();
 		return bet;
 	}
