@@ -81,13 +81,19 @@ public class Player {
 		text = name + "," + score + "," + wins;
 		return text;
 	}
-	
+	/**
+	 * Method to print a welcome message to players once they have been identified
+	 * @return  text       String of welcome message with specific player object
+	 */
 	public String welcomeToString() {
 		String text;
 		text = "Welcome " + name + " Your initial balance is: " + score + " $";
 		return text;
 	}
-	
+	/**
+	 * Method to print formatted layout of player object
+	 * @return  text     String of text containing info about player object
+	 */
 	public String toString() {
 		String text;
 		text = String.format("|%-18s|%-12d|%d $              |  ", name, wins, score);
