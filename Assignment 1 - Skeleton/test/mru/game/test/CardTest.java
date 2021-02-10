@@ -8,7 +8,7 @@ class CardTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+
 	}
 
 }
