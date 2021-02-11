@@ -183,6 +183,9 @@ public class PuntoBancoGame {
 					betAmount = betAmount * 5;
 				}
 			}
+			
+			 player = player % TEN;
+			 banker = banker % TEN;
 
 			if (winner == choice){
 				win = true;
@@ -197,13 +200,13 @@ public class PuntoBancoGame {
 			appMen.noThird(player, banker);
 		}
 		if(playerCardThree != null && bankerCardThree == null) {
-			appMen.noThirdBanker(playerCardThree, playerScore, banker);
+			appMen.noThirdBanker(playerCardThree, player, banker);
 		}
 		if(playerCardThree != null && bankerCardThree != null) {
-			appMen.thirdCard(playerCardThree, bankerCardThree, playerScore, banker);
+			appMen.thirdCard(playerCardThree, bankerCardThree, player, banker);
 		}
 		if(playerCardThree == null && bankerCardThree != null) {
-			appMen.noThirdPlayer(bankerCardThree, playerScore, banker);
+			appMen.noThirdPlayer(bankerCardThree, player, banker);
 		}
 		appMen.betHeader();
 		if(win == true) {

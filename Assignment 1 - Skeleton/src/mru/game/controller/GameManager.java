@@ -49,9 +49,11 @@ public class GameManager {
 			switch (option) {
 			case 'p':
 				playGame();
+				flag = false;
 				break;
 			case 's':
 				search();
+				flag = false;
 				break;
 			case 'e':
 				flag = false;
@@ -75,6 +77,7 @@ public class GameManager {
 			switch (option) {
 			case 't':
 				findTopPlayer();
+				flag = false;
 				break;
 			case 'n':
 				String name = appMen.promptName();
@@ -82,6 +85,7 @@ public class GameManager {
 				if (plyer != null) {
 					appMen.showPlayer(plyer);
 					appMen.enterContinue();
+					launchApp();
 					flag = false;
 				}else {
 					 appMen.playerNotFound();
@@ -90,6 +94,7 @@ public class GameManager {
 				break;
 			case 'b':
 				launchApp();
+				flag = false;
 				break;
 			default: 
 				appMen.searchError();
