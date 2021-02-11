@@ -22,7 +22,10 @@ public class PuntoBancoGame {
 	public boolean launchGame (char choice, int betAmount) {
 		boolean win = false;
 		
-		System.out.println("        - PUNTO BANCO -");
+		System.out.println("                 - PUNTO BANCO -");
+		System.out.println("+=======================+=======================+");
+		System.out.println("||PLAYER                |BANKER                ||");
+		System.out.println("+=======================+=======================+");
 		
 		return win;
 	}

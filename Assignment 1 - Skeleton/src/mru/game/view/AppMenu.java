@@ -80,9 +80,12 @@ public class AppMenu {
 	 */
 	public void showPlayer (Player plyer) {
 		Player ply = plyer;
-		System.out.println("            - PLAYER INFO -");
-		System.out.println("+==================+============+===================+");
+		System.out.println("                  - PLAYER INFO -");
+		System.out.println("+==================+============+====================+");
+		System.out.println("|NAME              |# WINS      |BALANCE             |");
+		System.out.println("+==================+============+====================+");
 		System.out.println(ply.toString());
+		System.out.println("+==================+============+====================+");
 	}
 	/**
 	 * A prompt for the user to enter the amount they wish to bet
