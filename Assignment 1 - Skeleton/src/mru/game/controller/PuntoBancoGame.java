@@ -80,14 +80,17 @@ public class PuntoBancoGame {
 			  player = player % TEN;
 			  banker = banker % TEN;
 			  
-			  if (player != 8 || player != 9|| banker != 8 || player != 9) {
+			  if (player == 8 || player == 9 || banker == 8 || banker == 9) {
 
+				  stopGame = true;
+				  
+			}else {
 				  if (player <= 5) {
 					  playerCardThree = deck.getDeck().remove(0);
 					  if (playerCardThree.getRank() >= 10) {
 						  player += ZERO;
 					  }else {
-						  player += playerCardTwo.getRank();
+						  player += playerCardThree.getRank();
 					  }	  
 				  }else if (banker <= 5) {
 						  bankerCardThree = deck.getDeck().remove(0);
@@ -103,8 +106,8 @@ public class PuntoBancoGame {
 				  }
 
 
-			  	
-				  if (playerCardThree.getRank() == 2 && playerCardThree.getRank() == 3){
+			  	if (playerCardThree != null) {
+			  		if (playerCardThree.getRank() == 2 && playerCardThree.getRank() == 3){
 					  	if (banker <= 4){
 							  bankerCardThree = deck.getDeck().remove(0);
 							  if (bankerCardThree.getRank() >= 10) {
@@ -160,8 +163,7 @@ public class PuntoBancoGame {
 						   stopGame = true;
 					   }
 				  }
-			}else {
-				stopGame = true;
+			  	}
 			}
 		}
 	
