@@ -57,7 +57,7 @@ public class GameManager {
 				exit();
 				flag = false;
 			default:
-				System.out.println("Invalid Input: Please try again!");
+				System.out.println("\nInvalid Input: Please try again!\n");
 			}
 		}
 	}
@@ -68,38 +68,52 @@ public class GameManager {
 	private void search() throws IOException {
 		char option = appMen.showSubMenu();
 		Scanner scan = new Scanner(System.in);
+		boolean flag = true;
 		
-		switch (option) {
-		case 't':
-			findTopPlayer();
-			break;
-		case 'n':
-			String name = appMen.promptName();
-			Player plyer = searchByName(name);
-			appMen.showPlayer(plyer);
-			System.out.println("Press \"Enter\" to continue");
-			scan.nextLine();
-			break;
-		case 'b':
-			launchApp();
-			break;
-		default: 
-			System.out.println("Invalid Input: Please try again!");
+		while (flag) {
+			switch (option) {
+			case 't':
+				findTopPlayer();
+				break;
+			case 'n':
+				String name = appMen.promptName();
+				Player plyer = searchByName(name);
+				if (plyer != null) {
+					appMen.showPlayer(plyer);
+					System.out.println("Press \"Enter\" to continue");
+					scan.nextLine();
+					flag = false;
+				}else {
+					 System.out.println("\nError: Person not found\n");
+					 search();
+				}
+				break;
+			case 'b':
+				launchApp();
+				break;
+			default: 
+				System.out.println("Invalid Input: Please try again!");
+				option = appMen.showSubMenu();
+			}
 		}
+
 		
 	}
 	/**
 	 * This method is the Play option which initializes the start of a game
 	 * It asks for the player's name and creates a new one if not found.
 	 * A welcome message displays if the player is already in the database
+	 * @throws IOException 
 	 */
-	private void playGame() {
+	private void playGame() throws IOException {
 		Scanner scan = new Scanner(System.in);
 		final int HUNDRED = 100;
 		final int ZERO = 0;
 		String name = appMen.promptName();
 		Player p = searchByName(name);
-		char playAgain;
+		boolean input = true;
+		char playAgain = 'y';
+		pbg = new PuntoBancoGame();
 		
 		if (p == null) {
 			players.add (new Player (name, HUNDRED, ZERO));
@@ -113,56 +127,62 @@ public class GameManager {
 			System.out.println("*****************************************************************");
 		}
 		
-        pbg = new PuntoBancoGame();
-        
-        char choice = appMen.betWho();
-		switch (choice) {
-			case 'p':
-				choice = 'p';
-				break;
-			case 'b':
-				choice = 'b';
-				break;
-			case 't':
-				choice = 't';
-				break;
-			default:
-			System.out.println("Invalid Input: Please try again!");
-		}
+        	char choice = appMen.betWho();
+            while (input == true) {
+            	switch (choice) {
+    			case 'p':
+    				choice = 'p';
+    				input = false;
+    				break;
+    			case 'b':
+    				choice = 'b';
+    				input = false;
+    				break;
+    			case 't':
+    				choice = 't';
+    				input = false;
+    				break;
+    			default:
+    			System.out.println("\nInvalid Input: Please try again!\n");
+    			choice = appMen.betWho();
+    		}
 
-        int betAmt = appMen.promptBet();
-        while(betAmt > p.getScore()) {
-        	System.out.println("You are unable to bet an amount greater than your score please try again");
-        	betAmt = appMen.promptBet();
-        }
-        
-        boolean win = pbg.launchGame(p, choice, betAmt);
-        if (win = true) {
-        	for (Player pl: players) {
-        		if (pl.getName().equalsIgnoreCase(name)) {
-        			int num = pl.getWins();
-        			int scores = pl.getScore();
-        			if(choice == 't') {
-        				betAmt = betAmt * 5;
-        			}
-        			pl.setWins(num + 1);
-        			pl.setScore(betAmt);
-        		}
-        	}
-     
-        } else {
-        	for (Player pl: players) {
-        		if (pl.getName().equalsIgnoreCase(name)) {
-        			int lose = pl.getScore() - betAmt;
-        			pl.setScore(lose);
-        		}
-        	}
-        }
+            }
+    		
+            int betAmt = appMen.promptBet();
+            while(betAmt > p.getScore()) {
+            	System.out.println("You are unable to bet an amount greater than your score please try again");
+            	betAmt = appMen.promptBet();
+            }
+            
+            boolean win = pbg.launchGame(p, choice, betAmt);
+            if (win = true) {
+            	for (Player pl: players) {
+            		if (pl.getName().equalsIgnoreCase(name)) {
+            			int num = pl.getWins();
+            			int scores = pl.getScore();
+            			if(choice == 't') {
+            				betAmt = betAmt * 5;
+            			}
+            			pl.setWins(num + 1);
+            			pl.setScore(betAmt);
+            		}
+            	}
+         
+            } else {
+            	for (Player pl: players) {
+            		if (pl.getName().equalsIgnoreCase(name)) {
+            			int lose = pl.getScore() - betAmt;
+            			pl.setScore(lose);
+            		}
+            	}
+            }
+            System.out.println("Do you want to play again (Y/N)?");
+    		playAgain = scan.nextLine().toLowerCase().charAt(0);
 
-		System.out.println("Do you want to play again (Y/N)?");
-		playAgain = scan.nextLine().toLowerCase().charAt(0);
+		
 
-  
+
 	}
 	/**
 	 * This method finds a player object from the inputed name from user 

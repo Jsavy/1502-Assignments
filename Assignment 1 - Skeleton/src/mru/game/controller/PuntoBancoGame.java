@@ -63,20 +63,25 @@ public class PuntoBancoGame {
 			} else {
 				player = playerCardOne.getRank();
 			}
+			
 			if(bankerCardOne.getRank() >= 10) {
 				banker = ZERO;
 			} else {
 				banker = bankerCardOne.getRank();
-			} if(playerCardTwo.getRank() >= 10) {
-				player += ZERO;
+			}
+			
+			if(playerCardTwo.getRank() >= 10) {
+			player += ZERO;
 			} else {
 				player += playerCardTwo.getRank();
 			}
+			
 			if(bankerCardTwo.getRank() >= 10) {
 				banker += ZERO;
 			} else {
 				banker += bankerCardTwo.getRank();
 			}
+			
 			  player = player % TEN;
 			  banker = banker % TEN;
 			  
