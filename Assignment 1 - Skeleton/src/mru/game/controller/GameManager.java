@@ -179,6 +179,9 @@ public class GameManager {
             	}
             }
     		playAgain = appMen.playAgain();
+    		if(playAgain == 'n') {
+    			appMen.showMainMenu();
+    		}
 
 		
 

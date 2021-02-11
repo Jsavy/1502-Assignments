@@ -257,6 +257,7 @@ public class AppMenu {
 	public char playAgain() {
 		char option;
 		System.out.println("Do you want to play again (Y/N)?");
+		scan.nextLine();
 		option = scan.nextLine().toLowerCase().charAt(0);
 		return option;
 	}
