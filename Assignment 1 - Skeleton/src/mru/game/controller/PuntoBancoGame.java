@@ -11,6 +11,7 @@ public class PuntoBancoGame {
 	 */
 	AppMenu appMen;
 	CardDeck deck;
+	Card myCard;
 	
 	public PuntoBancoGame () {
 		appMen = new AppMenu();
@@ -26,6 +27,8 @@ public class PuntoBancoGame {
 		System.out.println("+=======================+=======================+");
 		System.out.println("||PLAYER                |BANKER                ||");
 		System.out.println("+=======================+=======================+");
+		
+		
 		
 		return win;
 	}

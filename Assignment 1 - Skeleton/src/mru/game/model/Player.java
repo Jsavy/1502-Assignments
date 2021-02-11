@@ -87,7 +87,13 @@ public class Player {
 	 */
 	public String welcomeToString() {
 		String text;
-		text = "Welcome " + name + " Your initial balance is: " + score + " $";
+		text = "***  Welcome " + name + "    ---    Your balance is: $ " + score + "         ***"; 		
+		return text;
+	}
+	
+	public String welcomeBackToString() {
+		String text;
+		text = String.format ("***    Welcome Back %s   ---   Your balance is $ %-8d ***", name, score);
 		return text;
 	}
 	/**
@@ -96,7 +102,7 @@ public class Player {
 	 */
 	public String toString() {
 		String text;
-		text = String.format("|%-18s|%-12d|%d $              |  ", name, wins, score);
+		text = String.format("|%-18s|%-12d|$ %-18d|", name, wins, score);
 		return text;
 	}
 	

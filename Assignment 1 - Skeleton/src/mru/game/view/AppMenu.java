@@ -69,7 +69,7 @@ public class AppMenu {
 	 * @return name     The name which the user has entered
 	 */
 	public String promptName() {
-		System.out.println("What is your name: ");
+		System.out.print("What is your name: ");
 		String name = scan.nextLine().trim();
 		return name;
 	}

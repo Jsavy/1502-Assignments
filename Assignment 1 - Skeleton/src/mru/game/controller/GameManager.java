@@ -102,8 +102,14 @@ public class GameManager {
 		
 		if (p == null) {
 			players.add (new Player (name, HUNDRED, ZERO));
-		}else {
+			p = searchByName(name);
+			System.out.println("\n****************************************************************");
 			System.out.println(p.welcomeToString());
+			System.out.println("****************************************************************");
+		}else {
+			System.out.println("\n*****************************************************************");
+			System.out.println(p.welcomeBackToString());
+			System.out.println("*****************************************************************");
 		}
 		
         pbg = new PuntoBancoGame();
