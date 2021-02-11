@@ -42,7 +42,7 @@ public class GameManager {
 	private void launchApp() throws IOException {
 
 		boolean flag = true;
-		char option;
+		char option; // choice that the user will input
 
 		while (flag) {
 			option = appMen.showMainMenu();
@@ -223,6 +223,7 @@ public class GameManager {
 		for (Player p: players) {
 			value = p.getWins();
 			if(value == most) {
+				// adding players with the most wins to an arraylist
 				topPlayers.add(p);
 			}
 		}

@@ -29,20 +29,20 @@ public class PuntoBancoGame {
 	
 	
 	public boolean launchGame (Player name, char choice, int betAmount) {
-		boolean win = false;
-		boolean stopGame = false;
-		char winner = 'n';
-		Player pl = name;
-		final int ZERO = 0;
-		final int TEN = 10;
-		int player = 0;
-		int banker = 0;
-		Card playerCardOne = null;
-		Card bankerCardOne = null;
-		Card playerCardTwo = null;
-		Card bankerCardTwo = null;
-		Card playerCardThree = null;
-		Card bankerCardThree = null;
+		boolean win = false; // variable returned to indicate if the user won or loss
+		boolean stopGame = false;  // variable to stop the game when a condition is satisfied
+		char winner = 'n'; // indicates if player won, banker won or if it was a tie
+		Player pl = name; // user that is playing the game
+		final int ZERO = 0; // used to set the cards worth 10 or above to 0
+		final int TEN = 10; // used to calculate the score modulo 10
+		int player = ZERO; // score of the player
+		int banker = ZERO; // score of the banker
+		Card playerCardOne = null; // variable that holds the first player card drawn
+		Card bankerCardOne = null; // variable that holds the first banker card drawn
+		Card playerCardTwo = null; // variable that holds the second player card drawn
+		Card bankerCardTwo = null; // variable that holds the second banker card drawn
+		Card playerCardThree = null; // variable that holds the third player card drawn
+		Card bankerCardThree = null; // variable that holds the third banker card drawn
 
 		int playerScore = pl.getScore();
 		
@@ -50,6 +50,7 @@ public class PuntoBancoGame {
 		
 
 		while(deck.getDeck().remove(0) != null && stopGame != true) {
+			// Handing out the first two cards
 			playerCardOne = deck.getDeck().remove(0);
 			bankerCardOne = deck.getDeck().remove(0);
 			playerCardTwo = deck.getDeck().remove(0);
@@ -87,6 +88,7 @@ public class PuntoBancoGame {
 				  stopGame = true;
 				  
 			}else {
+				
 				  if (player <= 5) {
 					  playerCardThree = deck.getDeck().remove(0);
 					  if (playerCardThree.getRank() >= 10) {
@@ -106,8 +108,7 @@ public class PuntoBancoGame {
 				  }else {
 					  stopGame = true;
 				  }
-
-
+				  
 			  	if (playerCardThree != null) {
 			  		if (playerCardThree.getRank() == 2 && playerCardThree.getRank() == 3){
 					  	if (banker <= 4){
@@ -120,6 +121,7 @@ public class PuntoBancoGame {
 				 	  }else {
 						   stopGame = true;
 					   }
+					  	
 				  } else if (playerCardThree.getRank() == 4 || playerCardThree.getRank() == 5){
 					  	if (banker <= 5){
 							  bankerCardThree = deck.getDeck().remove(0);
@@ -131,6 +133,7 @@ public class PuntoBancoGame {
 				 	  }else {
 						   stopGame = true;
 					   }
+					  	
 				  } else if (playerCardThree.getRank() == 6 || playerCardThree.getRank() == 7) {
 					  	if (banker <= 6){
 							  bankerCardThree = deck.getDeck().remove(0);
@@ -142,6 +145,7 @@ public class PuntoBancoGame {
 				 	  }else {
 						   stopGame = true;
 					   }
+					  	
 				  }else if (playerCardThree.getRank() == 8){
 					  	if (banker <= 2){
 							  bankerCardThree = deck.getDeck().remove(0);
@@ -153,6 +157,7 @@ public class PuntoBancoGame {
 				 	  }else {
 						   stopGame = true;
 					   }
+					  	
 				}else if (playerCardThree.getRank() >= 9 || playerCardThree.getRank() == 1) {
 					  	if (banker <= 3){
 							  bankerCardThree = deck.getDeck().remove(0);
@@ -164,8 +169,8 @@ public class PuntoBancoGame {
 				 	  }else {
 						   stopGame = true;
 					   }
-				  }
-			  	}
+				   }
+			   }
 			}
 		}
 	
