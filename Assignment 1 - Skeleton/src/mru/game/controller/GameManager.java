@@ -54,8 +54,9 @@ public class GameManager {
 				search();
 				break;
 			case 'e':
-				exit();
 				flag = false;
+				exit();
+				break;
 			default:
 				System.out.println("\nInvalid Input: Please try again!\n");
 			}
