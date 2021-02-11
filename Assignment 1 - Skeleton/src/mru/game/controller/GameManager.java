@@ -154,6 +154,7 @@ public class GameManager {
         	for (Player pl: players) {
         		if (pl.getName().equalsIgnoreCase(name)) {
         			int lose = pl.getScore() - betAmt;
+        			pl.setScore(lose);
         		}
         	}
         }
