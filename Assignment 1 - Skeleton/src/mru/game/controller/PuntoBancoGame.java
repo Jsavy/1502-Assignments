@@ -46,10 +46,7 @@ public class PuntoBancoGame {
 
 		int playerScore = pl.getScore();
 		
-		System.out.println("\n\n                 - PUNTO BANCO -");
-		System.out.println("+=======================+=======================+");
-		System.out.println("||PLAYER                |BANKER                ||");
-		System.out.println("+=======================+=======================+");
+		appMen.printBoardHeader();
 		
 
 		while(deck.getDeck().remove(0) != null && stopGame != true) {
@@ -195,41 +192,26 @@ public class PuntoBancoGame {
 				pl.setScore(playerScore - betAmount);
 			}
 
-		System.out.format("|%-23s|%-23s|%n", playerCardOne.toString(), bankerCardOne.toString());	
-		System.out.println("+-----------------------+-----------------------+");
-		System.out.format("|%-23s|%-23s|%n", playerCardTwo.toString(), bankerCardTwo.toString());
-		System.out.println("+-----------------------+-----------------------+");
+		appMen.printTwo(playerCardOne, bankerCardOne, playerCardTwo, bankerCardTwo);
 		if(playerCardThree == null && bankerCardThree == null) {
-			System.out.println("|                       |                       |");
-			System.out.println("+-----------------------+-----------------------+");
-			System.out.println("|PLAYER POINTS: " + player + "       |BANKER POINTS: " + banker + "       |");
-			System.out.println("+=======================+=======================+\n");
+			appMen.noThird(player, banker);
 		}
 		if(playerCardThree != null && bankerCardThree == null) {
-			System.out.format("|%-23s|                       |%n", playerCardThree);
-			System.out.println("+-----------------------+-----------------------+");
-			System.out.println("|PLAYER POINTS: " + player + "       |BANKER POINTS: " + banker + "       |");
-			System.out.println("+=======================+=======================+\n");
+			appMen.noThirdBanker(playerCardThree, playerScore, banker);
 		}
 		if(playerCardThree != null && bankerCardThree != null) {
-			System.out.format("|%-23s|%-23s|%n", playerCardThree.toString(), bankerCardThree.toString());
-			System.out.println("+-----------------------+-----------------------+");
-			System.out.println("|PLAYER POINTS: " + player + "       |BANKER POINTS: " + banker + "       |");
-			System.out.println("+=======================+=======================+\n");
+			appMen.thirdCard(playerCardThree, bankerCardThree, playerScore, banker);
 		}
 		if(playerCardThree == null && bankerCardThree != null) {
-			System.out.format("|                      |%-23s|%n", bankerCardThree);
-			System.out.println("+-----------------------+-----------------------+");
-			System.out.println("|PLAYER POINTS: " + player + "       |BANKER POINTS: " + banker + "       |");
-			System.out.println("+=======================+=======================+\n");
+			appMen.noThirdPlayer(bankerCardThree, playerScore, banker);
 		}
-		System.out.println("        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		appMen.betHeader();
 		if(win == true) {
-			System.out.println("        $       PLAYER WON " + betAmount + "$        $");
+			appMen.playerWon(betAmount);
 		} else {
-			System.out.println("        $      PLAYER LOST " + betAmount + "$        $");
+			appMen.playerLost(betAmount);
 		}
-		System.out.println("        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n\n");
+		appMen.betFooter();
 		return win;
 	}
 }

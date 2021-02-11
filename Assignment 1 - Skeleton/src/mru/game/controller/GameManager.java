@@ -54,10 +54,11 @@ public class GameManager {
 				search();
 				break;
 			case 'e':
-				exit();
 				flag = false;
+				exit();
+				break;
 			default:
-				System.out.println("\nInvalid Input: Please try again!\n");
+				appMen.mainMenuError();
 			}
 		}
 	}
@@ -80,11 +81,10 @@ public class GameManager {
 				Player plyer = searchByName(name);
 				if (plyer != null) {
 					appMen.showPlayer(plyer);
-					System.out.println("Press \"Enter\" to continue");
-					scan.nextLine();
+					appMen.enterContinue();
 					flag = false;
 				}else {
-					 System.out.println("\nError: Person not found\n");
+					 appMen.playerNotFound();
 					 search();
 				}
 				break;
@@ -92,7 +92,7 @@ public class GameManager {
 				launchApp();
 				break;
 			default: 
-				System.out.println("Invalid Input: Please try again!");
+				appMen.searchError();
 				option = appMen.showSubMenu();
 			}
 		}
@@ -118,13 +118,9 @@ public class GameManager {
 		if (p == null) {
 			players.add (new Player (name, HUNDRED, ZERO));
 			p = searchByName(name);
-			System.out.println("\n****************************************************************");
-			System.out.println(p.welcomeToString());
-			System.out.println("****************************************************************");
+			appMen.welcomeNewPlayer(p);
 		}else {
-			System.out.println("\n*****************************************************************");
-			System.out.println(p.welcomeBackToString());
-			System.out.println("*****************************************************************");
+			appMen.welcomeOldPlayer(p);
 		}
 		
         	char choice = appMen.betWho();
@@ -143,7 +139,7 @@ public class GameManager {
     				input = false;
     				break;
     			default:
-    			System.out.println("\nInvalid Input: Please try again!\n");
+    			appMen.betError();
     			choice = appMen.betWho();
     		}
 
@@ -151,7 +147,7 @@ public class GameManager {
     		
             int betAmt = appMen.promptBet();
             while(betAmt > p.getScore()) {
-            	System.out.println("You are unable to bet an amount greater than your score please try again");
+            	appMen.errorBet();
             	betAmt = appMen.promptBet();
             }
             
@@ -177,8 +173,7 @@ public class GameManager {
             		}
             	}
             }
-            System.out.println("Do you want to play again (Y/N)?");
-    		playAgain = scan.nextLine().toLowerCase().charAt(0);
+    		playAgain = appMen.playAgain();
 
 		
 
@@ -228,8 +223,7 @@ public class GameManager {
 		}
 		appMen.printTop(topPlayers);
 		
-		System.out.println("\nPress \"Enter\" to continue");
-		scan.nextLine();
+		appMen.enterContinue();
 
 		launchApp();
 	}

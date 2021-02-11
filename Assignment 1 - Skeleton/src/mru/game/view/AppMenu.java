@@ -3,6 +3,7 @@ package mru.game.view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import mru.game.controller.Card;
 import mru.game.model.Player;
 
 public class AppMenu {
@@ -111,6 +112,177 @@ public class AppMenu {
 			System.out.println("+------------------+------------------+");
 		}
 		
+	}
+	/**
+	 * Prints the header to the Punto Banco Game board
+	 */
+	public void printBoardHeader() {
+		System.out.println("\n\n                 - PUNTO BANCO -");
+		System.out.println("+=======================+=======================+");
+		System.out.println("||PLAYER                |BANKER                ||");
+		System.out.println("+=======================+=======================+");
+	}
+	/**
+	 * Prints the first two cards for Punto Banco following game board layout
+	 * 
+	 * @param playerCardOne  the first card the player received
+	 * @param bankerCardOne  the first card the banker received
+	 * @param playerCardTwo  the second card the player received
+	 * @param bankerCardTwo  the second card the banker received
+	 */
+	public void printTwo(Card playerCardOne, Card bankerCardOne, Card playerCardTwo, Card bankerCardTwo) {
+		System.out.format("|%-23s|%-23s|%n", playerCardOne.toString(), bankerCardOne.toString());	
+		System.out.println("+-----------------------+-----------------------+");
+		System.out.format("|%-23s|%-23s|%n", playerCardTwo.toString(), bankerCardTwo.toString());
+		System.out.println("+-----------------------+-----------------------+");
+	}
+	/**
+	 * Prints if no third card was given to the players
+	 * 
+	 * @param player  the modulo value of the sum of cards the player received
+	 * @param banker  the modulo value of the sum of cards the banker received
+	 */
+	public void noThird(int player, int banker) {
+		System.out.println("|                       |                       |");
+		System.out.println("+-----------------------+-----------------------+");
+		System.out.println("|PLAYER POINTS: " + player + "       |BANKER POINTS: " + banker + "       |");
+		System.out.println("+=======================+=======================+\n");
+	}
+	/**
+	 * Prints if player has a third card and banker does not
+	 * 
+	 * @param playerCardThree the third card the player receives
+	 * @param player          the modulo value of the sum of cards player received
+	 * @param banker          the modulo value of the sum of cards banker received
+	 */
+	public void noThirdBanker(Card playerCardThree, int player, int banker) {
+		System.out.format("|%-23s|                       |%n", playerCardThree);
+		System.out.println("+-----------------------+-----------------------+");
+		System.out.println("|PLAYER POINTS: " + player + "       |BANKER POINTS: " + banker + "       |");
+		System.out.println("+=======================+=======================+\n");
+	}
+	/**
+	 * Prints if player and banker both have a third card
+	 * 
+	 * @param playerCardThree   the third card the player receives
+	 * @param bankerCardThree   the third card the banker receives
+	 * @param player            the modulo value of the sum of cards player received
+	 * @param banker            the modulo value of the sum of cards banker received
+	 */
+	public void thirdCard(Card playerCardThree, Card bankerCardThree, int player, int banker) {
+		System.out.format("|%-23s|%-23s|%n", playerCardThree.toString(), bankerCardThree.toString());
+		System.out.println("+-----------------------+-----------------------+");
+		System.out.println("|PLAYER POINTS: " + player + "       |BANKER POINTS: " + banker + "       |");
+		System.out.println("+=======================+=======================+\n");
+	}
+	/**
+	 * Prints if only banker has a third card
+	 * 
+	 * @param bankerCardThree  the third card the banker receives
+	 * @param player           the modulo value of the sum of cards player received
+	 * @param banker           the modulo value of the sum of cards banker received
+	 */
+	public void noThirdPlayer(Card bankerCardThree, int player, int banker) {
+		System.out.format("|                      |%-23s|%n", bankerCardThree);
+		System.out.println("+-----------------------+-----------------------+");
+		System.out.println("|PLAYER POINTS: " + player + "       |BANKER POINTS: " + banker + "       |");
+		System.out.println("+=======================+=======================+\n");
+	}
+	/**
+	 * Prints the header for if player won or lost 
+	 */
+	public void betHeader() {
+		System.out.println("        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+	}
+	/**
+	 * Prints if the player won in punto banco
+	 * 
+	 * @param betAmount  the amount the user bet on the game
+	 */
+	public void playerWon(int betAmount) {
+		System.out.println("        $       PLAYER WON " + betAmount + "$        $");
+	}
+	/**
+	 * Prints if the player lost in punto banco
+	 * 
+	 * @param betAmount  the amount the user bet on the game
+	 */
+	public void playerLost(int betAmount) {
+		System.out.println("        $      PLAYER LOST " + betAmount + "$        $");
+	}
+	/**
+	 * Prints the footer to contain the player win or lost message to complete a box
+	 */
+	public void betFooter() {
+		System.out.println("        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n\n");
+	}
+	/**
+	 * Prints if the player already existed in the database
+	 * 
+	 * @param p  the player that is playing
+	 */
+	public void welcomeOldPlayer(Player p) {
+		System.out.println("\n*****************************************************************");
+		System.out.println(p.welcomeBackToString());
+		System.out.println("*****************************************************************");
+	}
+	/**
+	 * Prints if the player is a new player that has to be added to database
+	 * 
+	 * @param p  the player that is playing 
+	 */
+	public void welcomeNewPlayer(Player p) {
+		System.out.println("\n****************************************************************");
+		System.out.println(p.welcomeToString());
+		System.out.println("****************************************************************");
+	}
+	/**
+	 * Prints if the player tries to bet a amount larger than his score
+	 */
+	public void errorBet() {
+		System.out.println("You are unable to bet an amount greater than your score please try again");
+	}
+	/**
+	 * Prints whenever we want to know if user wishes to continue after receiving the info provided
+	 */
+	public void enterContinue() {
+		System.out.println("Press \"Enter\" to continue");
+		scan.nextLine();
+	}
+	/**
+	 * Prints when the Punto Banco game is over to ask if player wishes to play again
+	 * 
+	 * @return option   the option the user selects 
+	 */
+	public char playAgain() {
+		char option;
+		System.out.println("Do you want to play again (Y/N)?");
+		option = scan.nextLine().toLowerCase().charAt(0);
+		return option;
+	}
+	/**
+	 * Prints if the user searches for a player that is not in the database
+	 */
+	public void playerNotFound() {
+		System.out.println("\nError: Person not found\n");
+	}
+	/**
+	 * Prints if the user selects an invalid option in the sub menu
+	 */
+	public void searchError() {
+		System.out.println("Invalid Input: Please try again!");
+	}
+	/**
+	 * Prints if the user selects an invalid option in the main menu
+	 */
+	public void mainMenuError() {
+		System.out.println("\nInvalid Input: Please try again!\n");
+	}
+	/**
+	 * Prints if the user selects a wrong option on who to bet on 
+	 */
+	public void betError() {
+		System.out.println("\nInvalid Input: Please try again!\n");
 	}
 
 }
