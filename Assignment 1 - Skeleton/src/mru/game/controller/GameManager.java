@@ -46,7 +46,6 @@ public class GameManager {
 
 		while (flag) {
 			option = appMen.showMainMenu();
-
 			switch (option) {
 			case 'p':
 				playGame();
@@ -57,6 +56,8 @@ public class GameManager {
 			case 'e':
 				exit();
 				flag = false;
+			default:
+				System.out.println("Invalid Input: Please try again!");
 			}
 		}
 	}
@@ -75,16 +76,15 @@ public class GameManager {
 		case 'n':
 			String name = appMen.promptName();
 			Player plyer = searchByName(name);
-			
 			appMen.showPlayer(plyer);
-			
 			System.out.println("Press \"Enter\" to continue");
 			scan.nextLine();
-			
 			break;
 		case 'b':
 			launchApp();
 			break;
+		default: 
+			System.out.println("Invalid Input: Please try again!");
 		}
 		
 	}
@@ -94,11 +94,12 @@ public class GameManager {
 	 * A welcome message displays if the player is already in the database
 	 */
 	private void playGame() {
-		
+		Scanner scan = new Scanner(System.in);
 		final int HUNDRED = 100;
 		final int ZERO = 0;
 		String name = appMen.promptName();
 		Player p = searchByName(name);
+		char playAgain;
 		
 		if (p == null) {
 			players.add (new Player (name, HUNDRED, ZERO));
@@ -115,17 +116,51 @@ public class GameManager {
         pbg = new PuntoBancoGame();
         
         char choice = appMen.betWho();
+		switch (choice) {
+			case 'p':
+				choice = 'p';
+				break;
+			case 'b':
+				choice = 'b';
+				break;
+			case 't':
+				choice = 't';
+				break;
+			default:
+			System.out.println("Invalid Input: Please try again!");
+		}
+
         int betAmt = appMen.promptBet();
+        while(betAmt > p.getScore()) {
+        	System.out.println("You are unable to bet an amount greater than your score please try again");
+        	betAmt = appMen.promptBet();
+        }
         
-        boolean win = pbg.launchGame(choice, betAmt);
-        if (win) {
+        boolean win = pbg.launchGame(p, choice, betAmt);
+        if (win = true) {
         	for (Player pl: players) {
         		if (pl.getName().equalsIgnoreCase(name)) {
         			int num = pl.getWins();
+        			int scores = pl.getScore();
+        			if(choice == 't') {
+        				betAmt = betAmt * 5;
+        			}
         			pl.setWins(num + 1);
+        			pl.setScore(betAmt);
+        		}
+        	}
+     
+        } else {
+        	for (Player pl: players) {
+        		if (pl.getName().equalsIgnoreCase(name)) {
+        			int lose = pl.getScore() - betAmt;
         		}
         	}
         }
+
+		System.out.println("Do you want to play again (Y/N)?");
+		playAgain = scan.nextLine().toLowerCase().charAt(0);
+
   
 	}
 	/**
