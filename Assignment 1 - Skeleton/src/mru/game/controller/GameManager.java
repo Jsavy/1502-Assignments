@@ -159,6 +159,7 @@ public class GameManager {
             	betAmt = appMen.promptBet();
             	}
             if(p.getScore() == 0) {
+            	appMen.noScore();
             	playAgain = 'n';
             } else {
             	playAgain = appMen.playAgain();
