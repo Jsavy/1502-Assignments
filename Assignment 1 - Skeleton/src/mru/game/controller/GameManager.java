@@ -152,8 +152,8 @@ public class GameManager {
     		}
 
             }
-    		
             int betAmt = appMen.promptBet();
+  
             while(betAmt > p.getScore()) {
             	appMen.errorBet();
             	betAmt = appMen.promptBet();

@@ -22,6 +22,8 @@ public class CardDeck {
 		deck = new ArrayList<Card>();
 		createDeck();
 		shuffleDeck();
+		
+
 	}
 
 	/**
