@@ -1,11 +1,12 @@
 package mru.game.model;
-
+/**
+ * This class represent each player record in the Database
+ * It is basically a model class for each record in the txt file
+ * @author Justin Savenko
+ * @author Austin Thieu
+ */
 public class Player {
 	
-	/**
-	 * This class represent each player record in the Database
-	 * It is basically a model class for each record in the txt file
-	 */
 	
 	private String name;  // the name of the player
 	private int score;    // the score of the player

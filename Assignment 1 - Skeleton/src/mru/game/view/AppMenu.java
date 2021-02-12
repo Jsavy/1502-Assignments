@@ -5,7 +5,12 @@ import java.util.Scanner;
 
 import mru.game.controller.Card;
 import mru.game.model.Player;
-
+/**
+ * This class contains all the menu and game board print methods
+ * @author Justin Savenko
+ * @author Austin Thieu
+ *
+ */
 public class AppMenu {
 
 	/**

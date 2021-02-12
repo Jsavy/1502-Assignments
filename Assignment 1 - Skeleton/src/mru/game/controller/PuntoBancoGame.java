@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 import mru.game.model.Player;
 import mru.game.view.AppMenu;
-
+/**
+ * This class represents the game Punto Banco
+ * @author Justin Savenko
+ * @author Austin Thieu
+ *
+ */
 public class PuntoBancoGame {
 	
 	/**

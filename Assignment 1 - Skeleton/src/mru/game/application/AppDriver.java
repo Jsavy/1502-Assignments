@@ -1,7 +1,12 @@
 package mru.game.application;
 
 import mru.game.controller.GameManager;
-
+/**
+ * This class runs the program
+ * @author Justin Savenko
+ * @author Austin Thieu
+ *
+ */
 public class AppDriver {
 
 	public static void main(String[] args) throws Exception {

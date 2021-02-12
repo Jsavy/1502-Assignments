@@ -10,7 +10,12 @@ import java.util.Scanner;
 import mru.game.model.Player;
 import mru.game.view.AppMenu;
 import mru.game.controller.PuntoBancoGame;
-
+/**
+ * This class manages the game
+ * @author Justin Savenko
+ * @author Austin Thieu
+ *
+ */
 public class GameManager {
 
 	/*
@@ -36,7 +41,7 @@ public class GameManager {
 	}
 	/**
 	 * This method assists in the processing of user inputs from the main menu 
-	 * @throws IOException
+	 * @throws IOException needed for file input
 	 */
 	private void launchApp() throws IOException {
 
@@ -65,7 +70,7 @@ public class GameManager {
 	}
 	/**
 	 * This method assists in processing the users input for the sub menu if user selected (S)
-	 * @throws IOException 
+	 * @throws IOException needed for file input 
 	 */
 	private void search() throws IOException {
 		char option = appMen.showSubMenu();
@@ -107,7 +112,7 @@ public class GameManager {
 	 * This method is the Play option which initializes the start of a game
 	 * It asks for the player's name and creates a new one if not found.
 	 * A welcome message displays if the player is already in the database
-	 * @throws IOException 
+	 * @throws IOException  needed for file input
 	 */
 	private void playGame() throws IOException {
 		Scanner scan = new Scanner(System.in);
@@ -176,7 +181,8 @@ public class GameManager {
 
 	}
 	/**
-	 * This method finds a player object from the inputed name from user 
+	 * This method finds a player object from the inputed name from user
+	 * @param   name    String of the players name 
 	 * @return  plyer   Player object of proper player from user inputted name
 	 */
 	private Player searchByName(String name) {
@@ -196,7 +202,7 @@ public class GameManager {
 	 * searches for the highest wins once highest score is determined goes through the ArrayList 
 	 * again and adds any player that has the highest amount of wins and adds into ArrayList for Top 
 	 * Players then calls method to print topPlayers
-	 * @throws IOException 
+	 * @throws IOException needed for File input
 	 *  
 	 */
 	private void findTopPlayer() throws IOException {
@@ -230,7 +236,7 @@ public class GameManager {
 	/**
 	 * A method which loads the player data into the file "CasinoInfo.txt"
 	 * 
-	 * @throws IOException
+	 * @throws IOException needed for file input
 	 */
 
 	private void exit() throws IOException {
@@ -247,7 +253,7 @@ public class GameManager {
 	/**
 	 * A method which loads the file "CasinoInfo.txt" and, if not found creates the file
 	 * 
-	 * @throws Exception
+	 * @throws Exception  used for file input
 	 */
 	private void casinoInfo() throws Exception {
 
