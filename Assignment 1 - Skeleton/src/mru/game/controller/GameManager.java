@@ -11,7 +11,6 @@ import mru.game.model.Player;
 import mru.game.view.AppMenu;
 import mru.game.controller.PuntoBancoGame;
 
-import mru.game.controller.PuntoBancoGame;
 public class GameManager {
 
 	/*
@@ -33,7 +32,7 @@ public class GameManager {
 		players = new ArrayList<Player>();
 		appMen = new AppMenu();
 		casinoInfo();
-		launchApp();
+		launchApp(); 
 	}
 	/**
 	 * This method assists in the processing of user inputs from the main menu 
@@ -47,20 +46,20 @@ public class GameManager {
 		while (flag) {
 			option = appMen.showMainMenu();
 			switch (option) {
-			case 'p':
+			case 'p': // option to play the Punto Banco Game
 				playGame();
 				flag = false;
 				break;
-			case 's':
+			case 's': // option to go the Sub Menu, Search
 				search();
 				flag = false;
 				break;
-			case 'e':
+			case 'e': // option to save and exit the application
 				flag = false;
 				exit();
 				break;
 			default:
-				appMen.mainMenuError();
+				appMen.mainMenuError(); // error if user entered an invalid input
 			}
 		}
 	}
@@ -75,15 +74,15 @@ public class GameManager {
 		
 		while (flag) {
 			switch (option) {
-			case 't':
+			case 't': // option to display info about the players with the most wins
 				findTopPlayer();
 				flag = false;
 				break;
-			case 'n':
+			case 'n': // option to display info about user inputted player
 				String name = appMen.promptName();
 				Player plyer = searchByName(name);
 				if (plyer != null) {
-					appMen.showPlayer(plyer);
+					appMen.showPlayer(plyer); // shows user's inputted player data
 					appMen.enterContinue();
 					launchApp();
 					flag = false;
@@ -92,12 +91,12 @@ public class GameManager {
 					 search();
 				}
 				break;
-			case 'b':
+			case 'b': // option to go back to the main menu
 				launchApp();
 				flag = false;
 				break;
 			default: 
-				appMen.searchError();
+				appMen.searchError(); // error if user enters an invalid input
 				option = appMen.showSubMenu();
 			}
 		}
@@ -121,6 +120,7 @@ public class GameManager {
 		char choice;
 		pbg = new PuntoBancoGame();
 		
+		// Adding new player and welcoming back returning players via name search
 		if (p == null) {
 			players.add (new Player (name, HUNDRED, ZERO));
 			p = searchByName(name);
@@ -128,21 +128,21 @@ public class GameManager {
 		}else {
 			appMen.welcomeOldPlayer(p);
 		}
-
-			playAgain = 'y';
+			playAgain = 'y'; // variable to determine if the user wishes to continue playing
 			while (playAgain == 'y') {
+				// Menu to display which side to bet on
 				choice = appMen.betWho();
             while (input == true) {
             	switch (choice) {
-    			case 'p':
+    			case 'p': // option for Player Wins
     				choice = 'p';
     				input = false;
     				break;
-    			case 'b':
+    			case 'b': // option for Banker wins
     				choice = 'b';
     				input = false;
     				break;
-    			case 't':
+    			case 't': // option for Tie
     				choice = 't';
     				input = false;
     				break;
@@ -152,16 +152,19 @@ public class GameManager {
     		}
 
             }
-            int betAmt = appMen.promptBet();
+            int betAmt = appMen.promptBet(); // Asking user for bet amount
   
+			// Error message when user bets more than their balance
             while(betAmt > p.getScore()) {
             	appMen.errorBet();
             	betAmt = appMen.promptBet();
             	}
-            if(p.getScore() == 0) {
+			// If user's balance is 0, returns them to main menu to exit
+            if(p.getScore() == ZERO) {
             	appMen.noScore();
             	playAgain = 'n';
             } else {
+			// Replays the game if the user chooses 'y'
 				pbg.launchGame(p, choice, betAmt);
             	playAgain = appMen.playAgain();
             }
@@ -202,20 +205,22 @@ public class GameManager {
 		topPlayers = new ArrayList<Player>();
 		Scanner scan = new Scanner(System.in);
 		
+		// finding player with most wins
 		for (Player p: players) {
 			value = p.getWins();
 			if(value > most) {
 				most = value;
 			}
 		}
+		// finding other players with the same amount of wins as the top player
 		for (Player p: players) {
 			value = p.getWins();
 			if(value == most) {
-				// adding players with the most wins to an arraylist
-				topPlayers.add(p);
+				topPlayers.add(p); // adding players with the most wins to an arraylist
 			}
 		}
-		appMen.printTop(topPlayers);
+		
+		appMen.printTop(topPlayers); // printing the arraylist of top player with most wins
 		
 		appMen.enterContinue();
 
@@ -249,14 +254,17 @@ public class GameManager {
 		File myFile = new File(FILE_PATH);
 		String currentLine;
 		String[] splittedLine;
+		final int ZERO = 0;
+		final int ONE = 1;
+		final int TWO = 2;
 
 		if (myFile.exists()) {
 			Scanner fileReader = new Scanner(myFile);
 			while (fileReader.hasNextLine()) {
 				currentLine = fileReader.nextLine();
 				splittedLine = currentLine.split(",");
-				Player p = new Player(splittedLine[0], Integer.parseInt(splittedLine[1]),
-						Integer.parseInt(splittedLine[2]));
+				Player p = new Player(splittedLine[ZERO], Integer.parseInt(splittedLine[ONE]),
+						Integer.parseInt(splittedLine[TWO]));
 				players.add(p);
 			}
 			fileReader.close();

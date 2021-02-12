@@ -24,13 +24,14 @@ public class AppMenu {
 	 */
 	public char showMainMenu () {
 		char option;
+		final int ZERO = 0;
 		System.out.println("Select one of these option: \n");
 		System.out.println("\t (P) Play Game");
 		System.out.println("\t (S) Search");
 		System.out.println("\t (E) Exit\n");
 		System.out.print("\nEnter a choice: ");
 		
-		option = scan.nextLine().toLowerCase().charAt(0);
+		option = scan.nextLine().toLowerCase().charAt(ZERO);
 		return option;
 	}
 	/**
@@ -39,13 +40,14 @@ public class AppMenu {
 	 * @return option      The option which the user has entered
 	 */
 	public char showSubMenu () {
+		final int ZERO = 0;
 		System.out.println("Select one of these options: \n");
 		System.out.println("\t (T) Top player (Most number of wins)");
 		System.out.println("\t (N) Looking for a Name");
 		System.out.println("\t (B) Back to Main menu\n");
 		System.out.print("\nEnter a choice: ");
 		
-		char option = scan.nextLine().toLowerCase().charAt(0);
+		char option = scan.nextLine().toLowerCase().charAt(ZERO);
 		return option;
 	}
 	/**
@@ -55,13 +57,14 @@ public class AppMenu {
 	 * @return selection    The selection which the user has entered.
 	 */
 	public char betWho() {
+		final int ZERO = 0;
 		System.out.println("Who do you want to bet on? \n");
 		System.out.println("\t (P) Player Wins");
 		System.out.println("\t (B) Banker Wins");
 		System.out.println("\t (T) Tie Game\n");
 		System.out.print("\nEnter your Choice: ");
 		
-		char selection = scan.nextLine().toLowerCase().charAt(0);
+		char selection = scan.nextLine().toLowerCase().charAt(ZERO);
 		return selection;
 	}
 	
@@ -261,10 +264,11 @@ public class AppMenu {
 	 * @return option   the option the user selects 
 	 */
 	public char playAgain() {
+		final int ZERO = 0;
 		char option;
 		System.out.println("Do you want to play again (Y/N)?");
 		scan.nextLine();
-		option = scan.nextLine().toLowerCase().charAt(0);
+		option = scan.nextLine().toLowerCase().charAt(ZERO);
 		return option;
 	}
 	/**
