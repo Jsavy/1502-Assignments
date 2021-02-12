@@ -183,7 +183,7 @@ public class AppMenu {
 	 * @param banker           the modulo value of the sum of cards banker received
 	 */
 	public void noThirdPlayer(Card bankerCardThree, int player, int banker) {
-		System.out.format("|                      |%-23s|%n", bankerCardThree);
+		System.out.format("|                       |%-23s|%n", bankerCardThree);
 		System.out.println("+-----------------------+-----------------------+");
 		System.out.println("|PLAYER POINTS: " + player + "       |BANKER POINTS: " + banker + "       |");
 		System.out.println("+=======================+=======================+\n");

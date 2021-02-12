@@ -24,13 +24,11 @@ public class PuntoBancoGame {
 		deck = new CardDeck();
 		player = new Player("null", 0, 0);
 		myCard = new Card(0, "null");
-		ArrayList<CardDeck> deck;
 	}
 	
 	
 	public void launchGame (Player name, char choice, int betAmount) {
 		boolean win = false; // variable returned to indicate if the user won or loss
-		boolean stopGame = false;  // variable to stop the game when a condition is satisfied
 		char winner = 'n'; // indicates if player won, banker won or if it was a tie
 		Player pl = name; // user that is playing the game
 		final int ZERO = 0; // used to set the cards worth 10 or above to 0
@@ -47,6 +45,9 @@ public class PuntoBancoGame {
 			int playerScore = pl.getScore();
 		
 			appMen.printBoardHeader();
+			if(deck.getDeck().remove(0) == null) {
+				deck = new CardDeck();
+			}
 
 			// Handing out the first player card
 				playerCardOne = deck.getDeck().remove(0);
@@ -106,10 +107,8 @@ public class PuntoBancoGame {
 				 			bankerCardThree = deck.getDeck().remove(0);	
 						  if (bankerCardThree.getRank() >= 10) {
 							  banker += ZERO;
-							  stopGame = true;
 						  }else {
 							  banker += bankerCardThree.getRank();
-							  stopGame = true;
 						  }
 				  }
 				  
