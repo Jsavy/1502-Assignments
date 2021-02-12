@@ -35,7 +35,7 @@ public class CardDeck {
 		 * The for loop creates a whole new deck based on their suit and rank
 		 */
 		for (int i = 0 ; i < 4; i++) {
-			for (int j = 1 ; j <=13 ; j++) {
+			for (int j = 1 ; j <= 13; j++) {
 				deck.add(new Card (j,suits[i]));
 			}
 		}
