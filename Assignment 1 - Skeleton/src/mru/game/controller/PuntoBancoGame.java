@@ -44,10 +44,17 @@ public class PuntoBancoGame {
 
 			int playerScore = pl.getScore();
 		
+			System.out.println("Deck Size: ");
+			System.out.println(deck.getDeck().size());
 			appMen.printBoardHeader();
+
 			if(deck.getDeck().remove(0) == null) {
 				deck = new CardDeck();
 			}
+
+
+			
+			
 
 			// Handing out the first player card
 				playerCardOne = deck.getDeck().remove(0);
@@ -55,7 +62,7 @@ public class PuntoBancoGame {
 			// Handing out first banker card
 				bankerCardOne = deck.getDeck().remove(0);
 				
-			// Handing out second player card			
+			// Handing out second player card
 				playerCardTwo = deck.getDeck().remove(0);
 				
 			// Handing out second banker card
@@ -96,7 +103,7 @@ public class PuntoBancoGame {
 			}else {
 				 // Player draw if player score is 0-5
 				  if (player <= 5) {
-				 		playerCardThree = deck.getDeck().remove(0);	
+						  playerCardThree = deck.getDeck().remove(0);	
 					  if (playerCardThree.getRank() >= 10) {
 						  player += ZERO;
 					  }else {
@@ -104,8 +111,8 @@ public class PuntoBancoGame {
 					  }	
 					// Banker draw if player didn't draw and banker score is 0-5  
 				  }else if (banker <= 5) {
-				 			bankerCardThree = deck.getDeck().remove(0);	
-						  if (bankerCardThree.getRank() >= 10) {
+						  bankerCardThree = deck.getDeck().remove(0);	
+						 if (bankerCardThree.getRank() >= 10) {
 							  banker += ZERO;
 						  }else {
 							  banker += bankerCardThree.getRank();
@@ -116,7 +123,7 @@ public class PuntoBancoGame {
 					  // If player draws a 2 or 3 on the third card
 			  		if (playerCardThree.getRank() == 2 && playerCardThree.getRank() == 3){
 					  	if (banker <= 4){
-				 				bankerCardThree = deck.getDeck().remove(0);	
+					  			bankerCardThree = deck.getDeck().remove(0);	
 							  if (bankerCardThree.getRank() >= 10) {
 							  banker += ZERO;
 						  }else {
@@ -126,7 +133,7 @@ public class PuntoBancoGame {
 					  	// if player draws a 4 or 5 on the third card
 				  } else if (playerCardThree.getRank() == 4 || playerCardThree.getRank() == 5){
 					  	if (banker <= 5){
-				 			bankerCardThree = deck.getDeck().remove(0);	
+					  			bankerCardThree = deck.getDeck().remove(0);	
 							  if (bankerCardThree.getRank() >= 10) {
 							  banker += ZERO;
 						  }else {
@@ -135,8 +142,8 @@ public class PuntoBancoGame {
 				 	  }
 					  	// if the player draws 6 or 7 on the third card
 				  } else if (playerCardThree.getRank() == 6 || playerCardThree.getRank() == 7) {
-					  	if (banker <= 6){
-							bankerCardThree = deck.getDeck().remove(0);
+					  	if (banker <= 6){ 		
+					  			bankerCardThree = deck.getDeck().remove(0);	
 							  if (bankerCardThree.getRank() >= 10) {
 							  banker += ZERO;
 						  }else {
@@ -145,8 +152,8 @@ public class PuntoBancoGame {
 				 	  }
 					  	// if the player draws 8 on the third card
 				  }else if (playerCardThree.getRank() == 8){
-					  	if (banker <= 2){
-				 				bankerCardThree = deck.getDeck().remove(0);	
+					  	if (banker <= 2) {	  		
+					  			bankerCardThree = deck.getDeck().remove(0);	
 							  if (bankerCardThree.getRank() >= 10) {
 							  banker += ZERO;
 						  }else {
@@ -155,8 +162,8 @@ public class PuntoBancoGame {
 				 	  }
 					  	// if the player draws 9, 10, Jack, Queen, King, or Ace on the third card
 				}else if (playerCardThree.getRank() >= 9 || playerCardThree.getRank() == 1) {
-					  	if (banker <= 3){
-				 				bankerCardThree = deck.getDeck().remove(0);	
+					  	if (banker <= 3) {
+					  			bankerCardThree = deck.getDeck().remove(0);	
 							  if (bankerCardThree.getRank() >= 10) {
 							  banker += ZERO;
 						  }else {
@@ -165,7 +172,7 @@ public class PuntoBancoGame {
 				   }
 			   }
 			}
-			}
+		}
 			player = player % TEN;
 			banker = banker % TEN;
 			
@@ -214,8 +221,10 @@ public class PuntoBancoGame {
 			appMen.playerLost(betAmount);
 		}
 		appMen.betFooter();
+			}
+
 	}
-}
+
 
 
 

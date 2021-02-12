@@ -23,13 +23,14 @@ public class AppMenu {
 	 * @return option      The option which the user has entered
 	 */
 	public char showMainMenu () {
+		char option;
 		System.out.println("Select one of these option: \n");
 		System.out.println("\t (P) Play Game");
 		System.out.println("\t (S) Search");
 		System.out.println("\t (E) Exit\n");
 		System.out.print("\nEnter a choice: ");
 		
-		char option = scan.nextLine().toLowerCase().charAt(0);
+		option = scan.nextLine().toLowerCase().charAt(0);
 		return option;
 	}
 	/**
@@ -94,6 +95,11 @@ public class AppMenu {
 	 */
 	public int promptBet() {
 		System.out.print("\nHow much do you want to bet this round? ");
+		while (!scan.hasNextInt()) {
+			scan.nextLine();
+			System.out.println("\nError: Invalid Bet Amount");
+			System.out.print("How much do you want to bet this round? ");
+		}
 		int bet = scan.nextInt();
 		return bet;
 	}
