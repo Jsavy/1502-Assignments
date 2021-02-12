@@ -28,7 +28,7 @@ public class PuntoBancoGame {
 	}
 	
 	
-	public boolean launchGame (Player name, char choice, int betAmount) {
+	public void launchGame (Player name, char choice, int betAmount) {
 		boolean win = false; // variable returned to indicate if the user won or loss
 		boolean stopGame = false;  // variable to stop the game when a condition is satisfied
 		char winner = 'n'; // indicates if player won, banker won or if it was a tie
@@ -291,7 +291,6 @@ public class PuntoBancoGame {
 			appMen.playerLost(betAmount);
 		}
 		appMen.betFooter();
-		return win;
 	}
 }
 

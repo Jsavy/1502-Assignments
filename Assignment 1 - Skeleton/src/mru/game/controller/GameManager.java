@@ -158,7 +158,11 @@ public class GameManager {
             	appMen.errorBet();
             	betAmt = appMen.promptBet();
             	}
-            playAgain = appMen.playAgain();
+            if(p.getScore() == 0) {
+            	playAgain = 'n';
+            } else {
+            	playAgain = appMen.playAgain();
+            }
 			}
     		
 			launchApp();
