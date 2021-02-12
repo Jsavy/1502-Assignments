@@ -285,5 +285,10 @@ public class AppMenu {
 	public void betError() {
 		System.out.println("\nInvalid Input: Please try again!\n");
 	}
+	
+	public void noScore() {
+		System.out.println("\n you have run out of virtual currency and are no longer able to play");
+		System.out.println("You now will be returning to the main menu\n");
+	}
 
 }

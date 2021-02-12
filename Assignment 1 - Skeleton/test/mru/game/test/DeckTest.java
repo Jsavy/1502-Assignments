@@ -46,11 +46,7 @@ class DeckTest {
 	@Test
 	void test5() {
 		CardDeck deck = new CardDeck();
-		Card hand[] = null;
-		for(int i = 0; i <= 5; i++) {
-			Card testCard = deck.getDeck().remove(0);           // trying to make a hand but errors 
-			hand[i] = testCard;                                 // happen so not sure what ive done wrong
-		}
-		System.out.println(hand.toString());
+		Card topCard = deck.getDeck().remove(0);
+		Assert.assertNotNull(topCard);
 	}
 }

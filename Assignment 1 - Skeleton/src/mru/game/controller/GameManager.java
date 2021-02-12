@@ -117,7 +117,8 @@ public class GameManager {
 		String name = appMen.promptName();
 		Player p = searchByName(name);
 		boolean input = true;
-		char playAgain = 'y';
+		char playAgain;
+		char choice;
 		pbg = new PuntoBancoGame();
 		
 		if (p == null) {
@@ -127,8 +128,10 @@ public class GameManager {
 		}else {
 			appMen.welcomeOldPlayer(p);
 		}
-		
-        	char choice = appMen.betWho();
+
+			playAgain = 'y';
+			while (playAgain == 'y') {
+				choice = appMen.betWho();
             while (input == true) {
             	switch (choice) {
     			case 'p':
@@ -154,35 +157,11 @@ public class GameManager {
             while(betAmt > p.getScore()) {
             	appMen.errorBet();
             	betAmt = appMen.promptBet();
-            }
-            
-            boolean win = pbg.launchGame(p, choice, betAmt);
-            if (win = true) {
-            	for (Player pl: players) {
-            		if (pl.getName().equalsIgnoreCase(name)) {
-            			int num = pl.getWins();
-            			int scores = pl.getScore();
-            			if(choice == 't') {
-            				betAmt = betAmt * 5;
-            			}
-            			pl.setWins(num + 1);
-            			pl.setScore(betAmt);
-            		}
             	}
-         
-            } else {
-            	for (Player pl: players) {
-            		if (pl.getName().equalsIgnoreCase(name)) {
-            			int lose = pl.getScore() - betAmt;
-            			pl.setScore(lose);
-            		}
-            	}
-            }
-    		playAgain = appMen.playAgain();
-    		if(playAgain == 'n') {
-    			appMen.showMainMenu();
-    		}
-
+            playAgain = appMen.playAgain();
+			}
+    		
+			launchApp();
 		
 
 
