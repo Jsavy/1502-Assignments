@@ -162,6 +162,7 @@ public class GameManager {
             	appMen.noScore();
             	playAgain = 'n';
             } else {
+				pbg.launchGame(p, choice, betAmt);
             	playAgain = appMen.playAgain();
             }
 			}
