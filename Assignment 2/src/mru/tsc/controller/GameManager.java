@@ -43,6 +43,18 @@ public class GameManager {
 		}
 	}
 	
+	private void addToy() {
+		String name;
+		String brand;
+		double price;
+		int avaliableCount;
+		String ageAppropriate;
+		
+		validateSN();
+		
+		
+	}
+	
 	private String validateSN() {
 		String sn = "";
 		boolean valid = false;
