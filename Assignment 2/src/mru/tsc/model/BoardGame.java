@@ -2,18 +2,21 @@ package mru.tsc.model;
 
 public class BoardGame extends Toy {
 	
-	private int number;
+	private String numPlayers;
+	private String designer;
 	
-	public BoardGame(int number) {
-		this.number = number;
+	public String getNumPlayers() {
+		return numPlayers;
 	}
-
-	public int getNumber() {
-		return number;
+	public void setNumPlayers(String numPlayers) {
+		this.numPlayers = numPlayers;
 	}
-
-	public void setNumber(int number) {
-		this.number = number;
+	public String getDesigner() {
+		return designer;
 	}
-
+	public void setDesigner(String designer) {
+		this.designer = designer;
+	}
+	
+	
 }

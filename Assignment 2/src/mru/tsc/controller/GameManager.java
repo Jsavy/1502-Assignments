@@ -2,26 +2,67 @@ package mru.tsc.controller;
 
 import java.util.ArrayList;
 
-import mru.game.model.*;
 import mru.tsc.model.Animal;
 import mru.tsc.model.BoardGame;
 import mru.tsc.model.Toy;
+import mru.tsc.view.AppMenu;
 
 public class GameManager {
 	
 	private static final String FILE_PATH = "res/toys.txt";
 	ArrayList<Toy> toys = new ArrayList<>();
-	Toy t1 = new Animal("type1");
-	toys.add(t1);
-	Toy t2 = new BoardGame(10);
-	toys.add(t2);
+	AppMenu appMen;
 	
-	if(toys.get(1) instanceof Animal ) {
-		Animal tt = (Animal)toys.get(1);
-		System.out.println("Type Toy Animal");
-	} else {
-		System.out.println("Type Toy BoardGame");
-		BoardGame tt = (BoardGame)toys.get(1);
+	
+	public GameManager () {
+		appMen = new AppMenu();
+		launchApp();
 	}
-
+	
+	private void launchApp () {
+		
+		boolean flag = true;
+		int option;
+		
+		while (flag) {
+			option = appMen.showMainMenu();
+			switch (option) {
+			case '1':
+				
+				flag = false;
+				break;
+			case '2':
+				flag = false;
+				break;
+			case '3':
+				
+				flag = false;
+				break;
+			default:
+			}
+		}
+	}
+	
+	private void validateSN() {
+		String sn = "";
+		boolean valid = false;
+	
+		do {
+			sn = appMen.enterSerial();
+			
+			if (sn.matches("[0-9]+")) {
+				if (sn.length() == 10) {
+					valid = true;
+				}else {
+					System.out.println("The serial number's length must be 10 digits");
+				}
+			}else {
+				System.out.println("The serial nuumber must only contain digits");
+			}
+			
+		}while (!valid);
+		
+		System.out.println("The accepted SN is: " + sn);
+		
+	}
 }

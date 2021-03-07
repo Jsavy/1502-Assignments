@@ -28,7 +28,7 @@ public class AppMenu {
 		System.out.println("(1)   Search Inventory and Purchase Toy");
 		System.out.println("(2)   Add New Toy");
 		System.out.println("(3)   Remove Toy");
-		System.out.println("(4)   Save & Exit/n");
+		System.out.println("(4)   Save & Exit \n");
 		System.out.print("Enter Option:");
 		option = scan.nextInt();
 		return option;
@@ -65,10 +65,10 @@ public class AppMenu {
 	 * 
 	 * @return serial  the user generated integer for serial Number
 	 */
-	public int enterSerial() {
-		int serial;
+	public String enterSerial() {
+		String serial;
 		System.out.print("/nEnter Serial Number:");
-		serial = scan.nextInt();
+		serial = scan.nextLine().trim();
 		return serial;
 	}
 	/**
@@ -142,7 +142,7 @@ public class AppMenu {
 	/**
 	 * Prompts the user to enter the designer names for the toys
 	 * 
-	 * @return names  all the names of the designers which are serpated by a ','
+	 * @return names  all the names of the designers which are seperated by a ','
 	 */
 	public String enterName() {
 		String names;
