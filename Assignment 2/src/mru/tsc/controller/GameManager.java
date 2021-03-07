@@ -43,7 +43,7 @@ public class GameManager {
 		}
 	}
 	
-	private void validateSN() {
+	private String validateSN() {
 		String sn = "";
 		boolean valid = false;
 	
@@ -63,6 +63,10 @@ public class GameManager {
 		}while (!valid);
 		
 		System.out.println("The accepted SN is: " + sn);
+		return sn;
+	}
+	
+	private void removeItem() {
 		
 	}
 }

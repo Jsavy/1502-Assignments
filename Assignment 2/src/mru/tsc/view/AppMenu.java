@@ -163,6 +163,11 @@ public class AppMenu {
 		System.out.println("Press \"Enter\" to continue");
 		scan.nextLine();
 	}
+	
+	public void removeToy () {
+		System.out.println("This item found: \n");
+		System.out.println();
+	}
 	/**
 	 * exit message for when the user wishes to exit with animation on the dots
 	 */
