@@ -40,7 +40,7 @@ public class AppMenu {
 	 */
 	public int showSubMenu() {
 		int option;
-		System.out.println("/nFind Toys With:/n");
+		System.out.println("/nFind Toys With: \n");
 		System.out.println("(1)   Serial Number(SN)");
 		System.out.println("(2)   Toy Name");
 		System.out.println("(3)   Type");
