@@ -1,6 +1,9 @@
 package mru.tsc.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import mru.tsc.model.Animal;
 import mru.tsc.model.BoardGame;
@@ -32,6 +35,7 @@ public class GameManager {
 				flag = false;
 				break;
 			case '2':
+				addToy();
 				flag = false;
 				break;
 			case '3':
@@ -50,7 +54,7 @@ public class GameManager {
 		int avaliableCount;
 		String ageAppropriate;
 		
-		validateSN();
+		name = validateSN();
 		
 		
 	}
@@ -69,7 +73,7 @@ public class GameManager {
 					System.out.println("The serial number's length must be 10 digits");
 				}
 			}else {
-				System.out.println("The serial nuumber must only contain digits");
+				System.out.println("The serial number must only contain digits");
 			}
 			
 		}while (!valid);
@@ -80,5 +84,29 @@ public class GameManager {
 	
 	private void removeItem() {
 		
+	}
+	
+	private void readFile() {
+		File myFile = new File(FILE_PATH);
+		String currentLine;
+		String[] splittedLine;
+		Scanner fileReader;
+		
+			while(fileReader.hasNextLine()) {
+				currentLine = fileReader.nextLine();
+				splittedLine = currentLine.split(";");
+				if (splittedLine[0].charAt(0) == 0 || splittedLine[0].charAt(0) == 1) {
+					
+				}else if (splittedLine[0].charAt(0) == 2 || splittedLine[0].charAt(0) == 3){
+					
+				}else if (splittedLine[0].charAt(0) == 4 || splittedLine[0].charAt(0) == 5 || splittedLine[0].charAt(0) == 6){
+					
+				}else {
+					
+				}
+				
+				
+			}
+			
 	}
 }
