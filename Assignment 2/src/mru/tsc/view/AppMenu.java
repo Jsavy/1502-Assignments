@@ -2,6 +2,8 @@ package mru.tsc.view;
 
 import java.util.Scanner;
 
+import mru.tsc.model.Toy;
+
 public class AppMenu {
 	
 	Scanner scan;
@@ -163,10 +165,12 @@ public class AppMenu {
 		System.out.println("Press \"Enter\" to continue");
 		scan.nextLine();
 	}
-	
-	public void removeToy () {
-		System.out.println("This item found: \n");
-		System.out.println();
+	/**
+	 * Finds the toy via the user inputted SN
+	 */
+	public void removeToy (String sn) {
+		
+		
 	}
 	/**
 	 * exit message for when the user wishes to exit with animation on the dots
@@ -189,7 +193,11 @@ public class AppMenu {
 	public void successMessage() {
 		System.out.println("/nThe Transaction successfully Terminated!");
 	}
-	
+	/**
+	 * Method which validates the user inputted serial number
+	 * 
+	 * @return sn - the validated sn number
+	 */
 	public String validateSN() {
 		String sn = "";
 		boolean valid = false;

@@ -62,12 +62,17 @@ public class GameManager {
 		
 		
 	}
+
 	
 
 	
 	private void removeToy() {
 		String sn;
-		sn = appMen.enterSerial();
+		sn = appMen.validateSN();
+	}
+	
+	private void searchSerialNumber() {
+		
 	}
 	/**
 	 * A method which loads the file "toys.txt" and adds different types of toys into an arraylist
