@@ -7,18 +7,22 @@ import java.util.Scanner;
 
 import mru.tsc.model.Animal;
 import mru.tsc.model.BoardGame;
+import mru.tsc.model.Figure;
+import mru.tsc.model.Puzzle;
 import mru.tsc.model.Toy;
 import mru.tsc.view.AppMenu;
 
 public class GameManager {
 	
 	private static final String FILE_PATH = "res/toys.txt";
-	ArrayList<Toy> toys = new ArrayList<>();
+	ArrayList<Toy> toys;
 	AppMenu appMen;
 	
 	
 	public GameManager () {
+		toys = new ArrayList<Toy>();
 		appMen = new AppMenu();
+		readFile();
 		launchApp();
 	}
 	
@@ -54,55 +58,64 @@ public class GameManager {
 		int avaliableCount;
 		String ageAppropriate;
 		
-		name = validateSN();
+		name = appMen.validateSN();
 		
 		
 	}
 	
-	private String validateSN() {
-		String sn = "";
-		boolean valid = false;
+
 	
-		do {
-			sn = appMen.enterSerial();
-			
-			if (sn.matches("[0-9]+")) {
-				if (sn.length() == 10) {
-					valid = true;
-				}else {
-					System.out.println("The serial number's length must be 10 digits");
-				}
-			}else {
-				System.out.println("The serial number must only contain digits");
-			}
-			
-		}while (!valid);
-		
-		System.out.println("The accepted SN is: " + sn);
-		return sn;
+	private void removeToy() {
+		String sn;
+		sn = appMen.enterSerial();
 	}
-	
-	private void removeItem() {
-		
-	}
-	
+	/**
+	 * A method which loads the file "toys.txt" and adds different types of toys into an arraylist
+	 */
 	private void readFile() {
 		File myFile = new File(FILE_PATH);
 		String currentLine;
 		String[] splittedLine;
-		Scanner fileReader;
+		Scanner fileReader = new Scanner(FILE_PATH);
+		int firstDigit;
+		final int ZERO = 0;
+		final int ONE = 1;
+		final int TWO = 2;
+		final int THREE = 3;
+		final int FOUR = 4;
+		final int FIVE = 5;
+		final int SIX = 6;
+		final int SEVEN = 7;
 		
 			while(fileReader.hasNextLine()) {
 				currentLine = fileReader.nextLine();
 				splittedLine = currentLine.split(";");
-				if (splittedLine[0].charAt(0) == 0 || splittedLine[0].charAt(0) == 1) {
+				firstDigit = Character.getNumericValue(splittedLine[ZERO].charAt(0));
+						
+				if (firstDigit == ZERO || firstDigit == ONE) {
 					
-				}else if (splittedLine[0].charAt(0) == 2 || splittedLine[0].charAt(0) == 3){
+					Figure f = new Figure (Integer.parseInt(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
+							splittedLine[FIVE], splittedLine[SIX].charAt(ZERO));
+					toys.add(f);
+				}else if (firstDigit == THREE || firstDigit == FOUR){
 					
-				}else if (splittedLine[0].charAt(0) == 4 || splittedLine[0].charAt(0) == 5 || splittedLine[0].charAt(0) == 6){
+					Animal a = new Animal (Integer.parseInt(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
+							splittedLine[FIVE], splittedLine[SIX].charAt(ZERO));
+					toys.add(a);
+				}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX){
 					
+					Puzzle p = new Puzzle (Integer.parseInt(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
+							splittedLine[FIVE], splittedLine[SIX]);
+					toys.add(p);
 				}else {
 					
+					BoardGame b = new BoardGame (Integer.parseInt(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
+							splittedLine[FIVE], splittedLine[SIX], splittedLine[SEVEN]);
+					toys.add(b);
 				}
 				
 				

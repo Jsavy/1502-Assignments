@@ -189,4 +189,27 @@ public class AppMenu {
 	public void successMessage() {
 		System.out.println("/nThe Transaction successfully Terminated!");
 	}
+	
+	public String validateSN() {
+		String sn = "";
+		boolean valid = false;
+	
+		do {
+			sn = enterSerial();
+			
+			if (sn.matches("[0-9]+")) {
+				if (sn.length() == 10) {
+					valid = true;
+				}else {
+					System.out.println("The serial number's length must be 10 digits");
+				}
+			}else {
+				System.out.println("The serial number must only contain digits");
+			}
+			
+		}while (!valid);
+		
+		System.out.println("The accepted SN is: " + sn);
+		return sn;
+	}
 }
