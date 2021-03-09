@@ -183,4 +183,10 @@ public class AppMenu {
 		}
 		System.out.println("/n/n*********** THANKS FOR VISITING US! ***********");
 	}
+	/**
+	 * Success message for when the user successfully purchases a toy 
+	 */
+	public void successMessage() {
+		System.out.println("/nThe Transaction successfully Terminated!");
+	}
 }
