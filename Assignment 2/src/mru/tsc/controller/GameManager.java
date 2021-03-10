@@ -218,7 +218,7 @@ public class GameManager {
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(f);
-				}else if (firstDigit == THREE || firstDigit == FOUR){
+				}else if (firstDigit == TWO || firstDigit == THREE){
 					
 					Animal a = new Animal ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
@@ -285,5 +285,25 @@ public class GameManager {
 			valid = false;
 		}
 		return valid;
+	}
+	
+	private Toy searchBySN(String SN) {
+		Toy t = null;
+		int firstDigit;
+		firstDigit = Character.getNumericValue(SN.charAt(0));
+		for(Toy tt: toys) {
+			if (tt.getSN().equals(SN)) {
+				if (firstDigit == 0 || firstDigit == 1) {
+					t = (Figure)tt;
+				}else if (firstDigit == 2 || firstDigit == 3) {
+					t = (Animal)tt;
+				} else if (firstDigit == 4 || firstDigit == 5 || firstDigit == 6) {
+					t = (Puzzle)tt;
+				} else if (firstDigit == 7 || firstDigit == 8 || firstDigit == 9) {
+					t = (BoardGame)tt;
+				}
+			}
+		}
+		return t;
 	}
 }
