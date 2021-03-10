@@ -56,7 +56,7 @@ public class GameManager {
 	}
 	
 	private void addToy() {
-		Long sn;
+		String sn;
 		String name;
 		String brand;
 		String designer;
@@ -156,7 +156,7 @@ public class GameManager {
 	 * @param sn - serial number of toy
 	 * @return first - first digit of serial number
 	 */
-	private int identifyToy (long sn) {
+	private int identifyToy (String sn) {
 		int first;
 		final int TEN = 10;
 

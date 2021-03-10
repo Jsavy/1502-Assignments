@@ -2,9 +2,6 @@ package mru.tsc.view;
 
 import java.util.Scanner;
 
-import mru.tsc.exceptions.ToyStoreException;
-import mru.tsc.model.Toy;
-
 public class AppMenu {
 	
 	Scanner scan;
@@ -68,10 +65,10 @@ public class AppMenu {
 	 * 
 	 * @return serial  the user generated integer for serial Number
 	 */
-	public Long enterSerial() {
-		Long serial;
+	public String enterSerial() {
+		String serial;
 		System.out.print("/nEnter Serial Number:");
-		serial = scan.nextLong();
+		serial = scan.nextLine();
 		return serial;
 	}
 	/**
@@ -228,15 +225,15 @@ public class AppMenu {
 	 * 
 	 * @return sn - the validated sn number
 	 */
-	public Long validateSN() {
-		Long sn = null;
+	public String validateSN() {
+		String sn = null;
 		boolean valid = false;
 	
 		do {
 			sn = enterSerial();
 			
 			if (sn.matches("[0-9]+")) {
-				if (sn == 10) {
+				if (sn.length() == 10) {
 					valid = true;
 				}else {
 					System.out.println("The serial number's length must be 10 digits");
