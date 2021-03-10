@@ -12,15 +12,15 @@ class PuzzleTest {
 
 	@Test
 	void test() {
-		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, "3+", "Logic");
+		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
 		p.setSN("5239874560");
 		String test = p.getSN();
-		String actual = 5239874560;
+		String actual = "5239874560";
 		Assert.assertEquals(test, actual);
 	}
 	@Test
 	void test2() {
-		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, "3+", "Logic");
+		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
 		p.setName("1000 Piece Jigsaw");
 		String test = p.getName();
 		String actual = "1000 Piece Jigsaw";
@@ -28,7 +28,7 @@ class PuzzleTest {
 	}
 	@Test
 	void test3() {
-		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, "3+", "Logic");
+		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
 		p.setBrand("Castle Toys");
 		String test = p.getBrand();
 		String actual = "Castle Toys";
@@ -36,7 +36,7 @@ class PuzzleTest {
 	}
 	@Test
 	void test4() {
-		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, "3+", "Logic");
+		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
 		p.setPrice(19.99);
 		double test = p.getPrice();
 		double actual = 19.99;
@@ -44,7 +44,7 @@ class PuzzleTest {
 	}
 	@Test
 	void test5() {
-		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, "3+", "Logic");
+		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
 		p.setAvaliableCount(18);
 		int test = p.getAvaliableCount();
 		int actual = 18;
@@ -52,23 +52,23 @@ class PuzzleTest {
 	}
 	@Test
 	void test6() {
-		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, "3+", "Logic");
-		p.setAgeAppropriate("5+");
-		String test = p.getAgeAppropriate();
-		String actual = "5+";
+		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
+		p.setAgeAppropriate(5);
+		int test = p.getAgeAppropriate();
+		int actual = 5;
 		Assert.assertEquals(test, actual);
 	}
 	@Test
 	void test7() {
-		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, "3+", "Logic");
-		p.setPuzzleType("Mechanical");
-		String test = p.getPuzzleType();
-		String actual = "Mechanical";
+		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
+		p.setPuzzleType('M');
+		char test = p.getPuzzleType();
+		char actual = 'M';
 		Assert.assertEquals(test, actual);
 	}
 	@Test
 	void test8() {
-		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, "3+", "Logic");
+		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
 		Assert.assertTrue(p instanceof Toy);
 	}
 
