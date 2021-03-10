@@ -16,7 +16,7 @@ public class BoardGame extends Toy {
 	 * @param numPlayers         the minimum and maximum number of players for the board game
 	 * @param designer           the names of who designed the board game
 	 */
-	public BoardGame(long SN, String name, String brand, double price, int availiableCount, int ageAppropriate, String numPlayers, String designer) {
+	public BoardGame(String SN, String name, String brand, double price, int availiableCount, int ageAppropriate, String numPlayers, String designer) {
 		super(SN,name,brand,price,availiableCount,ageAppropriate);
 		this.numPlayers = numPlayers;
 		this.designer = designer;

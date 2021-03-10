@@ -12,15 +12,15 @@ class AnimalTest {
 
 	@Test
 	void test() {
-		Animal a = new Animal(2146987123, "Stuffed Elephant", "Disney", 9.99, 9, "1+", 'S');
-		a.setSN(3234567891L);
-		long test = a.getSN();
-		long actual = 3234567891L;
+		Animal a = new Animal("2146987123", "Stuffed Elephant", "Disney", 9.99, 9, 1, 'S');
+		a.setSN("3234567891");
+		String test = a.getSN();
+		String actual = "3234567891";
 		Assert.assertEquals(test, actual);
 	}
 	@Test
 	void test2() {
-		Animal a = new Animal(2146987123, "Stuffed Elephant", "Disney", 9.99, 9, "1+", 'S');
+		Animal a = new Animal("2146987123", "Stuffed Elephant", "Disney", 9.99, 9, 1, 'S');
 		a.setName("Stuffed Giraffe");
 		String test = a.getName();
 		String actual = "Stuffed Giraffe";
@@ -28,7 +28,7 @@ class AnimalTest {
 	}
 	@Test
 	void test3() {
-		Animal a = new Animal(2146987123, "Stuffed Elephant", "Disney", 9.99, 9, "1+", 'S');
+		Animal a = new Animal("2146987123", "Stuffed Elephant", "Disney", 9.99, 9, 1, 'S');
 		a.setBrand("Castle Toys");
 		String test = a.getBrand();
 		String actual = "Castle Toys";
@@ -36,7 +36,7 @@ class AnimalTest {
 	}
 	@Test
 	void test4() {
-		Animal a = new Animal(2146987123, "Stuffed Elephant", "Disney", 9.99, 9, "1+", 'S');
+		Animal a = new Animal("2146987123", "Stuffed Elephant", "Disney", 9.99, 9, 1, 'S');
 		a.setPrice(4.99);
 		double test = a.getPrice();
 		double actual = 4.99;
@@ -44,7 +44,7 @@ class AnimalTest {
 	}
 	@Test
 	void test5() {
-		Animal a = new Animal(2146987123, "Stuffed Elephant", "Disney", 9.99, 9, "1+", 'S');
+		Animal a = new Animal("2146987123", "Stuffed Elephant", "Disney", 9.99, 9, 1, 'S');
 		a.setAvaliableCount(5);
 		int test = a.getAvaliableCount();
 		int actual = 5;
@@ -52,15 +52,15 @@ class AnimalTest {
 	}
 	@Test
 	void test6() {
-		Animal a = new Animal(2146987123, "Stuffed Elephant", "Disney", 9.99, 9, "1+", 'S');
-		a.setAgeAppropriate("0+");
-		String test = a.getAgeAppropriate();
-		String actual = "0+";
+		Animal a = new Animal("2146987123", "Stuffed Elephant", "Disney", 9.99, 9, 1, 'S');
+		a.setAgeAppropriate(0);
+		int test = a.getAgeAppropriate();
+		int actual = 0;
 		Assert.assertEquals(test, actual);
 	}
 	@Test
 	void test7() {
-		Animal a = new Animal(2146987123, "Stuffed Elephant", "Disney", 9.99, 9, "1+", 'S');
+		Animal a = new Animal("2146987123", "Stuffed Elephant", "Disney", 9.99, 9, 1, 'S');
 		a.setSize('M');
 		char test = a.getSize();
 		char actual = 'M';
@@ -68,7 +68,7 @@ class AnimalTest {
 	}
 	@Test
 	void test8() {
-		Animal a = new Animal(2146987123, "Stuffed Elephant", "Disney", 9.99, 9, "1+", 'S');
+		Animal a = new Animal("2146987123", "Stuffed Elephant", "Disney", 9.99, 9, 1, 'S');
 		Assert.assertTrue(a instanceof Toy);
 	}
 }

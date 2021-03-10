@@ -15,7 +15,7 @@ public class Animal extends Toy{
 	 * @param ageAppropriate   the recommended age for the animal
 	 * @param size             the size of the animal
 	 */
-	public Animal(long SN, String name, String brand, double price, int availiableCount, int ageAppropriate, char size) {
+	public Animal(String SN, String name, String brand, double price, int availiableCount, int ageAppropriate, char size) {
 		super(SN,name,brand,price,availiableCount,ageAppropriate);
 		this.size = size;
 	}

@@ -212,25 +212,25 @@ public class GameManager {
 						
 				if (firstDigit == ZERO || firstDigit == ONE) {
 					
-					Figure f = new Figure (Long.parseLong(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+					Figure f = new Figure ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(f);
 				}else if (firstDigit == THREE || firstDigit == FOUR){
 					
-					Animal a = new Animal (Long.parseLong(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+					Animal a = new Animal ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(a);
 				}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX){
 					
-					Puzzle p = new Puzzle (Long.parseLong(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+					Puzzle p = new Puzzle ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(p);
 				}else {
 					
-					BoardGame b = new BoardGame (Long.parseLong(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+					BoardGame b = new BoardGame ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX], splittedLine[SEVEN]);
 					toys.add(b);
