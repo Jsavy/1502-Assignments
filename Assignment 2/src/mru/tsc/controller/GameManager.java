@@ -68,7 +68,7 @@ public class GameManager {
 		int firstDigit;
 		char size;
 		char classification;
-		String type;
+		char type;
 		final int ZERO = 0;
 		final int ONE = 1;
 		final int TWO = 2;
@@ -86,19 +86,26 @@ public class GameManager {
 		
 		firstDigit = identifyToy(sn);
 		if (firstDigit == ZERO || firstDigit == ONE) {
-
+			classification = appMen.enterClass();
+			Figure f = new Figure (sn, name, brand, price, avaliableCount, ageAppropriate, classification);
+			toys.add(f);
 		}else if (firstDigit == TWO || firstDigit == THREE) {
 			size = appMen.enterSize();
+			Animal a = new Animal(sn, name, brand, price, avaliableCount, ageAppropriate, size);
 		}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX) {
-
+			type = appMen.enterType();
+			Puzzle p = new Puzzle (sn, name, brand, price, avaliableCount, ageAppropriate, type);
 		}else {
 			minPlayer = appMen.enterMinPlayer();
 			maxPlayer = appMen.enterMaxPlayer();
 			designer = appMen.enterName();
 			numPlayers = minPlayer + "-" + maxPlayer;
+			BoardGame b = new BoardGame(sn, name, brand, price, avaliableCount, ageAppropriate, numPlayers, designer);
 		}
-
 		
+		appMen.confirm();
+
+		appMen.enterContinue();
 		
 		
 	}
@@ -218,7 +225,7 @@ public class GameManager {
 					
 					Puzzle p = new Puzzle (Long.parseLong(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
-							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX]);
+							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(p);
 				}else {
 					
