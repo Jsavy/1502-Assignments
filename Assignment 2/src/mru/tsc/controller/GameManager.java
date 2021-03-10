@@ -203,6 +203,8 @@ public class GameManager {
 		final int FIVE = 5;
 		final int SIX = 6;
 		final int SEVEN = 7;
+		final int EIGHT = 8;
+		final int NINE = 9;
 		
 		
 			while(fileReader.hasNextLine()) {
@@ -228,7 +230,7 @@ public class GameManager {
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(p);
-				}else if (firstDigit == SEVEN || firstDigit == 8 || firstDigit == 9) {
+				}else if (firstDigit == SEVEN || firstDigit == EIGHT || firstDigit == NINE) {
 					
 					BoardGame b = new BoardGame ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
