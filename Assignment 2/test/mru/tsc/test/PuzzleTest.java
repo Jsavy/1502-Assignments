@@ -68,8 +68,8 @@ class PuzzleTest {
 	}
 	@Test
 	void test8() {
-		Puzzle p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
-		Assert.assertTrue(p instanceof Toy);
+		Toy p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
+		Assert.assertTrue(p instanceof Puzzle);
 	}
 
 }

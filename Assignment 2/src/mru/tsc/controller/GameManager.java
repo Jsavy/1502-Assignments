@@ -214,25 +214,25 @@ public class GameManager {
 						
 				if (firstDigit == ZERO || firstDigit == ONE) {
 					
-					Figure f = new Figure ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+					Toy f = new Figure ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(f);
 				}else if (firstDigit == TWO || firstDigit == THREE){
 					
-					Animal a = new Animal ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+					Toy a = new Animal ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(a);
 				}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX){
 					
-					Puzzle p = new Puzzle ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+					Toy p = new Puzzle ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(p);
 				}else if (firstDigit == SEVEN || firstDigit == EIGHT || firstDigit == NINE) {
 					
-					BoardGame b = new BoardGame ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
+					Toy b = new BoardGame ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX], splittedLine[SEVEN]);
 					toys.add(b);
