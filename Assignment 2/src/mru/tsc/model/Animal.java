@@ -45,5 +45,14 @@ public class Animal extends Toy{
 		text = super.format() + ";" + size;
 		return text;
 	}
-	
+	/**
+	 * unformatted toString method to overide the default toString
+	 * 
+	 * @return text   the unformatted display for toString for animals
+	 */
+	public String toString() {
+		String text;
+		text = "Catagory: Animal " + super.toString() + "," + " Size: " + size; 
+		return text;
+	}
 }

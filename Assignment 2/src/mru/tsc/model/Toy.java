@@ -129,7 +129,18 @@ public abstract class Toy {
 	 */
 	public String format() {
 		String text;
-		text = SN + ";" + name + ";" + brand + ";" + avaliableCount + ";" + ageAppropriate;
+		text = SN + ";" + name + ";" + brand + ";" + price + ";" + avaliableCount + ";" + ageAppropriate;
+		return text;
+	}
+	/**
+	 * unformatted toString method to overide the default toString
+	 * 
+	 * @return text   the unformatted display for toString
+	 */
+	public String toString() {
+		String text;
+		text = "Serial Number: " + SN + "," + " Name: " + name + "," + " Brand: " + brand + "," + 
+		" Price: " + price + "," + " Available Count: " + avaliableCount + "," + " Age Appropriate: " + ageAppropriate;
 		return text;
 	}
 }

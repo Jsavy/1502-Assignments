@@ -44,4 +44,14 @@ public class Puzzle extends Toy {
 		text = super.format() + ";" + puzzleType;
 		return text;
 	}
+	/**
+	 * unformatted toString method to overide the default toString
+	 * 
+	 * @return text   the unformatted display for toString for puzzles
+	 */
+	public String toString() {
+		String text;
+		text = "Catagory: Puzzle, " + super.toString() + "," + "Puzzle Type: " + puzzleType; 
+		return text;
+	}
 }

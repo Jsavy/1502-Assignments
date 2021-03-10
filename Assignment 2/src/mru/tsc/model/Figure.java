@@ -44,5 +44,14 @@ public class Figure extends Toy {
 		text = super.format() + ";" + classification;
 		return text;
 	}
-	
+	/**
+	 * unformatted toString method to overide the default toString
+	 * 
+	 * @return text   the unformatted display for toString for figures
+	 */
+	public String toString() {
+		String text;
+		text = "Catagory: Figure, " + super.toString() + "," + "Classification Type: " + classification;
+		return text;
+	}
 }

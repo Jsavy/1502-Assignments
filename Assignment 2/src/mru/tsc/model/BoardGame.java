@@ -63,6 +63,14 @@ public class BoardGame extends Toy {
 		text = super.format() + ";" + numPlayers + ";" + designer;
 		return text;
 	}
-	
-	
+	/**
+	 * unformatted toString method to overide the default toString
+	 * 
+	 * @return text   the unformatted display for toString for board games 
+	 */
+	public String toString() {
+		String text;
+		text = "Catagory: BoardGame, " + super.toString() + "," + "Number of players: " + numPlayers + "," + " Designer names: " + designer;
+		return text;
+	}
 }
