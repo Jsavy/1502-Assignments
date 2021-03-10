@@ -2,6 +2,7 @@ package mru.tsc.view;
 
 import java.util.Scanner;
 
+import mru.tsc.exceptions.ToyStoreException;
 import mru.tsc.model.Toy;
 
 public class AppMenu {
@@ -219,5 +220,13 @@ public class AppMenu {
 		
 		System.out.println("The accepted SN is: " + sn);
 		return sn;
+	}
+	/**
+	 * method used to print exception messages
+	 * 
+	 * @param e      the exception message
+	 */
+	public void errorMessage(String e) {
+		System.out.println(e);
 	}
 }

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import mru.tsc.exceptions.ToyStoreException;
 import mru.tsc.model.Animal;
 import mru.tsc.model.BoardGame;
 import mru.tsc.model.Figure;
@@ -126,5 +127,51 @@ public class GameManager {
 				
 			}
 			
+	}
+	/**
+	 * Validation class that uses the created ToyStoreException class to throw error message if the price is negative
+	 * 
+	 * @param price               the price the user inputed for the toy
+	 * @return valid              the boolean value of validity
+	 * @throws ToyStoreException  exception class used to throw exception
+	 */
+	public boolean isPriceValid(double price) throws ToyStoreException {
+		boolean valid = true;
+		String text;
+		
+		try {
+			if(price < 0.00) {
+				throw new ToyStoreException("Invalid, the price cannot be negative");
+			}
+		}catch(ToyStoreException e) {
+			text = e.getMessage();
+			appMen.errorMessage(text);
+			valid = false;
+		}
+		return valid;
+	}
+	/**
+	 * Validation class that uses the created ToyStoreException class to throw error message if minimum is greater
+	 * than maximum
+	 * 
+	 * @param min                  the minimum number of players user inputed for toy
+	 * @param max                  the maximum number of players user inputed for toy
+	 * @return valid               the boolean value of validity
+	 * @throws ToyStoreException   exception class used to throw exception
+	 */
+	public boolean isPlayerValid(int min, int max) throws ToyStoreException{
+		boolean valid = true;
+		String text;
+		
+		try {
+			if(min > max) {
+				throw new ToyStoreException("Invalid, the minimum number of players cannot be greater than maximum");
+			}
+		}catch(ToyStoreException e) {
+			text = e.getMessage();
+			appMen.errorMessage(text);
+			valid = false;
+		}
+		return valid;
 	}
 }
