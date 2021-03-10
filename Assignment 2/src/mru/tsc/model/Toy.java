@@ -2,7 +2,7 @@ package mru.tsc.model;
 
 public abstract class Toy {
 	
-	private int SN; // the serial number of the toy
+	private long SN; // the serial number of the toy
 	private String name; // the name of the toy
 	private String brand; // the brand of the toy
 	private double price; // the price of the toy
@@ -18,7 +18,7 @@ public abstract class Toy {
 	 * @param availiableCount     the amount of inventory of the item
 	 * @param ageAppropriate      the recommended age for the toy
 	 */
-	public Toy(int SN, String name, String brand, double price, int availiableCount, String ageAppropriate) {
+	public Toy(long SN, String name, String brand, double price, int availiableCount, String ageAppropriate) {
 		this.SN = SN;
 		this.name = name;
 		this.brand = brand;
@@ -31,7 +31,7 @@ public abstract class Toy {
 	 * 
 	 * @return SN   the serial number of the toy
 	 */
-	public int getSN() {
+	public long getSN() {
 		return SN;
 	}
 	/**
@@ -39,7 +39,7 @@ public abstract class Toy {
 	 * 
 	 * @param sN   the serial number of the toy
 	 */
-	public void setSN(int sN) {
+	public void setSN(long sN) {
 		SN = sN;
 	}
 	/**
