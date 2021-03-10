@@ -2,6 +2,7 @@ package mru.tsc.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,22 +45,68 @@ public class GameManager {
 				flag = false;
 				break;
 			case '3':
-				
+				removeToy();
 				flag = false;
 				break;
+			case '4':
+				exitFile();
 			default:
 			}
 		}
 	}
 	
 	private void addToy() {
+		Long sn;
 		String name;
 		String brand;
+		String designer;
+		String numPlayers;
 		double price;
 		int avaliableCount;
-		String ageAppropriate;
+		int ageAppropriate;
+		int minPlayer;
+		int maxPlayer;
+		int firstDigit;
+		char size;
+		char classification;
+		char type;
+		final int ZERO = 0;
+		final int ONE = 1;
+		final int TWO = 2;
+		final int THREE = 3;
+		final int FOUR = 4;
+		final int FIVE = 5;
+		final int SIX = 6;
 		
-		name = appMen.validateSN();
+		sn = appMen.validateSN();
+		name = appMen.enterToy();
+		brand = appMen.enterBrand();
+		price = appMen.enterPrice();
+		avaliableCount = appMen.enterInventory();
+		ageAppropriate = appMen.enterMinAge();
+		
+		firstDigit = identifyToy(sn);
+		if (firstDigit == ZERO || firstDigit == ONE) {
+			classification = appMen.enterClass();
+			Figure f = new Figure (sn, name, brand, price, avaliableCount, ageAppropriate, classification);
+			toys.add(f);
+		}else if (firstDigit == TWO || firstDigit == THREE) {
+			size = appMen.enterSize();
+			Animal a = new Animal(sn, name, brand, price, avaliableCount, ageAppropriate, size);
+		}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX) {
+			type = appMen.enterType();
+			Puzzle p = new Puzzle (sn, name, brand, price, avaliableCount, ageAppropriate, type);
+		}else {
+			minPlayer = appMen.enterMinPlayer();
+			maxPlayer = appMen.enterMaxPlayer();
+			designer = appMen.enterName();
+			numPlayers = minPlayer + "-" + maxPlayer;
+			BoardGame b = new BoardGame(sn, name, brand, price, avaliableCount, ageAppropriate, numPlayers, designer);
+		}
+		
+		appMen.confirm();
+
+		appMen.enterContinue();
 		
 		
 	}
@@ -68,13 +115,77 @@ public class GameManager {
 
 	
 	private void removeToy() {
-		String sn;
-		sn = appMen.validateSN();
+		long sn;
+	}
+	/**
+	 * Method which searches for the inputted serial number in the arraylist
+	 * 
+	 * @param serialNumber
+	 * @return toy - the object toy in the arraylist
+	 */
+	private Toy searchSerialNumber(long serialNumber) {
+		Toy toy = null;
+		
+		for (Toy t: toys) {
+			if (t.getSN() == serialNumber) {
+				toy = t;
+			}
+		}
+		
+		return toy;
+	}
+	/**
+	 * Method which searches the ArrayList based on the user-inputted name
+	 * 
+	 * @param name
+	 * @return toy - the object toy in the ArrayList
+	 */
+	private Toy searchName (String name) {
+		Toy toy = null;
+		
+		for (Toy t: toys) {
+			if (t.getName().equalsIgnoreCase(name)) {
+				toy = t;
+			}
+		}
+		return toy;
+	}
+	/**
+	 * Method to find the first digit of the serial number
+	 * 
+	 * @param sn - serial number of toy
+	 * @return first - first digit of serial number
+	 */
+	private int identifyToy (long sn) {
+		int first;
+		final int TEN = 10;
+
+		first = (int)sn;
+		while (first >= TEN) {
+			first = first / 10;
+		}
+		return first;
+	}
+	/**
+	 * Method which loads the toy data in the file "toys.txt"
+	 * 
+	 */
+	private void exitFile() {
+		File file = new File(FILE_PATH);
+		PrintWriter pw;
+			try {
+				pw = new PrintWriter(file);
+				for (Toy t: toys) {
+					pw.println(t.format());
+				}
+				
+				pw.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 	}
 	
-	private void searchSerialNumber() {
-		
-	}
+	
 	/**
 	 * A method which loads the file "toys.txt" and adds different types of toys into an arraylist
 	 */
@@ -83,7 +194,7 @@ public class GameManager {
 		String currentLine;
 		String[] splittedLine;
 		Scanner fileReader = new Scanner(FILE_PATH);
-		int firstDigit;
+		long firstDigit;
 		final int ZERO = 0;
 		final int ONE = 1;
 		final int TWO = 2;
@@ -92,6 +203,7 @@ public class GameManager {
 		final int FIVE = 5;
 		final int SIX = 6;
 		final int SEVEN = 7;
+		
 		
 			while(fileReader.hasNextLine()) {
 				currentLine = fileReader.nextLine();
@@ -102,31 +214,29 @@ public class GameManager {
 					
 					Figure f = new Figure (Long.parseLong(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
-							splittedLine[FIVE], splittedLine[SIX].charAt(ZERO));
+							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(f);
 				}else if (firstDigit == THREE || firstDigit == FOUR){
 					
 					Animal a = new Animal (Long.parseLong(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
-							splittedLine[FIVE], splittedLine[SIX].charAt(ZERO));
+							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(a);
 				}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX){
 					
 					Puzzle p = new Puzzle (Long.parseLong(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
-							splittedLine[FIVE], splittedLine[SIX]);
+							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(p);
 				}else {
 					
 					BoardGame b = new BoardGame (Long.parseLong(splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
-							splittedLine[FIVE], splittedLine[SIX], splittedLine[SEVEN]);
+							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX], splittedLine[SEVEN]);
 					toys.add(b);
-				}
-				
-				
+				}	
 			}
-			
+			fileReader.close();
 	}
 	/**
 	 * Validation class that uses the created ToyStoreException class to throw error message if the price is negative

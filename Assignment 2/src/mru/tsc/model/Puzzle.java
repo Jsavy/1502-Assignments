@@ -2,7 +2,7 @@ package mru.tsc.model;
 
 public class Puzzle extends Toy {
 
-	private String puzzleType; // the type of the puzzle
+	private char puzzleType; // the type of the puzzle
 	/**
 	 * The constructor for the puzzle class that uses the super constructor for the appropriate variables
 	 * 
@@ -14,7 +14,7 @@ public class Puzzle extends Toy {
 	 * @param ageAppropriate      the recommended age for the puzzle
 	 * @param puzzleType          the type of puzzle 
 	 */
-	public Puzzle(long SN, String name, String brand, double price, int availiableCount, String ageAppropriate, String puzzleType) {
+	public Puzzle(long SN, String name, String brand, double price, int availiableCount, int ageAppropriate, char puzzleType) {
 		super(SN,name,brand,price,availiableCount,ageAppropriate);
 		this.puzzleType = puzzleType;
 	}
@@ -23,7 +23,7 @@ public class Puzzle extends Toy {
 	 * 
 	 * @return puzzleType  the type of puzzle
 	 */
-	public String getPuzzleType() {
+	public char getPuzzleType() {
 		return puzzleType;
 	}
 	/**
@@ -31,7 +31,7 @@ public class Puzzle extends Toy {
 	 * 
 	 * @param puzzleType  the type of puzzle
 	 */
-	public void setPuzzleType(String puzzleType) {
+	public void setPuzzleType(char puzzleType) {
 		this.puzzleType = puzzleType;
 	}
 	/**

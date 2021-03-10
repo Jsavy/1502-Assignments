@@ -7,7 +7,7 @@ public abstract class Toy {
 	private String brand; // the brand of the toy
 	private double price; // the price of the toy
 	private int avaliableCount; // the inventory level of the specific toy
-	private String ageAppropriate; // the recommended age for the toy
+	private int ageAppropriate; // the recommended age for the toy
 	/**
 	 * A constructor for the Toy class that brings in all the required fields for the specific toy
 	 * 
@@ -18,7 +18,7 @@ public abstract class Toy {
 	 * @param availiableCount     the amount of inventory of the item
 	 * @param ageAppropriate      the recommended age for the toy
 	 */
-	public Toy(long SN, String name, String brand, double price, int availiableCount, String ageAppropriate) {
+	public Toy(long SN, String name, String brand, double price, int availiableCount, int ageAppropriate) {
 		this.SN = SN;
 		this.name = name;
 		this.brand = brand;
@@ -95,7 +95,7 @@ public abstract class Toy {
 	 * 
 	 * @return ageAppropriate  the recommended age for the use of the toy
 	 */
-	public String getAgeAppropriate() {
+	public int getAgeAppropriate() {
 		return ageAppropriate;
 	}
 	/**
@@ -103,7 +103,7 @@ public abstract class Toy {
 	 * 
 	 * @param ageAppropriate  the recommended age for the use of the toy
 	 */
-	public void setAgeAppropriate(String ageAppropriate) {
+	public void setAgeAppropriate(int ageAppropriate) {
 		this.ageAppropriate = ageAppropriate;
 	}
 	/**
