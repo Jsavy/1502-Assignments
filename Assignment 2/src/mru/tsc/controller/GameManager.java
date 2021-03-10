@@ -228,7 +228,7 @@ public class GameManager {
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(p);
-				}else {
+				}else if (firstDigit == SEVEN || firstDigit == 8 || firstDigit == 9) {
 					
 					BoardGame b = new BoardGame ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
