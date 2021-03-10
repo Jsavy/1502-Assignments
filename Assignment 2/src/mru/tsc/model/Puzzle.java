@@ -14,7 +14,7 @@ public class Puzzle extends Toy {
 	 * @param ageAppropriate      the recommended age for the puzzle
 	 * @param puzzleType          the type of puzzle 
 	 */
-	public Puzzle(long SN, String name, String brand, double price, int availiableCount, String ageAppropriate, String puzzleType) {
+	public Puzzle(long SN, String name, String brand, double price, int availiableCount, int ageAppropriate, String puzzleType) {
 		super(SN,name,brand,price,availiableCount,ageAppropriate);
 		this.puzzleType = puzzleType;
 	}

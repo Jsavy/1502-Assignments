@@ -67,10 +67,10 @@ public class AppMenu {
 	 * 
 	 * @return serial  the user generated integer for serial Number
 	 */
-	public String enterSerial() {
-		String serial;
+	public Long enterSerial() {
+		Long serial;
 		System.out.print("/nEnter Serial Number:");
-		serial = scan.nextLine().trim();
+		serial = scan.nextLong();
 		return serial;
 	}
 	/**
@@ -89,10 +89,10 @@ public class AppMenu {
 	 * 
 	 * @return price  the user generated price for the toy in string format
 	 */
-	public String enterPrice() {
-		String price;
+	public double enterPrice() {
+		double price;
 		System.out.print("/nEnter Toy Price:");
-		price = scan.nextLine();
+		price = scan.nextDouble();
 		return price;
 	}
 	/**
@@ -141,6 +141,7 @@ public class AppMenu {
 		numPlayer = scan.nextInt();
 		return numPlayer;
 	}
+
 	/**
 	 * Prompts the user to enter the designer names for the toys
 	 * 
@@ -151,6 +152,40 @@ public class AppMenu {
 		System.out.print("/nEnter Designer Names(Use ',' to separate the names if there is more than one name) ");
 		names = scan.nextLine();
 		return names;
+	}
+	/**
+	 * Prompts the user to enter the size of the animal toy
+	 * 
+	 * @return size - the size of the animal
+	 */
+	public char enterSize() {
+		String input;
+		char size;
+		System.out.println("\nEnter Toy Size: ");
+		input = scan.nextLine();
+		size = Character.toUpperCase(input.charAt(0));
+		return size;
+	}
+	/**
+	 * Prompts the user to enter the classification of the figure
+	 * 
+	 * @return class - the classification of the figure
+	 */
+	public char enterClass() {
+		String input;
+		char clas;
+		System.out.println("\nEnter Classification: ");
+		input = scan.nextLine();
+		clas = Character.toUpperCase(input.charAt(0));
+		return clas;
+	}
+	public char enterType() {
+		String input;
+		char type;
+		System.out.println("\nEnter Puzzle Type: ");
+		input = scan.nextLine();
+		type = Character.toUpperCase(input.charAt(0));
+		return type;
 	}
 	/**
 	 * Prints to confirm the toy has been added to the database
@@ -165,13 +200,7 @@ public class AppMenu {
 		System.out.println("Press \"Enter\" to continue");
 		scan.nextLine();
 	}
-	/**
-	 * Finds the toy via the user inputted SN
-	 */
-	public void removeToy (String sn) {
-		
-		
-	}
+
 	/**
 	 * exit message for when the user wishes to exit with animation on the dots
 	 */
@@ -198,15 +227,15 @@ public class AppMenu {
 	 * 
 	 * @return sn - the validated sn number
 	 */
-	public String validateSN() {
-		String sn = "";
+	public Long validateSN() {
+		Long sn = null;
 		boolean valid = false;
 	
 		do {
 			sn = enterSerial();
 			
 			if (sn.matches("[0-9]+")) {
-				if (sn.length() == 10) {
+				if (sn == 10) {
 					valid = true;
 				}else {
 					System.out.println("The serial number's length must be 10 digits");
