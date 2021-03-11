@@ -11,7 +11,7 @@ import mru.tsc.model.Toy;
 
 public class AppMenu {
 	
-	Scanner scan;
+	Scanner scan; //Scanner to allow user to use the keyboard
 	
 	public AppMenu () {
 		scan = new Scanner(System.in);
@@ -253,7 +253,11 @@ public class AppMenu {
 		names = scan.nextLine();
 		return names;
 	}
-	
+	/**
+	 * This method allows the user to enter the toy material if the respective toy calls for a fabric type
+	 * 
+	 * @return material     the material type for the toy that user inputed 
+	 */
 	public String enterMaterial() {
 		String input;
 		String material = "";
@@ -370,6 +374,11 @@ public class AppMenu {
 		
 		return clas;
 	}
+	/**
+	 * Allows the user to enter the type of puzzle for toy puzzles
+	 * 
+	 * @return type       the character for the type of puzzle
+	 */
 	public char enterType() {
 		String input;
 		char type = 'x';
@@ -483,7 +492,12 @@ public class AppMenu {
 	public void errorMessage(String e) {
 		System.out.println(e);
 	}
-	
+	/**
+	 * Method that prints out the arrayList based off search criteria the user inputted
+	 * 
+	 * @param toyType   the arraylist of the toys the user is searching for
+	 * @return option   the option the user selects to purchase or menu
+	 */
 	public int printType(ArrayList<Toy> toyType) {
 		int i;
 		int option;
@@ -509,23 +523,38 @@ public class AppMenu {
 		option = option - 1;
 		return option;
 	}
-	
+	/**
+	 * Method to print toy figures 
+	 * 
+	 * @param toy    this toy is of type figure that is printing
+	 */
 	public void printSNFigure(Figure toy) {
 		System.out.println(toy.toString());
 	}
-	
+	/**
+	 * Method to print toy animals
+	 * 
+	 * @param toy   this toy is of type animal that is printing
+	 */
 	public void printSNAnimal(Animal toy) {
 		System.out.println(toy.toString());
 	}
-	
+	/**
+	 * Method to print toy puzzles
+	 * 
+	 * @param toy   this toy is of type puzzle that is printing
+	 */
 	public void printSNPuzzle(Puzzle toy) {
 		System.out.println(toy.toString());
 	}
-	
+	/**
+	 * Method to print toy board games
+	 * 
+	 * @param toy   this toy is of type board game that is printing
+	 */
 	public void printSNBoardGame(BoardGame toy) {
 		System.out.println(toy.toString());
 	}
-	
 	/**
 	 * Prints if the user selects an invalid option in the main menu
 	 */

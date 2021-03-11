@@ -308,16 +308,10 @@ public class GameManager {
 	 */
 	public boolean isPriceValid(double price) throws ToyStoreException {
 		boolean valid = true;
-		String text;
-		
-		try {
-			if(price < 0.00) {
-				throw new ToyStoreException("Invalid, the price cannot be negative");
-			}
-		}catch(ToyStoreException e) {
-			text = e.getMessage();
-			appMen.errorMessage(text);
+		final double ZERO = 0.00;
+		if(price < ZERO) {
 			valid = false;
+			throw new ToyStoreException("Invalid, price of the toy cannot be negative, Inputted value: " + price);
 		}
 		return valid;
 	}
@@ -332,16 +326,11 @@ public class GameManager {
 	 */
 	public boolean isPlayerValid(int min, int max) throws ToyStoreException{
 		boolean valid = true;
-		String text;
 		
-		try {
-			if(min > max) {
-				throw new ToyStoreException("Invalid, the minimum number of players cannot be greater than maximum");
-			}
-		}catch(ToyStoreException e) {
-			text = e.getMessage();
-			appMen.errorMessage(text);
+		if(min > max) {
 			valid = false;
+			throw new ToyStoreException("Invalid, minimum number of players must be equal"
+					+ " or greater than maximum number of players, Inputted minimum: " + min + "Inputted maximum: " + max);
 		}
 		return valid;
 	}
@@ -364,7 +353,11 @@ public class GameManager {
 		}
 		return t;
 	}
-	
+	/**
+	 * Method that searches the arrayList based off SN input from user
+	 * 
+	 * @param SN  the serial number the user inputed for search
+	 */
 	private void searchBySN(String SN) {
 		
 		for(Toy tt: toys) {
@@ -386,34 +379,104 @@ public class GameManager {
 		}
 		
 	}
-	
+	/**
+	 * Method that creates a new arrayList based off search criteria the user is looking for and
+	 * updates the database ArrayList according to the actions the user selects
+	 * 
+	 * @param name  the name of toy based off keyword search
+	 */
 	private void searchByName(String name) {
 		toyName = new ArrayList<Toy>();
 		String nameLow = name.toLowerCase();
 		String resultLow;
 		int option;
+		final int ONE = 1;
 		
 		for(Toy tt: toys) {
 			resultLow = tt.getName().toLowerCase();
 			if(nameLow.contains(resultLow)) {
 				if(tt instanceof Figure) {
 					Figure cast = (Figure)tt;
+					toys.remove(tt);
 					toyName.add(cast);
 				} else if(tt instanceof Animal) {
 					Animal cast = (Animal)tt;
+					toys.remove(tt);
 					toyName.add(cast);
 				} else if(tt instanceof Puzzle) {
 					Puzzle cast = (Puzzle)tt;
+					toys.remove(tt);
 					toyName.add(cast);
 				} else if(tt instanceof BoardGame) {
 					BoardGame cast = (BoardGame)tt;
+					toys.remove(tt);
 					toyName.add(cast);
 				}
 			}
 		}
 		option = appMen.printType(toyName);
+		if(option < toyName.size()) {
+			if(toyName.get(option) instanceof Figure) {
+				Figure grab = (Figure)toyName.get(option);
+				if(grab.getAvaliableCount() == ONE) {
+					toyName.remove(option);
+				}else {
+					toyName.remove(option);
+					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
+					toyName.add(grab);
+				}
+			}else if(toyName.get(option) instanceof Animal) {
+				Animal grab = (Animal)toyName.get(option);
+				if(grab.getAvaliableCount() == ONE) {
+					toyName.remove(option);
+				}else {
+					toyName.remove(option);
+					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
+					toyName.add(grab);
+				}
+			}else if(toyName.get(option) instanceof Puzzle) {
+				Puzzle grab = (Puzzle)toyName.get(option);
+				if(grab.getAvaliableCount() == ONE) {
+					toyName.remove(option);
+				}else {
+					toyName.remove(option);
+					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
+					toyName.add(grab);
+				}
+			}else if(toyName.get(option) instanceof BoardGame) {
+				BoardGame grab = (BoardGame)toyName.get(option);
+				if(grab.getAvaliableCount() == ONE) {
+					toyName.remove(option);
+				}else {
+					toyName.remove(option);
+					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
+					toyName.add(grab);
+				}
+			}
+		}
+		
+		for(Toy tUpdate: toyName) {
+			if(tUpdate instanceof Figure) {
+				Figure update = (Figure)tUpdate;
+				toys.add(update);
+			}else if(tUpdate instanceof Animal) {
+				Animal update = (Animal)tUpdate;
+				toys.add(update);
+			}else if(tUpdate instanceof Puzzle) {
+				Puzzle update = (Puzzle)tUpdate;
+				toys.add(update);
+			}else if(tUpdate instanceof BoardGame) {
+				BoardGame update = (BoardGame)tUpdate;
+				toys.add(update);
+			}
+		}
 	}
-	
+	/**
+	 * Method that creates a new arrayList based off search criteria the user is looking for and
+	 * updates the database ArrayList according to the actions the user selects
+	 * 
+	 * @param types  the type of toy based off instance of search
+	 */
 	private void searchByType(String types) {
 		toyType = new ArrayList<Toy>();
 		String a = "Figure";
@@ -467,7 +530,60 @@ public class GameManager {
 			}
 		}
 		option = appMen.printType(toyType);
+		if(option < toyType.size()) {
+			if(toyType.get(option) instanceof Figure) {
+				Figure grab = (Figure)toyType.get(option);
+				if(grab.getAvaliableCount() == ONE) {
+					toyType.remove(option);
+				}else {
+					toyType.remove(option);
+					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
+					toyType.add(grab);
+				}
+			}else if(toyType.get(option) instanceof Animal) {
+				Animal grab = (Animal)toyType.get(option);
+				if(grab.getAvaliableCount() == ONE) {
+					toyType.remove(option);
+				}else {
+					toyType.remove(option);
+					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
+					toyType.add(grab);
+				}
+			}else if(toyType.get(option) instanceof Puzzle) {
+				Puzzle grab = (Puzzle)toyType.get(option);
+				if(grab.getAvaliableCount() == ONE) {
+					toyType.remove(option);
+				}else {
+					toyType.remove(option);
+					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
+					toyType.add(grab);
+				}
+			}else if(toyType.get(option) instanceof BoardGame) {
+				BoardGame grab = (BoardGame)toyType.get(option);
+				if(grab.getAvaliableCount() == ONE) {
+					toyType.remove(option);
+				}else {
+					toyType.remove(option);
+					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
+					toyType.add(grab);
+				}
+			}
+		}
 		
-	
-}
+		for(Toy tUpdate: toyType) {
+			if(tUpdate instanceof Figure) {
+				Figure update = (Figure)tUpdate;
+				toys.add(update);
+			}else if(tUpdate instanceof Animal) {
+				Animal update = (Animal)tUpdate;
+				toys.add(update);
+			}else if(tUpdate instanceof Puzzle) {
+				Puzzle update = (Puzzle)tUpdate;
+				toys.add(update);
+			}else if(tUpdate instanceof BoardGame) {
+				BoardGame update = (BoardGame)tUpdate;
+				toys.add(update);
+			}
+		}
+	}
 }
