@@ -34,7 +34,7 @@ public class GameManager {
 		
 		boolean flag = true;
 		int option;
-		
+		appMen.companyHeader();
 		while (flag) {
 			option = appMen.showMainMenu();
 			switch (option) {
@@ -51,12 +51,12 @@ public class GameManager {
 				flag = false;
 				break;
 			case 4:
+				appMen.exitMessage();
 				exitFile();
 				flag = false;
 				break;
 			default:
 				appMen.mainMenuError();
-				
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class GameManager {
 		while (flag) {
 			switch (option) {
 				case 1:
-					sn = appMen.validateSN();
+					sn = appMen.enterSerial();
 					searchBySN(sn);
 					break;
 				case 2:
@@ -93,6 +93,7 @@ public class GameManager {
 	}
 	
 	private void addToy() {
+		Toy t = null;
 		String sn;
 		String name;
 		String brand;
@@ -119,37 +120,50 @@ public class GameManager {
 		final int EIGHT = 8;
 		final int NINE = 9;
 		
-		sn = appMen.validateSN();
-		name = appMen.enterToy();
-		brand = appMen.enterBrand();
-		price = appMen.enterPrice();
-		avaliableCount = appMen.enterInventory();
-		ageAppropriate = appMen.enterMinAge();
+		sn = appMen.enterSerial();
+		t = searchRemove(sn);
 		
-		firstDigit = Character.getNumericValue(sn.charAt(0));
-		if (firstDigit == ZERO || firstDigit == ONE) {
-			classification = appMen.enterClass();
-			Toy f = new Figure (sn, name, brand, price, avaliableCount, ageAppropriate, classification);
-			toys.add(f);
-		}else if (firstDigit == TWO || firstDigit == THREE) {
-			size = appMen.enterSize();
-			material = appMen.enterMaterial();
-			Toy a = new Animal(sn, name, brand, price, avaliableCount, ageAppropriate, material, size);
-		}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX) {
-			type = appMen.enterType();
-			Toy p = new Puzzle (sn, name, brand, price, avaliableCount, ageAppropriate, type);
-		}else if (firstDigit == SEVEN ||  firstDigit == EIGHT || firstDigit == NINE){
-			minPlayer = appMen.enterMinPlayer();
-			maxPlayer = appMen.enterMaxPlayer();
-			designer = appMen.enterName();
-			numPlayers = minPlayer + "-" + maxPlayer;
-			Toy b = new BoardGame(sn, name, brand, price, avaliableCount, ageAppropriate, numPlayers, designer);
+		while (t != null) {
+			appMen.toyExists();
+			sn = appMen.enterSerial();
+			t = searchRemove(sn);
 		}
+			name = appMen.enterToy();
+			brand = appMen.enterBrand();
+			price = appMen.enterPrice();
+			avaliableCount = appMen.enterInventory();
+			ageAppropriate = appMen.enterMinAge();
+			
+			
+			firstDigit = Character.getNumericValue(sn.charAt(0));
+			if (firstDigit == ZERO || firstDigit == ONE) {
+				classification = appMen.enterClass();
+				Toy f = new Figure (sn, name, brand, price, avaliableCount, ageAppropriate, classification);
+				toys.add(f);
+			}else if (firstDigit == TWO || firstDigit == THREE) {
+				material = appMen.enterMaterial();
+				size = appMen.enterSize();
+				Toy a = new Animal(sn, name, brand, price, avaliableCount, ageAppropriate, material, size);
+				toys.add(a);
+			}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX) {
+				type = appMen.enterType();
+				Toy p = new Puzzle (sn, name, brand, price, avaliableCount, ageAppropriate, type);
+				toys.add(p);
+			}else if (firstDigit == SEVEN ||  firstDigit == EIGHT || firstDigit == NINE){
+				minPlayer = appMen.enterMinPlayer();
+				maxPlayer = appMen.enterMaxPlayer();
+				designer = appMen.enterName();
+				numPlayers = minPlayer + "-" + maxPlayer;
+				Toy b = new BoardGame(sn, name, brand, price, avaliableCount, ageAppropriate, numPlayers, designer);
+				toys.add(b);
+			}
+		
+		
 		
 		appMen.confirm();
 
-		appMen.enterContinue();
-		
+		appMen.enterContinue();		
+	
 		launchApp();
 	}
 
@@ -159,12 +173,11 @@ public class GameManager {
 	private void removeToy() {
 		String serial;
 		boolean valid = false;
-		int firstDigit;
 		char option = 'n';
 		Toy t = null;
-
+		
 		while (!valid) {
-			serial = appMen.validateSN();
+			serial = appMen.enterSerial();
 			t = searchRemove(serial);
 			if (t == null) {
 				appMen.itemNotFound();

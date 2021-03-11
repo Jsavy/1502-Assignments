@@ -22,7 +22,7 @@ public class AppMenu {
 	public void companyHeader() {
 		System.out.println("*****************************************************");
 		System.out.println("*        WELCOME TO TOY STORE COMPANY!              *");
-		System.out.println("*****************************************************/n");
+		System.out.println("*****************************************************\n");
 	}
 	/**
 	 * Prints the main menu that prompts the user for which option they wish to select
@@ -30,14 +30,28 @@ public class AppMenu {
 	 * @return option  the integer the user selected
 	 */
 	public int showMainMenu() {
-		int option;
-		System.out.println("How We May Help You?/n");
+		int option = 0;
+		boolean isInt;
+		System.out.println("How We May Help You?\n");
 		System.out.println("(1)   Search Inventory and Purchase Toy");
 		System.out.println("(2)   Add New Toy");
 		System.out.println("(3)   Remove Toy");
 		System.out.println("(4)   Save & Exit \n");
-		System.out.print("Enter Option:");
-		option = scan.nextInt();
+		
+		do {
+			System.out.print("Enter Option: ");
+			if (scan.hasNextInt()) {
+				option = scan.nextInt();
+				isInt = true;
+			}else {
+				System.out.println("\nError: Invalid Menu Input\n");
+				isInt = false;
+				scan.next();
+			}
+			
+		} while (!(isInt));
+		
+		scan.nextLine();
 		return option;
 	}
 	/**
@@ -47,14 +61,41 @@ public class AppMenu {
 	 */
 	public int showSubMenu() {
 		int option;
-		System.out.println("/nFind Toys With: \n");
+		System.out.println("\nFind Toys With: \n");
 		System.out.println("(1)   Serial Number(SN)");
 		System.out.println("(2)   Toy Name");
 		System.out.println("(3)   Type");
-		System.out.println("(4)   Back to Main Menu/n");
+		System.out.println("(4)   Back to Main Menu\n");
 		System.out.print("Enter Option:");
+		scan.next();
 		option = scan.nextInt();
 		return option;
+	}
+	/**
+	 * Prompts the user to enter the desired Serial Number
+	 * 
+	 * @return serial  the user generated integer for serial Number
+	 */
+	public String enterSerial() {
+		String sn = "";
+		boolean valid = false;
+		
+		do {
+			System.out.print("\nEnter Serial Number: ");
+			sn = scan.nextLine();
+			
+			if (sn.matches("[0-9]+")) {
+				if (sn.length() == 10) {
+					valid = true;
+				}else {
+					System.out.println("The Serial Number's length must be 10 digits!\n");
+				}
+			}else {
+				System.out.println("The serial number must only contain digits!\n");
+			}
+		} while (!valid);
+		
+		return sn;
 	}
 	/**
 	 * Prompts the user to enter the desired toy name
@@ -63,21 +104,9 @@ public class AppMenu {
 	 */
 	public String enterToy() {
 		String text;
-		System.out.print("/nEnter Toy Name:");
+		System.out.print("\nEnter Toy Name: ");
 		text = scan.nextLine();
 		return text;
-	}
-	/**
-	 * Prompts the user to enter the desired Serial Number
-	 * 
-	 * @return serial  the user generated integer for serial Number
-	 */
-	public String enterSerial() {
-		String serial;
-		System.out.print("/nEnter Serial Number:");
-		serial = scan.nextLine();
-		
-		return serial;
 	}
 	/**
 	 * Prompts the user to enter the desired brand name
@@ -86,7 +115,7 @@ public class AppMenu {
 	 */
 	public String enterBrand() {
 		String brand;
-		System.out.print("/nEnter Toy Brand:");
+		System.out.print("\nEnter Toy Brand: ");
 		brand = scan.nextLine();
 		return brand;
 	}
@@ -96,9 +125,23 @@ public class AppMenu {
 	 * @return price  the user generated price for the toy in string format
 	 */
 	public double enterPrice() {
-		double price;
-		System.out.print("/nEnter Toy Price:");
-		price = scan.nextDouble();
+		double price = 0;
+		boolean isDouble;
+		
+		
+		do {
+			System.out.print("\nEnter Toy Price: ");
+			if (scan.hasNextDouble()) {
+				price = scan.nextDouble();
+				isDouble = true;
+			}else {
+				System.out.println("Error: Invalid Price Input");
+				isDouble = false;
+				scan.next();
+			}
+			
+		} while (!(isDouble));
+		
 		return price;
 	}
 	/**
@@ -107,9 +150,22 @@ public class AppMenu {
 	 * @return inventory  the user generated inventory for the toy
 	 */
 	public int enterInventory() {
-		int inventory;
-		System.out.print("/nEnter Available Counts:");
-		inventory = scan.nextInt();
+		int inventory = 0;
+		boolean isInt;
+		
+		
+		do {
+			System.out.print("\nEnter Available Counts: ");
+			if (scan.hasNextDouble()) {
+				inventory = scan.nextInt();
+				isInt = true;
+			}else {
+				System.out.println("Error: Invalid Inventory Input");
+				isInt = false;
+				scan.next();
+			}
+			
+		} while (!(isInt));
 		return inventory;
 	}
 	/**
@@ -118,9 +174,21 @@ public class AppMenu {
 	 * @return age  the recommended age for the toy
 	 */
 	public int enterMinAge() {
-		int age;
-		System.out.print("/nEnter Appropriate Age:");
-		age = scan.nextInt();
+		int age = 0;
+		boolean isInt;
+		
+		do {
+			System.out.print("\nEnter Appropriate Age: ");
+			if (scan.hasNextInt()) {
+				age = scan.nextInt();
+				isInt = true;
+			}else {
+				System.out.println("Error: Invalid Age Input");
+				isInt = false;
+				scan.next();
+			}
+			
+		} while (!(isInt));
 		return age;
 	}
 	/**
@@ -130,9 +198,21 @@ public class AppMenu {
 	 * @return numPlayer  the amount of players needed 
 	 */
 	public int enterMinPlayer() {
-		int numPlayer;
-		System.out.print("/nEnter Minimum Number of Players: ");
-		numPlayer = scan.nextInt();
+		int numPlayer = 0;
+		boolean isInt;
+		do {
+			System.out.print("\nEnter Minimum Number of Players: ");
+			if (scan.hasNextInt()) {
+				numPlayer = scan.nextInt();
+				isInt = true;
+			}else {
+				System.out.println("Error: Invalid Age Input");
+				isInt = false;
+				scan.next();
+			}
+			
+		} while (!(isInt));
+		
 		return numPlayer;
 	}
 	/**
@@ -142,9 +222,21 @@ public class AppMenu {
 	 * @return numPlayer  the amount of players needed
 	 */
 	public int enterMaxPlayer() {
-		int numPlayer;
-		System.out.print("/nEnter Maximum Number of Players: ");
-		numPlayer = scan.nextInt();
+		int numPlayer = 0;
+		boolean isInt;
+		
+		do {
+			System.out.print("\nEnter Maximum Number of Players: ");
+			if (scan.hasNextInt()) {
+				numPlayer = scan.nextInt();
+				isInt = true;
+			}else {
+				System.out.println("Error: Invalid Age Input");
+				isInt = false;
+				scan.next();
+			}
+			
+		} while (!(isInt));
 		return numPlayer;
 	}
 
@@ -155,9 +247,41 @@ public class AppMenu {
 	 */
 	public String enterName() {
 		String names;
-		System.out.print("/nEnter Designer Names(Use ',' to separate the names if there is more than one name) ");
+		scan.nextLine();
+		System.out.print("\nEnter Designer Names(Use ',' to separate the names if there is more than one name): ");
 		names = scan.nextLine();
 		return names;
+	}
+	
+	public String enterMaterial() {
+		String input;
+		String material = "";
+		boolean valid = false;
+		String a = "Wooden";
+		String b = "Plastic";
+		String c = "Fabric";
+
+		scan.nextLine();
+		while (!valid) {
+			System.out.print("\nPlease enter a material type (Wooden, Plastic or Fabric): ");
+			input = scan.nextLine();
+			
+			if (input.equalsIgnoreCase(a)) {
+				material = a;
+				valid = true;
+			}else if (input.equalsIgnoreCase(b)) {
+				material = b;
+				valid = true;
+			}else if (input.equalsIgnoreCase(c)) {
+				material = c;
+				valid = true;
+			}else {
+				System.out.println("Error: Invalid Material Type");
+			}
+		}
+		
+		return material;
+		
 	}
 	/**
 	 * Prompts the user to enter the size of the animal toy
@@ -168,16 +292,18 @@ public class AppMenu {
 		String input;
 		char size = 'N';
 		boolean valid = false;
+		
 		while (!valid) {
+			
 
-			System.out.println("\nEnter Toy Size: ");
+			System.out.print("\nEnter Toy Size: ");
 			input = scan.nextLine();
 			size = Character.toUpperCase(input.charAt(0));
 
 			if (size == 'S' || size == 'M' || size == 'L') {
 				valid = true;
 			}else {
-				System.out.println("Error: Invalid Input");
+				System.out.println("Error: Invalid Size Type");
 				valid = false;
 			}
 		}
@@ -226,16 +352,17 @@ public class AppMenu {
 		String input;
 		char clas = 'n';
 		boolean valid = false;
-
+		
+		scan.nextLine();
 		while (!valid) {
-			System.out.println("\nEnter Classification: ");
+			System.out.print("\nEnter Classification (Action, Doll, or Historic): ");
 			input = scan.nextLine();
 			clas = Character.toUpperCase(input.charAt(0));
 
 			if (clas == 'A' || clas == 'D' || clas == 'H') {
 				valid = true;
 			}else {
-				System.out.println("Error: Invalid Input");
+				System.out.println("Error: Invalid Type of Classification");
 				valid = false;
 			}
 		}
@@ -244,25 +371,34 @@ public class AppMenu {
 	}
 	public char enterType() {
 		String input;
-		char type;
-		boolean valid;
-
-		System.out.println("\nEnter Puzzle Type: ");
-		input = scan.nextLine();
-		type = Character.toUpperCase(input.charAt(0));
+		char type = 'x';
+		boolean valid = false;
+		
+		scan.nextLine();
+		while (!valid) {
+			System.out.print("\nEnter Puzzle Type (Mechanical, Cryptic, Logic, Trivia, or Riddle): ");
+			input = scan.nextLine();
+			type = Character.toUpperCase(input.charAt(0));
+			
+			if (type == 'M' || type == 'C' || type == 'L' || type == 'T' || type == 'R') {
+				valid = true;
+			}else {
+				System.out.println("Error: Invalid Type of Puzzle");
+			}
+		}
 		return type;
 	}
 	/**
 	 * Prints to confirm the toy has been added to the database
 	 */
 	public void confirm() {
-		System.out.println("New Toy Added!");
+		System.out.println("\nNew Toy Added!");
 	}
 	/**
 	 * Prompts the user to press enter to continue
 	 */
 	public void enterContinue() {
-		System.out.println("Press \"Enter\" to continue");
+		System.out.println("\nPress \"Enter\" to continue");
 		scan.nextLine();
 	}
 
@@ -270,7 +406,7 @@ public class AppMenu {
 	* Finds the toy found by the user's inputted serial number
 	*/ 
 	public void itemFound() {
-		System.out.println("This Item Found: ");
+		System.out.println("\nThis Item Found: \n");
 	}
 
 	/**
@@ -282,28 +418,40 @@ public class AppMenu {
 		final int ZERO = 0;
 		String input;
 		char option;
-		System.out.println("Do you want to remove it (Y/N)?");
+		System.out.print("\nDo you want to remove it (Y/N)? ");
 		input = scan.nextLine();
-		option = input.toLowerCase().charAt(0);
+		option = input.toLowerCase().charAt(ZERO);
 		return option;
 	}
-
+	/**
+	 * Message to confirm when the user inputs a SN number that does not correspond to a toy
+	 */
 	public void itemNotFound() {
-		System.out.println("Item not found");
+		System.out.println("\nItem not found\n");
 	}
-
+	/**
+	 * Message to confirm the item was removed
+	 */
 	public void itemRemove() {
-		System.out.println("Item Removed!");
+		System.out.println("\nItem Removed!\n");
 	}
-
+	/**
+	 * Message when item was not removed
+	 */
 	public void itemNotRemove() {
-		System.out.println("Item not removed!");
+		System.out.println("\nItem not removed!\n");
+	}
+	/**
+	 * Message when user inputs a non-unique SN
+	 */
+	public void toyExists() {
+		System.out.print("\nError: Toy already exists!\n");
 	}
 	/**
 	 * exit message for when the user wishes to exit with animation on the dots
 	 */
 	public void exitMessage() {
-		System.out.print("/n Saving Data Into Database");
+		System.out.print("\nSaving Data Into Database");
 		for (int i=0; i<3; i++) {
 			try {
 				Thread.sleep(1000);
@@ -312,7 +460,7 @@ public class AppMenu {
 			}
 			System.out.print(".");
 		}
-		System.out.println("/n/n*********** THANKS FOR VISITING US! ***********");
+		System.out.println("\n\n*********** THANKS FOR VISITING US! ***********");
 	}
 	/**
 	 * Success message for when the user successfully purchases a toy 
@@ -320,33 +468,7 @@ public class AppMenu {
 	public void successMessage() {
 		System.out.println("/nThe Transaction successfully Terminated!");
 	}
-	/**
-	 * Method which validates the user inputted serial number
-	 * 
-	 * @return sn - the validated sn number
-	 */
-	public String validateSN() {
-		String sn = null;
-		boolean valid = false;
-	
-		do {
-			sn = enterSerial();
-			
-			if (sn.matches("[0-9]+")) {
-				if (sn.length() == 10) {
-					valid = true;
-				}else {
-					System.out.println("The serial number's length must be 10 digits");
-				}
-			}else {
-				System.out.println("The serial number must only contain digits");
-			}
-			
-		}while (!valid);
-		
-		System.out.println("The accepted SN is: " + sn);
-		return sn;
-	}
+
 	/**
 	 * method used to print exception messages
 	 * 
@@ -402,31 +524,8 @@ public class AppMenu {
 	 * Prints if the user selects an invalid option in the main menu
 	 */
 	public void mainMenuError() {
-		System.out.println("\nInvalid Input: Please try again!\n");
+		System.out.println("\nError: Invalid Choice, Please try again!\n");
 	}
 
-	public String enterMaterial() {
-		String input = "";
-		boolean valid = false;
-		String a = "Wooden";
-		String b = "Plastic";
-		String c = "Fabric";
 
-		while (!valid) {
-			System.out.println("Please enter a material type ");
-			input = scan.nextLine();
-			
-			if (input.equalsIgnoreCase(a)) {
-				valid = true;
-			}else if (input.equalsIgnoreCase(b)) {
-				valid = true;
-			}else if (input.equalsIgnoreCase(c)) {
-				valid = true;
-			}else {
-				valid = false;
-			}
-		}
-		return input;
-		
-	}
 }

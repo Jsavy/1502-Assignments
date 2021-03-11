@@ -70,7 +70,7 @@ public class BoardGame extends Toy {
 	 */
 	public String toString() {
 		String text;
-		text = "Catagory: BoardGame, " + super.toString() + "," + "Number of players: " + numPlayers + "," + " Designer names: " + designer;
+		text = "Catagory: BoardGame, " + super.toString() + "," + " Number of players: " + numPlayers + "," + " Designer Names: " + designer;
 		return text;
 	}
 }

@@ -51,7 +51,7 @@ public class Figure extends Toy {
 	 */
 	public String toString() {
 		String text;
-		text = "Catagory: Figure, " + super.toString() + "," + "Classification Type: " + classification;
+		text = "Catagory: Figure, " + super.toString() + "," + " Classification Type: " + classification;
 		return text;
 	}
 }

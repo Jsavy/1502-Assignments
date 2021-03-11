@@ -51,7 +51,7 @@ public class Puzzle extends Toy {
 	 */
 	public String toString() {
 		String text;
-		text = "Catagory: Puzzle, " + super.toString() + "," + "Puzzle Type: " + puzzleType; 
+		text = "Catagory: Puzzle, " + super.toString() + "," + " Puzzle Type: " + puzzleType; 
 		return text;
 	}
 }
