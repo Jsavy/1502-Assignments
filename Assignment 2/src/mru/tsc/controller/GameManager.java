@@ -100,11 +100,14 @@ public class GameManager {
 		String designer;
 		String numPlayers;
 		String material;
-		double price;
+		String text;
+		double price = 0;
+		boolean priceValidity = false;
+		boolean playerValidity = false;
 		int avaliableCount;
 		int ageAppropriate;
-		int minPlayer;
-		int maxPlayer;
+		int minPlayer = 0;
+		int maxPlayer = 0;
 		int firstDigit;
 		char size;
 		char classification;
@@ -130,7 +133,15 @@ public class GameManager {
 		}
 			name = appMen.enterToy();
 			brand = appMen.enterBrand();
-			price = appMen.enterPrice();
+			while(!priceValidity) {
+				price = appMen.enterPrice();
+				try {
+					priceValidity = isPriceValid(price);
+				} catch (ToyStoreException e) {
+					text = e.getMessage();
+					appMen.errorMessage(text);
+				}
+			}
 			avaliableCount = appMen.enterInventory();
 			ageAppropriate = appMen.enterMinAge();
 			
@@ -150,8 +161,16 @@ public class GameManager {
 				Toy p = new Puzzle (sn, name, brand, price, avaliableCount, ageAppropriate, type);
 				toys.add(p);
 			}else if (firstDigit == SEVEN ||  firstDigit == EIGHT || firstDigit == NINE){
-				minPlayer = appMen.enterMinPlayer();
-				maxPlayer = appMen.enterMaxPlayer();
+				while(!playerValidity) {
+					minPlayer = appMen.enterMinPlayer();
+					maxPlayer = appMen.enterMaxPlayer();
+					try {
+						playerValidity = isPlayerValid(minPlayer,maxPlayer);
+					} catch (ToyStoreException e) {
+						text = e.getMessage();
+						appMen.errorMessage(text);
+					}
+				}
 				designer = appMen.enterName();
 				numPlayers = minPlayer + "-" + maxPlayer;
 				Toy b = new BoardGame(sn, name, brand, price, avaliableCount, ageAppropriate, numPlayers, designer);
@@ -330,7 +349,7 @@ public class GameManager {
 		if(min > max) {
 			valid = false;
 			throw new ToyStoreException("Invalid, minimum number of players must be equal"
-					+ " or greater than maximum number of players, Inputted minimum: " + min + "Inputted maximum: " + max);
+					+ " or greater than maximum number of players, Inputted minimum: " + min + " Inputted maximum: " + max);
 		}
 		return valid;
 	}
