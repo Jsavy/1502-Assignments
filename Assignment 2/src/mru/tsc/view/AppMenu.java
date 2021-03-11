@@ -79,13 +79,14 @@ public class AppMenu {
 	public String enterSerial() {
 		String sn = "";
 		boolean valid = false;
+		final int TEN = 10;
 		
 		do {
 			System.out.print("\nEnter Serial Number: ");
 			sn = scan.nextLine();
 			
 			if (sn.matches("[0-9]+")) {
-				if (sn.length() == 10) {
+				if (sn.length() == TEN) {
 					valid = true;
 				}else {
 					System.out.println("The Serial Number's length must be 10 digits!\n");
@@ -373,12 +374,13 @@ public class AppMenu {
 		String input;
 		char type = 'x';
 		boolean valid = false;
+		final int ZERO = 0;
 		
 		scan.nextLine();
 		while (!valid) {
 			System.out.print("\nEnter Puzzle Type (Mechanical, Cryptic, Logic, Trivia, or Riddle): ");
 			input = scan.nextLine();
-			type = Character.toUpperCase(input.charAt(0));
+			type = Character.toUpperCase(input.charAt(ZERO));
 			
 			if (type == 'M' || type == 'C' || type == 'L' || type == 'T' || type == 'R') {
 				valid = true;
@@ -451,12 +453,16 @@ public class AppMenu {
 	 * exit message for when the user wishes to exit with animation on the dots
 	 */
 	public void exitMessage() {
+		final int THREE = 3;
+		final int THOUSAND = 1000;
+		String text;
 		System.out.print("\nSaving Data Into Database");
-		for (int i=0; i<3; i++) {
+		for (int i=0; i<THREE; i++) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(THOUSAND);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				text = e.getMessage();
+				errorMessage(text);
 			}
 			System.out.print(".");
 		}

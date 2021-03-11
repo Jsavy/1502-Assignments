@@ -245,11 +245,13 @@ public class GameManager {
 		String[] splittedLine;
 		String splittedLine1;
 		Scanner fileReader = null;
+		String text;
+		
 		try {
 			fileReader = new Scanner(myFile);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			text = e.getMessage();
+			appMen.errorMessage(text);
 		}
 		int firstDigit;
 		final int ZERO = 0;
@@ -419,36 +421,46 @@ public class GameManager {
 		String c = "Puzzles";
 		String d = "Board Games";
 		int option;
+		final int ZERO = 0;
+		final int ONE = 1;
+		final int TWO = 2;
+		final int THREE = 3;
+		final int FOUR = 4;
+		final int FIVE = 5;
+		final int SIX = 6;
+		final int SEVEN = 7;
+		final int EIGHT = 8;
+		final int NINE = 9;
 		
 		
 		if(types.equalsIgnoreCase(a)) {
 			for(Toy tt: toys) {
-				int firstDigit = Character.getNumericValue(tt.getSN().charAt(0));
-				if(firstDigit == 0 || firstDigit == 1) {
+				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
+				if(firstDigit == ZERO || firstDigit == ONE) {
 					Figure cast = (Figure)tt;
 					toyType.add(cast);
 				}
 			}
 		}else if(types.equalsIgnoreCase(b)) {
 			for(Toy tt: toys) {
-				int firstDigit = Character.getNumericValue(tt.getSN().charAt(0));
-				if(firstDigit == 2 || firstDigit == 3) {
+				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
+				if(firstDigit == TWO || firstDigit == THREE) {
 					Animal cast = (Animal)tt;
 					toyType.add(cast);
 		}
 }	
 		}else if(types.equalsIgnoreCase(c)) {
 			for(Toy tt: toys) {
-				int firstDigit = Character.getNumericValue(tt.getSN().charAt(0));
-				if(firstDigit == 4 || firstDigit == 5 || firstDigit == 6) {
+				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
+				if(firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX) {
 					Puzzle cast = (Puzzle)tt;
 					toyType.add(cast);
 				}
 			}
 		}else if(types.equalsIgnoreCase(d)) {
 			for(Toy tt: toys) {
-				int firstDigit = Character.getNumericValue(tt.getSN().charAt(0));
-				if(firstDigit == 7 || firstDigit == 8 || firstDigit == 9) {
+				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
+				if(firstDigit == SEVEN || firstDigit == EIGHT || firstDigit == NINE) {
 					BoardGame cast = (BoardGame)tt;
 					toyType.add(cast);
 				}
