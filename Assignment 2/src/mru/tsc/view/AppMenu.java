@@ -1,6 +1,13 @@
 package mru.tsc.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import mru.tsc.model.Animal;
+import mru.tsc.model.BoardGame;
+import mru.tsc.model.Figure;
+import mru.tsc.model.Puzzle;
+import mru.tsc.model.Toy;
 
 public class AppMenu {
 	
@@ -69,6 +76,7 @@ public class AppMenu {
 		String serial;
 		System.out.print("/nEnter Serial Number:");
 		serial = scan.nextLine();
+		
 		return serial;
 	}
 	/**
@@ -158,11 +166,56 @@ public class AppMenu {
 	 */
 	public char enterSize() {
 		String input;
-		char size;
-		System.out.println("\nEnter Toy Size: ");
-		input = scan.nextLine();
-		size = Character.toUpperCase(input.charAt(0));
+		char size = 'N';
+		boolean valid = false;
+		while (!valid) {
+
+			System.out.println("\nEnter Toy Size: ");
+			input = scan.nextLine();
+			size = Character.toUpperCase(input.charAt(0));
+
+			if (size == 'S' || size == 'M' || size == 'L') {
+				valid = true;
+			}else {
+				System.out.println("Error: Invalid Input");
+				valid = false;
+			}
+		}
+	
+
 		return size;
+	}
+	/**
+	*	Prompts the user to enter the type of toy and validates the input (Figure, Animal, Puzzles, Board Games)
+	*
+	*   @return input - the validated type of toy
+	*/
+	public String enterToyType() {
+		String input = "";
+		boolean valid = false;
+		String a = "Figure";
+		String b = "Animal";
+		String c = "Puzzles";
+		String d = "Board Games";
+
+		while (!valid) {
+			System.out.println("Enter Toy Type (Figure, Animal, Puzzles, Board Games): ");
+			input = scan.nextLine();
+
+			if (input.equalsIgnoreCase(a)) {
+				valid = true;
+			}else if (input.equalsIgnoreCase(b)) {
+				valid = true;
+			}else if (input.equalsIgnoreCase(c)) {
+				valid = true;
+			}else if (input.equalsIgnoreCase(d)) {
+				valid = true;
+			}else {
+				valid = false;
+			}
+		}
+
+		return input;
 	}
 	/**
 	 * Prompts the user to enter the classification of the figure
@@ -171,15 +224,29 @@ public class AppMenu {
 	 */
 	public char enterClass() {
 		String input;
-		char clas;
-		System.out.println("\nEnter Classification: ");
-		input = scan.nextLine();
-		clas = Character.toUpperCase(input.charAt(0));
+		char clas = 'n';
+		boolean valid = false;
+
+		while (!valid) {
+			System.out.println("\nEnter Classification: ");
+			input = scan.nextLine();
+			clas = Character.toUpperCase(input.charAt(0));
+
+			if (clas == 'A' || clas == 'D' || clas == 'H') {
+				valid = true;
+			}else {
+				System.out.println("Error: Invalid Input");
+				valid = false;
+			}
+		}
+		
 		return clas;
 	}
 	public char enterType() {
 		String input;
 		char type;
+		boolean valid;
+
 		System.out.println("\nEnter Puzzle Type: ");
 		input = scan.nextLine();
 		type = Character.toUpperCase(input.charAt(0));
@@ -199,6 +266,39 @@ public class AppMenu {
 		scan.nextLine();
 	}
 
+	/**
+	* Finds the toy found by the user's inputted serial number
+	*/ 
+	public void itemFound() {
+		System.out.println("This Item Found: ");
+	}
+
+	/**
+	*	Prompts the user to remove the item or not
+	*
+	*   @return  option - the choice the user inputted
+	*/
+	public char removeToy() {
+		final int ZERO = 0;
+		String input;
+		char option;
+		System.out.println("Do you want to remove it (Y/N)?");
+		input = scan.nextLine();
+		option = input.toLowerCase().charAt(0);
+		return option;
+	}
+
+	public void itemNotFound() {
+		System.out.println("Item not found");
+	}
+
+	public void itemRemove() {
+		System.out.println("Item Removed!");
+	}
+
+	public void itemNotRemove() {
+		System.out.println("Item not removed!");
+	}
 	/**
 	 * exit message for when the user wishes to exit with animation on the dots
 	 */
@@ -254,5 +354,79 @@ public class AppMenu {
 	 */
 	public void errorMessage(String e) {
 		System.out.println(e);
+	}
+	
+	public int printType(ArrayList<Toy> toyType) {
+		int i;
+		int option;
+		System.out.println("Here are the search results:/n");
+		for(i = 0; i < toyType.size(); i++) {
+			Toy tp = toyType.get(i);
+			if(tp instanceof Figure) {
+				Figure cast = (Figure)tp;
+				System.out.println("(" + i + 1 + ")  " + cast.toString());
+			} else if(tp instanceof Animal) {
+				Animal cast = (Animal)tp;
+				System.out.println("(" + i + 1 + ")  " + cast.toString());
+			} else if(tp instanceof Puzzle) {
+				Puzzle cast = (Puzzle)tp;
+				System.out.println("(" + i + 1 + ")  " + cast.toString());
+			} else if(tp instanceof BoardGame) {
+				BoardGame cast = (BoardGame)tp;
+				System.out.println("(" + i + 1 + ")  " + cast.toString());
+			}
+		}
+		System.out.println("(" + i + 1 + ")  " + "Back to Search Menu");
+		option = scan.nextInt();
+		option = option - 1;
+		return option;
+	}
+	
+	public void printSNFigure(Figure toy) {
+		System.out.println(toy.toString());
+	}
+	
+	public void printSNAnimal(Animal toy) {
+		System.out.println(toy.toString());
+	}
+	
+	public void printSNPuzzle(Puzzle toy) {
+		System.out.println(toy.toString());
+	}
+	
+	public void printSNBoardGame(BoardGame toy) {
+		System.out.println(toy.toString());
+	}
+	
+	/**
+	 * Prints if the user selects an invalid option in the main menu
+	 */
+	public void mainMenuError() {
+		System.out.println("\nInvalid Input: Please try again!\n");
+	}
+
+	public String enterMaterial() {
+		String input = "";
+		boolean valid = false;
+		String a = "Wooden";
+		String b = "Plastic";
+		String c = "Fabric";
+
+		while (!valid) {
+			System.out.println("Please enter a material type ");
+			input = scan.nextLine();
+			
+			if (input.equalsIgnoreCase(a)) {
+				valid = true;
+			}else if (input.equalsIgnoreCase(b)) {
+				valid = true;
+			}else if (input.equalsIgnoreCase(c)) {
+				valid = true;
+			}else {
+				valid = false;
+			}
+		}
+		return input;
+		
 	}
 }

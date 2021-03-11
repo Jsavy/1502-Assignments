@@ -2,9 +2,13 @@ package mru.tsc.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import junit.framework.Assert;
+import mru.tsc.model.BoardGame;
+import mru.tsc.model.Figure;
 import mru.tsc.model.Puzzle;
 import mru.tsc.model.Toy;
 
@@ -69,6 +73,15 @@ class PuzzleTest {
 	@Test
 	void test8() {
 		Toy p = new Puzzle("1234567890", "Jigsaw Puzzle Madness", "Warner Bros.", 24.99, 3, 3, 'L');
+		Toy f = new Figure("1452365872", "Buzz Lightyear", "Warner Bros.", 32.99, 9, 6, 'A');
+		BoardGame b = new BoardGame("7123456789", "Monopoly", "Warner Bros.", 12.99, 2, 8, "2-6", "John");
+		ArrayList<Toy> toys = new ArrayList<Toy>();
+		toys.add(b);
+		toys.add(f);
+		toys.add(p);
+		System.out.println(toys.get(0));
+		System.out.println(toys.get(1));
+		System.out.println(toys.get(2));
 		Assert.assertTrue(p instanceof Puzzle);
 	}
 

@@ -3,6 +3,7 @@ package mru.tsc.model;
 public class Animal extends Toy{
 	
 	private char size; // the letter to identify the size of the animal
+	private String material;
 	
 	/**
 	 * The constructor for the Animal class that uses the super constructor for the appropriate variables
@@ -15,9 +16,10 @@ public class Animal extends Toy{
 	 * @param ageAppropriate   the recommended age for the animal
 	 * @param size             the size of the animal
 	 */
-	public Animal(String SN, String name, String brand, double price, int availiableCount, int ageAppropriate, char size) {
+	public Animal(String SN, String name, String brand, double price, int availiableCount, int ageAppropriate, String material, char size) {
 		super(SN,name,brand,price,availiableCount,ageAppropriate);
 		this.size = size;
+		this.material = material;
 	}
 	/**
 	 * getter method for the size of the animal
@@ -35,6 +37,14 @@ public class Animal extends Toy{
 	public void setSize(char size) {
 		this.size = size;
 	}
+	
+	public String getMaterial() {
+		return material;
+	}
+	
+	public void setMaterial(String material) {
+		this.material = material;
+	}
 	/**
 	 * formatted output for the Animal that uses the format from the super class to get info thats not toy specific
 	 * 
@@ -42,7 +52,7 @@ public class Animal extends Toy{
 	 */
 	public String format() {
 		String text;
-		text = super.format() + ";" + size;
+		text = super.format() + ";" + material + ";" + size;
 		return text;
 	}
 	/**
@@ -52,7 +62,7 @@ public class Animal extends Toy{
 	 */
 	public String toString() {
 		String text;
-		text = "Catagory: Animal " + super.toString() + "," + " Size: " + size; 
+		text = "Catagory: Animal " + super.toString() + "," + " Material: " + material + "," + " Size: " + size; 
 		return text;
 	}
 }
