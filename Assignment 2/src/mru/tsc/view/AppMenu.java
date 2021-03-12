@@ -310,13 +310,14 @@ public class AppMenu {
 		String input;
 		char size = 'N';
 		boolean valid = false;
+		final int ZERO = 0;
 		
 		while (!valid) {
 			
 
 			System.out.print("\nEnter Toy Size: ");
 			input = scan.nextLine();
-			size = Character.toUpperCase(input.charAt(0));
+			size = Character.toUpperCase(input.charAt(ZERO));
 
 			if (size == 'S' || size == 'M' || size == 'L') {
 				valid = true;
@@ -370,12 +371,13 @@ public class AppMenu {
 		String input;
 		char clas = 'n';
 		boolean valid = false;
+		final int ZERO = 0;
 		
 		scan.nextLine();
 		while (!valid) {
 			System.out.print("\nEnter Classification (Action, Doll, or Historic): ");
 			input = scan.nextLine();
-			clas = Character.toUpperCase(input.charAt(0));
+			clas = Character.toUpperCase(input.charAt(ZERO));
 
 			if (clas == 'A' || clas == 'D' || clas == 'H') {
 				valid = true;
@@ -423,7 +425,6 @@ public class AppMenu {
 	 */
 	public void enterContinue() {
 		System.out.println("\nPress \"Enter\" to continue");
-		scan.nextLine();
 		scan.nextLine();
 	}
 
@@ -495,7 +496,7 @@ public class AppMenu {
 	 * Success message for when the user successfully purchases a toy 
 	 */
 	public void successMessage() {
-		System.out.println("/nThe Transaction successfully Terminated!");
+		System.out.println("\nThe Transaction successfully Terminated!");
 	}
 
 	/**
@@ -515,26 +516,27 @@ public class AppMenu {
 	public int printType(ArrayList<Toy> toyType) {
 		int i;
 		int option;
+		final int ONE = 1;
 		System.out.println("Here are the search results:\n");
 		for(i = 0; i < toyType.size(); i++) {
 			Toy tp = toyType.get(i);
 			if(tp instanceof Figure) {
 				Figure cast = (Figure)tp;
-				System.out.println("(" + (i + 1) + ")  " + cast.toString());
+				System.out.println("(" + (i + ONE) + ")  " + cast.toString());
 			} else if(tp instanceof Animal) {
 				Animal cast = (Animal)tp;
-				System.out.println("(" + (i + 1) + ")  " + cast.toString());
+				System.out.println("(" + (i + ONE) + ")  " + cast.toString());
 			} else if(tp instanceof Puzzle) {
 				Puzzle cast = (Puzzle)tp;
-				System.out.println("(" + (i + 1) + ")  " + cast.toString());
+				System.out.println("(" + (i + ONE) + ")  " + cast.toString());
 			} else if(tp instanceof BoardGame) {
 				BoardGame cast = (BoardGame)tp;
-				System.out.println("(" + (i + 1) + ")  " + cast.toString());
+				System.out.println("(" + (i + ONE) + ")  " + cast.toString());
 			}
 		}
-		System.out.println("(" + (i + 1) + ")  " + "Back to Search Menu");
+		System.out.println("(" + (i + ONE) + ")  " + "Back to Search Menu");
 		option = scan.nextInt();
-		option = option - 1;
+		option = option - ONE;
 		return option;
 	}
 
@@ -556,6 +558,34 @@ public class AppMenu {
 	 */
 	public void mainMenuError() {
 		System.out.println("\nError: Invalid Choice, Please try again!\n");
+	}
+	
+	public String enterPurchase() {
+		String sn = "";
+		boolean valid = false;
+		final int TEN = 10;
+		scan.nextLine();
+		do {
+			System.out.print("\nEnter Serial Number: ");
+			sn = scan.nextLine();
+			
+			if (sn.matches("[0-9]+")) {
+				if (sn.length() == TEN) {
+					valid = true;
+				}else {
+					System.out.println("The Serial Number's length must be 10 digits!\n");
+				}
+			}else {
+				System.out.println("The serial number must only contain digits!\n");
+			}
+		} while (!valid);
+		
+		return sn;
+	}
+	public void enterContinueDouble() {
+		System.out.println("\nPress \"Enter\" to continue");
+		scan.nextLine();
+		scan.nextLine();
 	}
 
 

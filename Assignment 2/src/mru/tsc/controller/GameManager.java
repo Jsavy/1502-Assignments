@@ -29,65 +29,77 @@ public class GameManager {
 		readFile();
 		launchApp();
 	}
-	
+	/**
+	*	This method assists in the proccessing of user inputs from the main menu
+	*
+	*/
 	private void launchApp () {
 		
 		boolean flag = true; // variable to loop the menu
 		int option; // user inputted choice
+		final int ONE = 1; // used by the switch case to eliminate magic number
+		final int TWO = 2; // used by the switch case to eliminate magic number
+		final int THREE = 3; // used by the switch case to eliminate magic number
+		final int FOUR = 4; // used by the switch case to eliminate magic number
 
 		appMen.companyHeader(); // Welcome message
 
 		while (flag) {
 			option = appMen.showMainMenu();
 			switch (option) {
-			case 1:
+			case ONE:
 				subMenu(); // show Sub Menu
 				flag = false;
 				break;
-			case 2:
+			case TWO:
 				addToy(); // Allows for user to add a toy to the directory
 				flag = false;
 				break;
-			case 3:
+			case THREE:
 				removeToy(); // Allows for user to remove a toy from the directory
 				flag = false;
 				break;
-			case 4:
+			case FOUR:
 				appMen.exitMessage(); // Exit message
-				exitFile();
+				exitFile(); // Saves and exits the program
 				flag = false;
 				break;
 			default:
-				appMen.mainMenuError();
+				appMen.mainMenuError(); // default error message
 			}
 		}
 	}
 
 	private void subMenu() {
-		boolean flag = true;
-		String sn;
-		String name;
-		String type;
+		boolean flag = true; // looping menu
+		String sn; // user inputed serial number
+		String name; // user inputed toy name
+		String type; // user inputed toy type
+		int option; // user inputed choice
+		final int ONE = 1; // used by the switch case
+		final int TWO = 2;
+		final int THREE = 3;
+		final int FOUR = 4;
 
 		while (flag) {
-			int option = appMen.showSubMenu();
+			option = appMen.showSubMenu(); // choice the user makes
 			switch (option) {
-				case 1:
-					sn = appMen.enterSerial();
+				case ONE: // search toy using serial number
+					sn = appMen.enterPurchase();
 					searchBySN(sn);
 					flag = false;
 					break;
-				case 2:
+				case TWO: // search toy using toy name
 					name = appMen.enterToy();
 					searchByName(name);
 					flag = false;
 					break;
-				case 3:
+				case THREE: // search toy using type of toy
 					type = appMen.enterToyType();
 					searchByType(type);
 					flag = false;
 					break;
-				case 4:
+				case FOUR: // back to main menu
 					launchApp();
 					flag = false;
 					break;
@@ -100,24 +112,14 @@ public class GameManager {
 	
 	private void addToy() {
 		Toy t = null;
-		String sn;
-		String name;
-		String brand;
-		String designer;
-		String numPlayers;
-		String material;
-		String text;
-		double price = 0;
+		String sn, name , brand, designer, numPlayers, material, text;
+		double price; // price element of a toy
 		boolean priceValidity = false;
 		boolean playerValidity = false;
-		int avaliableCount;
-		int ageAppropriate;
-		int minPlayer = 0;
-		int maxPlayer = 0;
-		int firstDigit;
-		char size;
-		char classification;
-		char type;
+		int avaliableCount, ageAppropriate; // elements of toy
+		int minPlayer, maxPlayer; // minimum and maximum amount of players in a board game
+		int firstDigit; // identification digit of a serial number
+		char size, classification, type;
 		final int ZERO = 0;
 		final int ONE = 1;
 		final int TWO = 2;
@@ -129,6 +131,10 @@ public class GameManager {
 		final int EIGHT = 8;
 		final int NINE = 9;
 		
+		price = ZERO;
+		minPlayer = ZERO;
+		maxPlayer = ZERO;
+
 		sn = appMen.enterSerial();
 		t = searchRemove(sn);
 		
@@ -222,6 +228,8 @@ public class GameManager {
 			}
 		}
 
+		appMen.enterContinue();
+
 		launchApp();
 		
 	}
@@ -268,16 +276,8 @@ public class GameManager {
 		File myFile = new File(FILE_PATH);
 		String currentLine;
 		String[] splittedLine;
-		String splittedLine1;
 		Scanner fileReader = null;
 		String text;
-		
-		try {
-			fileReader = new Scanner(myFile);
-		} catch (FileNotFoundException e) {
-			text = e.getMessage();
-			appMen.errorMessage(text);
-		}
 		int firstDigit;
 		final int ZERO = 0;
 		final int ONE = 1;
@@ -289,6 +289,15 @@ public class GameManager {
 		final int SEVEN = 7;
 		final int EIGHT = 8;
 		final int NINE = 9;
+		
+		try {
+			fileReader = new Scanner(myFile);
+		} catch (FileNotFoundException e) {
+			text = e.getMessage();
+			appMen.errorMessage(text);
+		}
+
+	
 		
 		
 			while(fileReader.hasNextLine()) {
@@ -405,7 +414,7 @@ public class GameManager {
 			}
 		}
 		
-		appMen.enterContinue();
+		appMen.enterContinueDouble();
 
 		subMenu();
 	}
@@ -419,7 +428,7 @@ public class GameManager {
 		toyName = new ArrayList<Toy>();
 		String nameLow = name.toLowerCase();
 		String resultLow;
-		Toy cast = null;
+		Toy t = null;
 		int option;
 		final int ONE = 1;
 		
@@ -427,80 +436,36 @@ public class GameManager {
 			resultLow = tt.getName().toLowerCase();
 			if(resultLow.contains(nameLow)) {
 				if(tt instanceof Figure) {
-					cast = (Figure)tt;
-					toyName.add(cast);
+					t = (Figure)tt;
+					toyName.add(t);
 				} else if(tt instanceof Animal) {
-					cast = (Animal)tt;
-					toyName.add(cast);
+					t = (Animal)tt;
+					toyName.add(t);
 				} else if(tt instanceof Puzzle) {
-					cast = (Puzzle)tt;
-					toyName.add(cast);
+					t = (Puzzle)tt;
+					toyName.add(t);
 				} else if(tt instanceof BoardGame) {
-					cast = (BoardGame)tt;
-					toyName.add(cast);
+					t = (BoardGame)tt;
+					toyName.add(t);
 				}
 			}
-		}
-		for(Toy test: toyName) {
-			toys.remove(test);
 		}
 		option = appMen.printType(toyName);
-		if(option < toyName.size()) {
-			if(toyName.get(option) instanceof Figure) {
-				Figure grab = (Figure)toyName.get(option);
-				if(grab.getAvaliableCount() == ONE) {
-					toyName.remove(option);
-				}else {
-					toyName.remove(option);
-					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
-					toyName.add(grab);
-				}
-			}else if(toyName.get(option) instanceof Animal) {
-				Animal grab = (Animal)toyName.get(option);
-				if(grab.getAvaliableCount() == ONE) {
-					toyName.remove(option);
-				}else {
-					toyName.remove(option);
-					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
-					toyName.add(grab);
-				}
-			}else if(toyName.get(option) instanceof Puzzle) {
-				Puzzle grab = (Puzzle)toyName.get(option);
-				if(grab.getAvaliableCount() == ONE) {
-					toyName.remove(option);
-				}else {
-					toyName.remove(option);
-					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
-					toyName.add(grab);
-				}
-			}else if(toyName.get(option) instanceof BoardGame) {
-				BoardGame grab = (BoardGame)toyName.get(option);
-				if(grab.getAvaliableCount() == ONE) {
-					toyName.remove(option);
-				}else {
-					toyName.remove(option);
-					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
-					toyName.add(grab);
-				}
+		if (option < toyName.size()) {
+			t = searchRemove(toyName.get(option).getSN());
+
+			if (t.getAvaliableCount() == 1) {
+				toys.remove(t);
+				appMen.successMessage();
+			}else {
+				t.setAvaliableCount(t.getAvaliableCount() - ONE);
+				appMen.successMessage();
 			}
+		}else {
+			subMenu();
 		}
-		
-		for(Toy tUpdate: toyName) {
-			if(tUpdate instanceof Figure) {
-				Figure update = (Figure)tUpdate;
-				toys.add(update);
-			}else if(tUpdate instanceof Animal) {
-				Animal update = (Animal)tUpdate;
-				toys.add(update);
-			}else if(tUpdate instanceof Puzzle) {
-				Puzzle update = (Puzzle)tUpdate;
-				toys.add(update);
-			}else if(tUpdate instanceof BoardGame) {
-				BoardGame update = (BoardGame)tUpdate;
-				toys.add(update);
-			}
-		}
-		appMen.enterContinue();
+
+		appMen.enterContinueDouble();
 
 		subMenu();
 	}
@@ -516,6 +481,7 @@ public class GameManager {
 		String b = "Animal";
 		String c = "Puzzles";
 		String d = "Board Games";
+		Toy t = null;
 		int option;
 		final int ZERO = 0;
 		final int ONE = 1;
@@ -533,104 +499,51 @@ public class GameManager {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
 				if(firstDigit == ZERO || firstDigit == ONE) {
-					Figure cast = (Figure)tt;
-					toyType.add(cast);
+					t = (Figure)tt;
+					toyType.add(t);
 				}
-			}
-			for(Toy test: toyType) {
-				toys.remove(test);
 			}
 		}else if(types.equalsIgnoreCase(b)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
 				if(firstDigit == TWO || firstDigit == THREE) {
-					Animal cast = (Animal)tt;
-					toyType.add(cast);
-		}
-			}
-			for(Toy test: toyType) {
-				toys.remove(test);
+					t = (Animal)tt;
+					toyType.add(t);
+				}
 			}
 		}else if(types.equalsIgnoreCase(c)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
 				if(firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX) {
-					Puzzle cast = (Puzzle)tt;
-					toyType.add(cast);
+					t = (Puzzle)tt;
+					toyType.add(t);
 				}
 			}
-			for(Toy test: toyType) {
-				toys.remove(test);
-			}
+
 		}else if(types.equalsIgnoreCase(d)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
 				if(firstDigit == SEVEN || firstDigit == EIGHT || firstDigit == NINE) {
-					BoardGame cast = (BoardGame)tt;
-					toyType.add(cast);
+					t = (BoardGame)tt;
+					toyType.add(t);
 				}
-			}
-			for(Toy test: toyType) {
-				toys.remove(test);
 			}
 		}
 		option = appMen.printType(toyType);
-		if(option < toyType.size()) {
-			if(toyType.get(option) instanceof Figure) {
-				Figure grab = (Figure)toyType.get(option);
-				if(grab.getAvaliableCount() == ONE) {
-					toyType.remove(option);
-				}else {
-					toyType.remove(option);
-					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
-					toyType.add(grab);
-				}
-			}else if(toyType.get(option) instanceof Animal) {
-				Animal grab = (Animal)toyType.get(option);
-				if(grab.getAvaliableCount() == ONE) {
-					toyType.remove(option);
-				}else {
-					toyType.remove(option);
-					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
-					toyType.add(grab);
-				}
-			}else if(toyType.get(option) instanceof Puzzle) {
-				Puzzle grab = (Puzzle)toyType.get(option);
-				if(grab.getAvaliableCount() == ONE) {
-					toyType.remove(option);
-				}else {
-					toyType.remove(option);
-					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
-					toyType.add(grab);
-				}
-			}else if(toyType.get(option) instanceof BoardGame) {
-				BoardGame grab = (BoardGame)toyType.get(option);
-				if(grab.getAvaliableCount() == ONE) {
-					toyType.remove(option);
-				}else {
-					toyType.remove(option);
-					grab.setAvaliableCount(grab.getAvaliableCount() - ONE);
-					toyType.add(grab);
-				}
+		if (option < toyType.size()) {
+			t = searchRemove(toyType.get(option).getSN());
+			if (t.getAvaliableCount() == 1) {
+				toys.remove(t);
+				appMen.successMessage();
+			}else {
+				t.setAvaliableCount(t.getAvaliableCount() - ONE);
+				appMen.successMessage();
 			}
+		}else {
+			subMenu();
 		}
 		
-		for(Toy tUpdate: toyType) {
-			if(tUpdate instanceof Figure) {
-				Figure update = (Figure)tUpdate;
-				toys.add(update);
-			}else if(tUpdate instanceof Animal) {
-				Animal update = (Animal)tUpdate;
-				toys.add(update);
-			}else if(tUpdate instanceof Puzzle) {
-				Puzzle update = (Puzzle)tUpdate;
-				toys.add(update);
-			}else if(tUpdate instanceof BoardGame) {
-				BoardGame update = (BoardGame)tUpdate;
-				toys.add(update);
-			}
-		}
-		appMen.enterContinue();
+		appMen.enterContinueDouble();
 
 		subMenu();
 	}
