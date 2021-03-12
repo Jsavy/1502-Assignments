@@ -14,7 +14,7 @@ public class AppMenu {
 	Scanner scan; //Scanner to allow user to use the keyboard
 	
 	public AppMenu () {
-		scan = new Scanner(System.in);
+		scan = new Scanner(System.in); // scanner initialization 
 	}
 	/**
 	 * Prints a welcome banner for the Toy Store Company
@@ -30,8 +30,8 @@ public class AppMenu {
 	 * @return option  the integer the user selected
 	 */
 	public int showMainMenu() {
-		int option = 0;
-		boolean isInt;
+		int option = 0; // user input for the menu
+		boolean isInt; // boolean to make sure user only enters what is required
 		System.out.println("How We May Help You?\n");
 		System.out.println("(1)   Search Inventory and Purchase Toy");
 		System.out.println("(2)   Add New Toy");
@@ -39,7 +39,7 @@ public class AppMenu {
 		System.out.println("(4)   Save & Exit \n");
 		
 		do {
-			System.out.print("Enter Option: ");
+			System.out.print("Enter Option:");
 			if (scan.hasNextInt()) {
 				option = scan.nextInt();
 				isInt = true;
@@ -60,8 +60,8 @@ public class AppMenu {
 	 * @return option  the integer the user selected
 	 */
 	public int showSubMenu() {
-		int option = 0;
-		boolean isInt = false;;
+		int option = 0; // user input for the menu
+		boolean isInt = false; // boolean to make sure user only enters what is required 
 		System.out.println("\nFind Toys With: \n");
 		System.out.println("(1)   Serial Number(SN)");
 		System.out.println("(2)   Toy Name");
@@ -69,7 +69,7 @@ public class AppMenu {
 		System.out.println("(4)   Back to Main Menu\n");
 
 		do {
-			System.out.print("Enter Option: ");
+			System.out.print("Enter Option:");
 			if (scan.hasNextInt()) {
 				option = scan.nextInt();
 				isInt = true;
@@ -89,12 +89,12 @@ public class AppMenu {
 	 * @return serial  the user generated integer for serial Number
 	 */
 	public String enterSerial() {
-		String sn = "";
-		boolean valid = false;
-		final int TEN = 10;
+		String sn = ""; // the serial number from the user
+		boolean valid = false; // boolean to make sure the serial is only what is can be
+		final int TEN = 10; // the value used for string length 
 		
 		do {
-			System.out.print("\nEnter Serial Number: ");
+			System.out.print("\nEnter Serial Number:");
 			sn = scan.nextLine();
 			
 			if (sn.matches("[0-9]+")) {
@@ -116,9 +116,9 @@ public class AppMenu {
 	 * @return text  the user generated text of the toy name
 	 */
 	public String enterToy() {
-		String text;
+		String text; // the toy name the user wishes
 		scan.nextLine();
-		System.out.print("\nEnter Toy Name: ");
+		System.out.print("\nEnter Toy Name:");
 		text = scan.nextLine();
 		return text;
 	}
@@ -128,8 +128,8 @@ public class AppMenu {
 	 * @return brand  the user generated brand name for toy
 	 */
 	public String enterBrand() {
-		String brand;
-		System.out.print("\nEnter Toy Brand: ");
+		String brand; // the toy brand the user wishes
+		System.out.print("\nEnter Toy Brand:");
 		brand = scan.nextLine();
 		return brand;
 	}
@@ -139,12 +139,12 @@ public class AppMenu {
 	 * @return price  the user generated price for the toy in string format
 	 */
 	public double enterPrice() {
-		double price = 0;
-		boolean isDouble;
+		double price = 0; // the price of the toy the user wishes
+		boolean isDouble; // boolean to make sure only double is inputted
 		
 		
 		do {
-			System.out.print("\nEnter Toy Price: ");
+			System.out.print("\nEnter Toy Price:");
 			if (scan.hasNextDouble()) {
 				price = scan.nextDouble();
 				isDouble = true;
@@ -164,12 +164,12 @@ public class AppMenu {
 	 * @return inventory  the user generated inventory for the toy
 	 */
 	public int enterInventory() {
-		int inventory = 0;
-		boolean isInt;
+		int inventory = 0; // the inventory level of the toy the user wishes
+		boolean isInt; // boolean used to make sure only Integer entered
 		
 		
 		do {
-			System.out.print("\nEnter Available Counts: ");
+			System.out.print("\nEnter Available Counts:");
 			if (scan.hasNextDouble()) {
 				inventory = scan.nextInt();
 				isInt = true;
@@ -188,11 +188,11 @@ public class AppMenu {
 	 * @return age  the recommended age for the toy
 	 */
 	public int enterMinAge() {
-		int age = 0;
-		boolean isInt;
+		int age = 0; // the recommended minimum age for the toy
+		boolean isInt; // boolean used to make sure only Integer entered
 		
 		do {
-			System.out.print("\nEnter Appropriate Age: ");
+			System.out.print("\nEnter Appropriate Age:");
 			if (scan.hasNextInt()) {
 				age = scan.nextInt();
 				isInt = true;
@@ -212,10 +212,10 @@ public class AppMenu {
 	 * @return numPlayer  the amount of players needed 
 	 */
 	public int enterMinPlayer() {
-		int numPlayer = 0;
-		boolean isInt;
+		int numPlayer = 0; // the minimum number of players for the board game to function
+		boolean isInt; // boolean used to make sure only integer is entered
 		do {
-			System.out.print("\nEnter Minimum Number of Players: ");
+			System.out.print("\nEnter Minimum Number of Players:");
 			if (scan.hasNextInt()) {
 				numPlayer = scan.nextInt();
 				isInt = true;
@@ -236,11 +236,11 @@ public class AppMenu {
 	 * @return numPlayer  the amount of players needed
 	 */
 	public int enterMaxPlayer() {
-		int numPlayer = 0;
-		boolean isInt;
+		int numPlayer = 0; // the maximum number of players for the board game to function
+		boolean isInt; // boolean used to make sure only integer is entered
 		
 		do {
-			System.out.print("\nEnter Maximum Number of Players: ");
+			System.out.print("\nEnter Maximum Number of Players:");
 			if (scan.hasNextInt()) {
 				numPlayer = scan.nextInt();
 				isInt = true;
@@ -260,9 +260,9 @@ public class AppMenu {
 	 * @return names  all the names of the designers which are seperated by a ','
 	 */
 	public String enterName() {
-		String names;
+		String names; // the names of the designers for the board game
 		scan.nextLine();
-		System.out.print("\nEnter Designer Names(Use ',' to separate the names if there is more than one name): ");
+		System.out.print("\nEnter Designer Names(Use ',' to separate the names if there is more than one name):");
 		names = scan.nextLine();
 		return names;
 	}
@@ -272,16 +272,16 @@ public class AppMenu {
 	 * @return material     the material type for the toy that user inputed 
 	 */
 	public String enterMaterial() {
-		String input;
-		String material = "";
-		boolean valid = false;
-		String a = "Wooden";
-		String b = "Plastic";
-		String c = "Fabric";
+		String input; // the users input
+		String material = ""; // the material type that the user entered formatted accordingly
+		boolean valid = false; // used to make sure only the 3 fabric types are used
+		String a = "Wooden"; // fabric type of the toy
+		String b = "Plastic"; // fabric type of the toy
+		String c = "Fabric"; // fabric type of the toy
 
 		scan.nextLine();
 		while (!valid) {
-			System.out.print("\nPlease enter a material type (Wooden, Plastic or Fabric): ");
+			System.out.print("\nPlease enter a material type (Wooden, Plastic or Fabric):");
 			input = scan.nextLine();
 			
 			if (input.equalsIgnoreCase(a)) {
@@ -307,10 +307,10 @@ public class AppMenu {
 	 * @return size - the size of the animal
 	 */
 	public char enterSize() {
-		String input;
-		char size = 'N';
-		boolean valid = false;
-		final int ZERO = 0;
+		String input; // the users input
+		char size = 'N'; // the first character in the toy size user types to follow database format
+		boolean valid = false; // boolean to make sure user enters proper size type
+		final int ZERO = 0; // integer used to grab the char of the users string
 		
 		while (!valid) {
 			
@@ -336,16 +336,16 @@ public class AppMenu {
 	*   @return input - the validated type of toy
 	*/
 	public String enterToyType() {
-		String input = "";
-		boolean valid = false;
-		String a = "Figure";
-		String b = "Animal";
-		String c = "Puzzles";
-		String d = "Board Games";
+		String input = ""; // the users input for toy type 
+		boolean valid = false; //boolean used to make sure 
+		String a = "Figure"; // reference value used to check validity
+		String b = "Animal"; // reference value used to check validity
+		String c = "Puzzles"; // reference value used to check validity
+		String d = "Board Games"; // reference value used to check validity
 
 		while (!valid) {
-			System.out.println("Enter Toy Type (Figure, Animal, Puzzles, Board Games): ");
-			input = scan.nextLine();
+			System.out.println("Enter Toy Type (Figure, Animal, Puzzles, Board Games):");
+			input = scan.next();
 
 			if (input.equalsIgnoreCase(a)) {
 				valid = true;
@@ -368,14 +368,14 @@ public class AppMenu {
 	 * @return class - the classification of the figure
 	 */
 	public char enterClass() {
-		String input;
-		char clas = 'n';
-		boolean valid = false;
-		final int ZERO = 0;
+		String input; // users input
+		char clas = 'n'; // the char of the users input for the type of classification to follow database format
+		boolean valid = false; // boolean to make sure its a valid input type
+		final int ZERO = 0; // value used to grab the char from user input string
 		
 		scan.nextLine();
 		while (!valid) {
-			System.out.print("\nEnter Classification (Action, Doll, or Historic): ");
+			System.out.print("\nEnter Classification (Action, Doll, or Historic):");
 			input = scan.nextLine();
 			clas = Character.toUpperCase(input.charAt(ZERO));
 
@@ -395,14 +395,14 @@ public class AppMenu {
 	 * @return type       the character for the type of puzzle
 	 */
 	public char enterType() {
-		String input;
-		char type = 'x';
-		boolean valid = false;
-		final int ZERO = 0;
+		String input; // user input for puzzle type
+		char type = 'x'; // the char from the users entry to follow database structure
+		boolean valid = false; // boolean value used to check validity
+		final int ZERO = 0; // value used to grab the char of the user input 
 		
 		scan.nextLine();
 		while (!valid) {
-			System.out.print("\nEnter Puzzle Type (Mechanical, Cryptic, Logic, Trivia, or Riddle): ");
+			System.out.print("\nEnter Puzzle Type (Mechanical, Cryptic, Logic, Trivia, or Riddle):");
 			input = scan.nextLine();
 			type = Character.toUpperCase(input.charAt(ZERO));
 			
@@ -441,9 +441,10 @@ public class AppMenu {
 	*   @return  option - the choice the user inputted
 	*/
 	public char removeToy() {
-		final int ZERO = 0;
-		String input;
-		char option;
+		final int ZERO = 0; // value used to grab the char
+		String input; // the users input 
+		char option; // the char from the users input
+		
 		System.out.print("\nDo you want to remove it (Y/N)? ");
 		input = scan.nextLine();
 		option = input.toLowerCase().charAt(ZERO);
@@ -477,9 +478,10 @@ public class AppMenu {
 	 * exit message for when the user wishes to exit with animation on the dots
 	 */
 	public void exitMessage() {
-		final int THREE = 3;
-		final int THOUSAND = 1000;
-		String text;
+		final int THREE = 3; // value used in the loop to cause animation
+		final int THOUSAND = 1000; // the pause value for animation
+		String text; // the error message if it catches exception
+		
 		System.out.print("\nSaving Data Into Database");
 		for (int i=0; i<THREE; i++) {
 			try {
@@ -514,9 +516,9 @@ public class AppMenu {
 	 * @return option   the option the user selects to purchase or menu
 	 */
 	public int printType(ArrayList<Toy> toyType) {
-		int i;
-		int option;
-		final int ONE = 1;
+		int i; // counter value for loop
+		int option; // the users option for purchasing
+		final int ONE = 1; // used to make the display look human compared to computer
 		System.out.println("Here are the search results:\n");
 		for(i = 0; i < toyType.size(); i++) {
 			Toy tp = toyType.get(i);
@@ -539,27 +541,40 @@ public class AppMenu {
 		option = option - ONE;
 		return option;
 	}
-
 	/**
 	 * Method to print toy puzzles
 	 * 
 	 * @param toy   this toy is of type puzzle that is printing
 	 */
 	public int printSN(Toy toy) {
-		int option;
+		int option; // the users option 
 		System.out.println("(1) " + toy.toString());
 		System.out.println("(2) Back to the search menu");
 		option = scan.nextInt();
 		return option;
 	}
-
 	/**
 	 * Prints if the user selects an invalid option in the main menu
 	 */
 	public void mainMenuError() {
 		System.out.println("\nError: Invalid Choice, Please try again!\n");
 	}
-	
+	/**
+	 * Method to enter the toy name when adding a new toy
+	 * 
+	 * @return text  the users input
+	 */
+	public String addToyEnter() {
+		String text;
+		System.out.print("\nEnter Toy Name:");
+		text = scan.nextLine();
+		return text;
+	}
+	/**
+	 * Method to enter the serial number to purchase toy
+	 * 
+	 * @return sn  the serial number the user entered
+	 */
 	public String enterPurchase() {
 		String sn = "";
 		boolean valid = false;
@@ -582,6 +597,9 @@ public class AppMenu {
 		
 		return sn;
 	}
+	/**
+	 * Enter Continue method that contains a flush
+	 */
 	public void enterContinueDouble() {
 		System.out.println("\nPress \"Enter\" to continue");
 		scan.nextLine();

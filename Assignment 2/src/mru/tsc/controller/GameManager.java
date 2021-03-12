@@ -61,8 +61,8 @@ public class GameManager {
 				break;
 			case FOUR:
 				appMen.exitMessage(); // Exit message
-				exitFile(); // Saves and exits the program
 				flag = false;
+				exitFile(); // Saves and exits the program
 				break;
 			default:
 				appMen.mainMenuError(); // default error message
@@ -77,9 +77,9 @@ public class GameManager {
 		String type; // user inputed toy type
 		int option; // user inputed choice
 		final int ONE = 1; // used by the switch case
-		final int TWO = 2;
-		final int THREE = 3;
-		final int FOUR = 4;
+		final int TWO = 2; // used by the switch case
+		final int THREE = 3; // used by the switch case
+		final int FOUR = 4; // used by the switch case
 
 		while (flag) {
 			option = appMen.showSubMenu(); // choice the user makes
@@ -100,8 +100,8 @@ public class GameManager {
 					flag = false;
 					break;
 				case FOUR: // back to main menu
-					launchApp();
 					flag = false;
+					launchApp();
 					break;
 				default:
 					appMen.mainMenuError();
@@ -111,39 +111,40 @@ public class GameManager {
 	}
 	
 	private void addToy() {
-		Toy t = null;
-		String sn, name , brand, designer, numPlayers, material, text;
+		Toy t = null; // toy variable used to add the new toy to array
+		String sn, name , brand, designer, numPlayers, material, text; // the sting fields for the toys
 		double price; // price element of a toy
-		boolean priceValidity = false;
-		boolean playerValidity = false;
+		boolean priceValidity = false; // used to make sure price is valid 
+		boolean playerValidity = false; // used to make sure minimum cannot exceed maximum
 		int avaliableCount, ageAppropriate; // elements of toy
 		int minPlayer, maxPlayer; // minimum and maximum amount of players in a board game
 		int firstDigit; // identification digit of a serial number
-		char size, classification, type;
-		final int ZERO = 0;
-		final int ONE = 1;
-		final int TWO = 2;
-		final int THREE = 3;
-		final int FOUR = 4;
-		final int FIVE = 5;
-		final int SIX = 6;
-		final int SEVEN = 7;
-		final int EIGHT = 8;
-		final int NINE = 9;
+		char size, classification, type; // the char fields for the toys
+		final int ZERO = 0; // used when the value of zero is needed
+		final int ONE = 1; // used when the value of one is needed
+		final int TWO = 2; // used when the value of two is needed
+		final int THREE = 3; // used when the value of three is needed
+		final int FOUR = 4; // used when the value of four is needed
+		final int FIVE = 5; // used when the value of five is needed
+		final int SIX = 6; // used when the value of six is needed
+		final int SEVEN = 7; // used when the value of seven is needed
+		final int EIGHT = 8; // used when the value of eight is needed
+		final int NINE = 9; // used when the value of nine is needed
 		
 		price = ZERO;
 		minPlayer = ZERO;
 		maxPlayer = ZERO;
 
+		// user inputs unique serial number
 		sn = appMen.enterSerial();
 		t = searchRemove(sn);
-		
+		// If toy exists, message appears and toy is not added
 		while (t != null) {
 			appMen.toyExists();
 			sn = appMen.enterSerial();
 			t = searchRemove(sn);
 		}
-			name = appMen.enterToy();
+			name = appMen.addToyEnter();
 			brand = appMen.enterBrand();
 			while(!priceValidity) {
 				price = appMen.enterPrice();
@@ -158,20 +159,24 @@ public class GameManager {
 			ageAppropriate = appMen.enterMinAge();
 			
 			
-			firstDigit = Character.getNumericValue(sn.charAt(0));
+			firstDigit = Character.getNumericValue(sn.charAt(0)); // identifying type of toy
+			// Creating Figure toy
 			if (firstDigit == ZERO || firstDigit == ONE) {
 				classification = appMen.enterClass();
 				Toy f = new Figure (sn, name, brand, price, avaliableCount, ageAppropriate, classification);
 				toys.add(f);
+			// Creating Animal toy
 			}else if (firstDigit == TWO || firstDigit == THREE) {
 				material = appMen.enterMaterial();
 				size = appMen.enterSize();
 				Toy a = new Animal(sn, name, brand, price, avaliableCount, ageAppropriate, material, size);
 				toys.add(a);
+			// Creating Puzzle toy
 			}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX) {
 				type = appMen.enterType();
 				Toy p = new Puzzle (sn, name, brand, price, avaliableCount, ageAppropriate, type);
 				toys.add(p);
+			// Creating Board Game toy
 			}else if (firstDigit == SEVEN ||  firstDigit == EIGHT || firstDigit == NINE){
 				while(!playerValidity) {
 					minPlayer = appMen.enterMinPlayer();
@@ -202,10 +207,10 @@ public class GameManager {
 
 	
 	private void removeToy() {
-		String serial;
-		boolean valid = false;
-		char option = 'n';
-		Toy t = null;
+		String serial; // the serial number of the toy the user inputs
+		boolean valid = false; // allows to loop if the user enters a invalid toy serial
+		char option = 'n'; // user inputed option
+		Toy t = null; // toy variable used to get the toy
 		
 		while (!valid) {
 			serial = appMen.enterSerial();
@@ -240,9 +245,9 @@ public class GameManager {
 	 * 
 	 */
 	private void exitFile() {
-		File file = new File(FILE_PATH);
-		PrintWriter pw;
-		String text;
+		File file = new File(FILE_PATH); // file location for export
+		PrintWriter pw; // used for file export
+		String text; // used to print exceptions messages
 			try {
 				pw = new PrintWriter(file);
 				for (Toy t: toys) {
@@ -273,22 +278,22 @@ public class GameManager {
 	 * A method which loads the file "toys.txt" and adds different types of toys into an arraylist
 	 */
 	private void readFile() {
-		File myFile = new File(FILE_PATH);
-		String currentLine;
-		String[] splittedLine;
-		Scanner fileReader = null;
-		String text;
-		int firstDigit;
-		final int ZERO = 0;
-		final int ONE = 1;
-		final int TWO = 2;
-		final int THREE = 3;
-		final int FOUR = 4;
-		final int FIVE = 5;
-		final int SIX = 6;
-		final int SEVEN = 7;
-		final int EIGHT = 8;
-		final int NINE = 9;
+		File myFile = new File(FILE_PATH); // file location to read
+		String currentLine; // the current line that has been read of the file
+		String[] splittedLine; // the information for the whole line split into its components based on criteria
+		Scanner fileReader = null; //scanner for file reader
+		String text; // used for printing the error message 
+		int firstDigit; // the first digit of the serial number 
+		final int ZERO = 0; // used to determine the PolyMorphism 
+		final int ONE = 1; // used to determine the PolyMorphism
+		final int TWO = 2; // used to determine the PolyMorphism
+		final int THREE = 3; // used to determine the PolyMorphism
+		final int FOUR = 4; // used to determine the PolyMorphism
+		final int FIVE = 5; // used to determine the PolyMorphism
+		final int SIX = 6; // used to determine the PolyMorphism
+		final int SEVEN = 7; // used to determine the PolyMorphism
+		final int EIGHT = 8; // used to determine the PolyMorphism
+		final int NINE = 9; // used to determine the PolyMorphism
 		
 		try {
 			fileReader = new Scanner(myFile);
@@ -297,32 +302,33 @@ public class GameManager {
 			appMen.errorMessage(text);
 		}
 
-	
-		
-		
 			while(fileReader.hasNextLine()) {
 				currentLine = fileReader.nextLine();
 				splittedLine = currentLine.split(";");
 				firstDigit = Character.getNumericValue(splittedLine[ZERO].charAt(0));
 
+				// Loads in Figure toys
 				if (firstDigit == ZERO || firstDigit == ONE) {
 					
 					Toy f = new Figure ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(f);
+				// Loads in Animal toys
 				}else if (firstDigit == TWO || firstDigit == THREE){
 					
 					Toy a = new Animal ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX], splittedLine[SEVEN].charAt(0));
 					toys.add(a);
+				// Loads in Puzzle Ttoys
 				}else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX){
 					
 					Toy p = new Puzzle ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
 							Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]), 
 							Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
 					toys.add(p);
+				// Loads in Board Game toys
 				}else if (firstDigit == SEVEN || firstDigit == EIGHT || firstDigit == NINE) {
 					
 					Toy b = new BoardGame ((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO], 
@@ -331,7 +337,7 @@ public class GameManager {
 					toys.add(b);
 				}	
 			}
-			fileReader.close();
+			fileReader.close(); // close the file reader
 	}
 	/**
 	 * Validation class that uses the created ToyStoreException class to throw error message if the price is negative
@@ -341,8 +347,9 @@ public class GameManager {
 	 * @throws ToyStoreException  exception class used to throw exception
 	 */
 	public boolean isPriceValid(double price) throws ToyStoreException {
-		boolean valid = true;
-		final double ZERO = 0.00;
+		boolean valid = true; // boolean used to determine if price is valid
+		final double ZERO = 0.00; // value needed for the if condition to see if price is valid
+		
 		if(price < ZERO) {
 			valid = false;
 			throw new ToyStoreException("Invalid, price of the toy cannot be negative, Inputted value: " + price);
@@ -359,7 +366,7 @@ public class GameManager {
 	 * @throws ToyStoreException   exception class used to throw exception
 	 */
 	public boolean isPlayerValid(int min, int max) throws ToyStoreException{
-		boolean valid = true;
+		boolean valid = true; // boolean used to determine if player numbers are valid
 		
 		if(min > max) {
 			valid = false;
@@ -370,7 +377,7 @@ public class GameManager {
 	}
 
 	private Toy searchRemove(String SN) {
-		Toy t = null;
+		Toy t = null; // toy variable used for the method to function
 
 		for (Toy tt: toys) {
 			if (tt.getSN().equals(SN)) {
@@ -425,12 +432,12 @@ public class GameManager {
 	 * @param name  the name of toy based off keyword search
 	 */
 	private void searchByName(String name) {
-		toyName = new ArrayList<Toy>();
-		String nameLow = name.toLowerCase();
-		String resultLow;
-		Toy t = null;
-		int option;
-		final int ONE = 1;
+		toyName = new ArrayList<Toy>(); // arraylist for printing just the toys that contain the keyword
+		String nameLow = name.toLowerCase(); // makes the inputed value by user to lowercase to use contains
+		String resultLow; // the resulting name from searching the array in lowercase
+		Toy t = null; // toy variable used 
+		int option; // the users option when purchasing
+		final int ONE = 1; // variable used to remove toys and determine if remove from Array
 		
 		for(Toy tt: toys) {
 			resultLow = tt.getName().toLowerCase();
@@ -450,11 +457,12 @@ public class GameManager {
 				}
 			}
 		}
+		// removes toy from user inputted option
 		option = appMen.printType(toyName);
 		if (option < toyName.size()) {
 			t = searchRemove(toyName.get(option).getSN());
 
-			if (t.getAvaliableCount() == 1) {
+			if (t.getAvaliableCount() == ONE) {
 				toys.remove(t);
 				appMen.successMessage();
 			}else {
@@ -476,25 +484,25 @@ public class GameManager {
 	 * @param types  the type of toy based off instance of search
 	 */
 	private void searchByType(String types) {
-		toyType = new ArrayList<Toy>();
-		String a = "Figure";
-		String b = "Animal";
-		String c = "Puzzles";
-		String d = "Board Games";
-		Toy t = null;
-		int option;
-		final int ZERO = 0;
-		final int ONE = 1;
-		final int TWO = 2;
-		final int THREE = 3;
-		final int FOUR = 4;
-		final int FIVE = 5;
-		final int SIX = 6;
-		final int SEVEN = 7;
-		final int EIGHT = 8;
-		final int NINE = 9;
+		toyType = new ArrayList<Toy>(); // Arraylist used to print the type of toy user requested
+		String a = "Figure"; // reference item used to determine what type of casting required
+		String b = "Animal"; // reference item used to determine what type of casting required
+		String c = "Puzzles"; // reference item used to determine what type of casting required
+		String d = "Board Games"; // reference item used to determine what type of casting required
+		Toy t = null; // toy object used for the method
+		int option; // the users option from the print menu
+		final int ZERO = 0; // used to eliminate magic number
+		final int ONE = 1; // used to eliminate magic number
+		final int TWO = 2; // used to eliminate magic number
+		final int THREE = 3; // used to eliminate magic number
+		final int FOUR = 4; // used to eliminate magic number
+		final int FIVE = 5; // used to eliminate magic number
+		final int SIX = 6; // used to eliminate magic number
+		final int SEVEN = 7; // used to eliminate magic number
+		final int EIGHT = 8; // used to eliminate magic number
+		final int NINE = 9; // used to eliminate magic number
 		
-		
+		// Finds all toys that are "Figure" type
 		if(types.equalsIgnoreCase(a)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
@@ -503,6 +511,7 @@ public class GameManager {
 					toyType.add(t);
 				}
 			}
+		// Finds all toys that are "Animal" type
 		}else if(types.equalsIgnoreCase(b)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
@@ -511,6 +520,7 @@ public class GameManager {
 					toyType.add(t);
 				}
 			}
+		// Finds all toys that are "Puzzle" type
 		}else if(types.equalsIgnoreCase(c)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
@@ -519,7 +529,7 @@ public class GameManager {
 					toyType.add(t);
 				}
 			}
-
+		// Finds all toys that are "Board Games" type
 		}else if(types.equalsIgnoreCase(d)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
@@ -529,10 +539,11 @@ public class GameManager {
 				}
 			}
 		}
+		// Removes the toy from the user inputted option
 		option = appMen.printType(toyType);
 		if (option < toyType.size()) {
 			t = searchRemove(toyType.get(option).getSN());
-			if (t.getAvaliableCount() == 1) {
+			if (t.getAvaliableCount() == ONE) {
 				toys.remove(t);
 				appMen.successMessage();
 			}else {
