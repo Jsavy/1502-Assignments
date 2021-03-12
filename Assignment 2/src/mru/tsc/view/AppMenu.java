@@ -60,15 +60,27 @@ public class AppMenu {
 	 * @return option  the integer the user selected
 	 */
 	public int showSubMenu() {
-		int option;
+		int option = 0;
+		boolean isInt = false;;
 		System.out.println("\nFind Toys With: \n");
 		System.out.println("(1)   Serial Number(SN)");
 		System.out.println("(2)   Toy Name");
 		System.out.println("(3)   Type");
 		System.out.println("(4)   Back to Main Menu\n");
-		System.out.print("Enter Option:");
-		scan.next();
-		option = scan.nextInt();
+
+		do {
+			System.out.print("Enter Option: ");
+			if (scan.hasNextInt()) {
+				option = scan.nextInt();
+				isInt = true;
+			}else {
+				System.out.println("\nError: Invalid Menu Input\n");
+				isInt = false;
+				scan.next();
+			}
+			
+		} while (!(isInt));
+		
 		return option;
 	}
 	/**
@@ -105,6 +117,7 @@ public class AppMenu {
 	 */
 	public String enterToy() {
 		String text;
+		scan.nextLine();
 		System.out.print("\nEnter Toy Name: ");
 		text = scan.nextLine();
 		return text;
@@ -411,6 +424,7 @@ public class AppMenu {
 	public void enterContinue() {
 		System.out.println("\nPress \"Enter\" to continue");
 		scan.nextLine();
+		scan.nextLine();
 	}
 
 	/**
@@ -501,60 +515,42 @@ public class AppMenu {
 	public int printType(ArrayList<Toy> toyType) {
 		int i;
 		int option;
-		System.out.println("Here are the search results:/n");
+		System.out.println("Here are the search results:\n");
 		for(i = 0; i < toyType.size(); i++) {
 			Toy tp = toyType.get(i);
 			if(tp instanceof Figure) {
 				Figure cast = (Figure)tp;
-				System.out.println("(" + i + 1 + ")  " + cast.toString());
+				System.out.println("(" + (i + 1) + ")  " + cast.toString());
 			} else if(tp instanceof Animal) {
 				Animal cast = (Animal)tp;
-				System.out.println("(" + i + 1 + ")  " + cast.toString());
+				System.out.println("(" + (i + 1) + ")  " + cast.toString());
 			} else if(tp instanceof Puzzle) {
 				Puzzle cast = (Puzzle)tp;
-				System.out.println("(" + i + 1 + ")  " + cast.toString());
+				System.out.println("(" + (i + 1) + ")  " + cast.toString());
 			} else if(tp instanceof BoardGame) {
 				BoardGame cast = (BoardGame)tp;
-				System.out.println("(" + i + 1 + ")  " + cast.toString());
+				System.out.println("(" + (i + 1) + ")  " + cast.toString());
 			}
 		}
-		System.out.println("(" + i + 1 + ")  " + "Back to Search Menu");
+		System.out.println("(" + (i + 1) + ")  " + "Back to Search Menu");
 		option = scan.nextInt();
 		option = option - 1;
 		return option;
 	}
-	/**
-	 * Method to print toy figures 
-	 * 
-	 * @param toy    this toy is of type figure that is printing
-	 */
-	public void printSNFigure(Figure toy) {
-		System.out.println(toy.toString());
-	}
-	/**
-	 * Method to print toy animals
-	 * 
-	 * @param toy   this toy is of type animal that is printing
-	 */
-	public void printSNAnimal(Animal toy) {
-		System.out.println(toy.toString());
-	}
+
 	/**
 	 * Method to print toy puzzles
 	 * 
 	 * @param toy   this toy is of type puzzle that is printing
 	 */
-	public void printSNPuzzle(Puzzle toy) {
-		System.out.println(toy.toString());
+	public int printSN(Toy toy) {
+		int option;
+		System.out.println("(1) " + toy.toString());
+		System.out.println("(2) Back to the search menu");
+		option = scan.nextInt();
+		return option;
 	}
-	/**
-	 * Method to print toy board games
-	 * 
-	 * @param toy   this toy is of type board game that is printing
-	 */
-	public void printSNBoardGame(BoardGame toy) {
-		System.out.println(toy.toString());
-	}
+
 	/**
 	 * Prints if the user selects an invalid option in the main menu
 	 */

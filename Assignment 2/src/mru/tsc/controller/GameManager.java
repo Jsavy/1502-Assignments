@@ -32,26 +32,28 @@ public class GameManager {
 	
 	private void launchApp () {
 		
-		boolean flag = true;
-		int option;
-		appMen.companyHeader();
+		boolean flag = true; // variable to loop the menu
+		int option; // user inputted choice
+
+		appMen.companyHeader(); // Welcome message
+
 		while (flag) {
 			option = appMen.showMainMenu();
 			switch (option) {
 			case 1:
-				
+				subMenu(); // show Sub Menu
 				flag = false;
 				break;
 			case 2:
-				addToy();
+				addToy(); // Allows for user to add a toy to the directory
 				flag = false;
 				break;
 			case 3:
-				removeToy();
+				removeToy(); // Allows for user to remove a toy from the directory
 				flag = false;
 				break;
 			case 4:
-				appMen.exitMessage();
+				appMen.exitMessage(); // Exit message
 				exitFile();
 				flag = false;
 				break;
@@ -62,28 +64,32 @@ public class GameManager {
 	}
 
 	private void subMenu() {
-		int option = appMen.showSubMenu();
 		boolean flag = true;
 		String sn;
 		String name;
 		String type;
 
 		while (flag) {
+			int option = appMen.showSubMenu();
 			switch (option) {
 				case 1:
 					sn = appMen.enterSerial();
 					searchBySN(sn);
+					flag = false;
 					break;
 				case 2:
-					name = appMen.enterName();
+					name = appMen.enterToy();
 					searchByName(name);
+					flag = false;
 					break;
 				case 3:
 					type = appMen.enterToyType();
 					searchByType(type);
+					flag = false;
 					break;
 				case 4:
 					launchApp();
+					flag = false;
 					break;
 				default:
 					appMen.mainMenuError();
@@ -378,25 +384,30 @@ public class GameManager {
 	 * @param SN  the serial number the user inputed for search
 	 */
 	private void searchBySN(String SN) {
-		
-		for(Toy tt: toys) {
-			if (tt.getSN().equals(SN)) {
-				if (tt instanceof Figure) {
-					Figure t = (Figure)tt;	
-					appMen.printSNFigure(t);
-				}else if (tt instanceof Animal) {
-					Animal t = (Animal)tt;
-					appMen.printSNAnimal(t);
-				} else if (tt instanceof Puzzle) {
-					 Puzzle t = (Puzzle)tt;
-					 appMen.printSNPuzzle(t);
-				} else if (tt instanceof BoardGame) {
-					 BoardGame t = (BoardGame)tt;
-					 appMen.printSNBoardGame(t);
+		Toy t = searchRemove(SN);
+		int option;
+		final int ONE = 1;
+
+		if (t == null) {
+			appMen.itemNotFound();
+		}else {
+			option = appMen.printSN(t);
+			if (option == 1) {
+				if (t.getAvaliableCount() == 1) {
+					toys.remove(t);
+					appMen.successMessage();
+				}else {
+					t.setAvaliableCount(t.getAvaliableCount() - 1);
+					appMen.successMessage();
 				}
+			}else {
+				subMenu();
 			}
 		}
 		
+		appMen.enterContinue();
+
+		subMenu();
 	}
 	/**
 	 * Method that creates a new arrayList based off search criteria the user is looking for and
@@ -408,30 +419,30 @@ public class GameManager {
 		toyName = new ArrayList<Toy>();
 		String nameLow = name.toLowerCase();
 		String resultLow;
+		Toy cast = null;
 		int option;
 		final int ONE = 1;
 		
 		for(Toy tt: toys) {
 			resultLow = tt.getName().toLowerCase();
-			if(nameLow.contains(resultLow)) {
+			if(resultLow.contains(nameLow)) {
 				if(tt instanceof Figure) {
-					Figure cast = (Figure)tt;
-					toys.remove(tt);
+					cast = (Figure)tt;
 					toyName.add(cast);
 				} else if(tt instanceof Animal) {
-					Animal cast = (Animal)tt;
-					toys.remove(tt);
+					cast = (Animal)tt;
 					toyName.add(cast);
 				} else if(tt instanceof Puzzle) {
-					Puzzle cast = (Puzzle)tt;
-					toys.remove(tt);
+					cast = (Puzzle)tt;
 					toyName.add(cast);
 				} else if(tt instanceof BoardGame) {
-					BoardGame cast = (BoardGame)tt;
-					toys.remove(tt);
+					cast = (BoardGame)tt;
 					toyName.add(cast);
 				}
 			}
+		}
+		for(Toy test: toyName) {
+			toys.remove(test);
 		}
 		option = appMen.printType(toyName);
 		if(option < toyName.size()) {
@@ -489,6 +500,9 @@ public class GameManager {
 				toys.add(update);
 			}
 		}
+		appMen.enterContinue();
+
+		subMenu();
 	}
 	/**
 	 * Method that creates a new arrayList based off search criteria the user is looking for and
@@ -523,6 +537,9 @@ public class GameManager {
 					toyType.add(cast);
 				}
 			}
+			for(Toy test: toyType) {
+				toys.remove(test);
+			}
 		}else if(types.equalsIgnoreCase(b)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
@@ -530,7 +547,10 @@ public class GameManager {
 					Animal cast = (Animal)tt;
 					toyType.add(cast);
 		}
-}	
+			}
+			for(Toy test: toyType) {
+				toys.remove(test);
+			}
 		}else if(types.equalsIgnoreCase(c)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
@@ -539,6 +559,9 @@ public class GameManager {
 					toyType.add(cast);
 				}
 			}
+			for(Toy test: toyType) {
+				toys.remove(test);
+			}
 		}else if(types.equalsIgnoreCase(d)) {
 			for(Toy tt: toys) {
 				int firstDigit = Character.getNumericValue(tt.getSN().charAt(ZERO));
@@ -546,6 +569,9 @@ public class GameManager {
 					BoardGame cast = (BoardGame)tt;
 					toyType.add(cast);
 				}
+			}
+			for(Toy test: toyType) {
+				toys.remove(test);
 			}
 		}
 		option = appMen.printType(toyType);
@@ -604,5 +630,10 @@ public class GameManager {
 				toys.add(update);
 			}
 		}
+		appMen.enterContinue();
+
+		subMenu();
 	}
+	
 }
+
