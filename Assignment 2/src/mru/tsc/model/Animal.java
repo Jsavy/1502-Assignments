@@ -1,9 +1,15 @@
 package mru.tsc.model;
-
+/**
+ * This class represents a subclass of Toy
+ * 
+ * @author Justin Savenko
+ * @author Austin Thieu
+ *
+ */
 public class Animal extends Toy{
 	
 	private char size; // the letter to identify the size of the animal
-	private String material;
+	private String material; // the material type of the animal
 	
 	/**
 	 * The constructor for the Animal class that uses the super constructor for the appropriate variables
@@ -15,6 +21,7 @@ public class Animal extends Toy{
 	 * @param availiableCount  the available inventory for the animal
 	 * @param ageAppropriate   the recommended age for the animal
 	 * @param size             the size of the animal
+	 * @param material         the material type for animal
 	 */
 	public Animal(String SN, String name, String brand, double price, int availiableCount, int ageAppropriate, String material, char size) {
 		super(SN,name,brand,price,availiableCount,ageAppropriate);

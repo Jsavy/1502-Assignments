@@ -1,5 +1,11 @@
 package mru.tsc.model;
-
+/**
+ * This class represents a subclass of Toy
+ * 
+ * @author Justin Savenko
+ * @author Austin Thieu
+ *
+ */
 public class Figure extends Toy {
 	
 	private char classification; // the classification used for the type of figure

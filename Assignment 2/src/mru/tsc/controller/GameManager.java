@@ -1,5 +1,10 @@
 package mru.tsc.controller;
-
+/**
+ * This class manages what the user inputs
+ * 
+ * @author Justin Savenko
+ * @author Austin Thieu
+ */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -272,8 +277,6 @@ public class GameManager {
 				appMen.errorMessage(text);
 			}
 	}
-	
-	
 	/**
 	 * A method which loads the file "toys.txt" and adds different types of toys into an arraylist
 	 */
@@ -406,23 +409,23 @@ public class GameManager {
 
 		if (t == null) {
 			appMen.itemNotFound();
+			appMen.enterContinue();
 		}else {
 			option = appMen.printSN(t);
 			if (option == 1) {
 				if (t.getAvaliableCount() == 1) {
 					toys.remove(t);
 					appMen.successMessage();
+					appMen.enterContinueDouble();
 				}else {
 					t.setAvaliableCount(t.getAvaliableCount() - 1);
 					appMen.successMessage();
+					appMen.enterContinueDouble();
 				}
 			}else {
 				subMenu();
 			}
 		}
-		
-		appMen.enterContinueDouble();
-
 		subMenu();
 	}
 	/**
@@ -465,15 +468,15 @@ public class GameManager {
 			if (t.getAvaliableCount() == ONE) {
 				toys.remove(t);
 				appMen.successMessage();
+				appMen.enterContinueDouble();
 			}else {
 				t.setAvaliableCount(t.getAvaliableCount() - ONE);
 				appMen.successMessage();
+				appMen.enterContinueDouble();
 			}
 		}else {
 			subMenu();
 		}
-
-		appMen.enterContinueDouble();
 
 		subMenu();
 	}
@@ -546,15 +549,15 @@ public class GameManager {
 			if (t.getAvaliableCount() == ONE) {
 				toys.remove(t);
 				appMen.successMessage();
+				appMen.enterContinueDouble();
 			}else {
 				t.setAvaliableCount(t.getAvaliableCount() - ONE);
 				appMen.successMessage();
+				appMen.enterContinueDouble();
 			}
 		}else {
 			subMenu();
 		}
-		
-		appMen.enterContinueDouble();
 
 		subMenu();
 	}

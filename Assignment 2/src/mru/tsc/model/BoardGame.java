@@ -1,5 +1,11 @@
 package mru.tsc.model;
-
+/**
+ * This class represents a subclass of Toy
+ * 
+ * @author Justin Savenko
+ * @author Austin Thieu
+ *
+ */
 public class BoardGame extends Toy {
 	
 	private String numPlayers; // the required minimum number of players and maximum

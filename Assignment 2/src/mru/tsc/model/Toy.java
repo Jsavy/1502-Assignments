@@ -1,5 +1,11 @@
 package mru.tsc.model;
-
+/**
+ * This class represents the Super Toy class
+ * 
+ * @author Justin Savenko
+ * @author Austin Thieu
+ *
+ */
 public abstract class Toy {
 	
 	private String SN; // the serial number of the toy

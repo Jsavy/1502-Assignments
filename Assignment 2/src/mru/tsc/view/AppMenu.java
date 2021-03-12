@@ -1,5 +1,9 @@
 package mru.tsc.view;
-
+/** This class represents the menu
+ * 
+ * @author Justin Savenko
+ * @author Austin Thieu
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -544,7 +548,8 @@ public class AppMenu {
 	/**
 	 * Method to print toy puzzles
 	 * 
-	 * @param toy   this toy is of type puzzle that is printing
+	 * @param toy       this toy is of type puzzle that is printing
+	 * @return option   the users selection
 	 */
 	public int printSN(Toy toy) {
 		int option; // the users option 
