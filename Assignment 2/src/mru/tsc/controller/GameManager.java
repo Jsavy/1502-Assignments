@@ -1,10 +1,4 @@
 package mru.tsc.controller;
-/**
- * This class manages what the user inputs
- * 
- * @author Justin Savenko
- * @author Austin Thieu
- */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -18,7 +12,12 @@ import mru.tsc.model.Figure;
 import mru.tsc.model.Puzzle;
 import mru.tsc.model.Toy;
 import mru.tsc.view.AppMenu;
-
+/**
+ * This class manages what the user inputs
+ * 
+ * @author Justin Savenko
+ * @author Austin Thieu
+ */
 public class GameManager {
 	
 	private static final String FILE_PATH = "res/toys.txt";

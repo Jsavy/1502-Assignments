@@ -1,9 +1,4 @@
 package mru.tsc.view;
-/** This class represents the menu
- * 
- * @author Justin Savenko
- * @author Austin Thieu
- */
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +7,11 @@ import mru.tsc.model.BoardGame;
 import mru.tsc.model.Figure;
 import mru.tsc.model.Puzzle;
 import mru.tsc.model.Toy;
-
+/** This class represents the menu
+ * 
+ * @author Justin Savenko
+ * @author Austin Thieu
+ */
 public class AppMenu {
 	
 	Scanner scan; //Scanner to allow user to use the keyboard
