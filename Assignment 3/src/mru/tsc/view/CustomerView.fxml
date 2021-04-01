@@ -9,11 +9,12 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="1139.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="1139.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mru.tsc.controller.CustomerViewController">
   <tabs>
     <Tab text="Home">
       <content>
@@ -38,9 +39,12 @@
                   </Label>
                   <Button layoutX="29.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Search" />
                   <Button layoutX="179.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Clear" />
-                  <RadioButton layoutX="40.0" layoutY="111.0" mnemonicParsing="false" text="Serial Number" />
-                  <RadioButton layoutX="163.0" layoutY="111.0" mnemonicParsing="false" text="Name" />
-                  <RadioButton layoutX="248.0" layoutY="111.0" mnemonicParsing="false" text="Type" />
+                  <RadioButton layoutX="40.0" layoutY="111.0" mnemonicParsing="false" text="Serial Number">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="inventorySelect" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton layoutX="163.0" layoutY="111.0" mnemonicParsing="false" text="Name" toggleGroup="$inventorySelect" />
+                  <RadioButton layoutX="248.0" layoutY="111.0" mnemonicParsing="false" text="Type" toggleGroup="$inventorySelect" />
                   <TextField layoutX="146.0" layoutY="175.0" />
                   <TextField layoutX="146.0" layoutY="229.0" />
                   <TextField layoutX="146.0" layoutY="287.0" />
