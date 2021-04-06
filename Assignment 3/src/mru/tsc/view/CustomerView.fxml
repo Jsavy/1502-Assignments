@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="1139.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mru.tsc.controller.CustomerViewController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="1139.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mru.tsc.controller.CustomerViewController">
   <tabs>
     <Tab text="Home">
       <content>
@@ -29,24 +29,24 @@
                         <Line endX="1039.0" layoutX="101.0" layoutY="62.0" opacity="0.6" startX="-100.0" stroke="#756c6c" />
                      </children>
                   </AnchorPane>
-                  <ListView layoutX="366.0" layoutY="69.0" prefHeight="397.0" prefWidth="759.0" />
-                  <Button layoutX="663.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Buy" />
+                  <ListView fx:id="homeView" layoutX="366.0" layoutY="69.0" prefHeight="397.0" prefWidth="759.0" />
+                  <Button fx:id="btnBuy" layoutX="663.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Buy" />
                   <Label layoutX="13.0" layoutY="62.0" prefHeight="38.0" prefWidth="150.0" text="Search Inventory:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button layoutX="29.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Search" />
-                  <Button layoutX="179.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Clear" />
+                  <Button fx:id="btnSearch" layoutX="29.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Search" />
+                  <Button fx:id="btnClear" layoutX="179.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Clear" />
                   <RadioButton layoutX="40.0" layoutY="111.0" mnemonicParsing="false" text="Serial Number">
                      <toggleGroup>
                         <ToggleGroup fx:id="inventorySelect" />
                      </toggleGroup></RadioButton>
                   <RadioButton layoutX="163.0" layoutY="111.0" mnemonicParsing="false" text="Name" toggleGroup="$inventorySelect" />
                   <RadioButton layoutX="248.0" layoutY="111.0" mnemonicParsing="false" text="Type" toggleGroup="$inventorySelect" />
-                  <TextField layoutX="146.0" layoutY="175.0" />
-                  <TextField layoutX="146.0" layoutY="229.0" />
-                  <TextField layoutX="146.0" layoutY="287.0" />
+                  <TextField fx:id="homeSN" layoutX="146.0" layoutY="175.0" />
+                  <TextField fx:id="homeName" layoutX="146.0" layoutY="229.0" />
+                  <TextField fx:id="homeType" layoutX="146.0" layoutY="287.0" />
                   <Label layoutX="14.0" layoutY="178.0" text="Serial Number (SN)" textFill="RED">
                      <font>
                         <Font size="14.0" />
@@ -67,7 +67,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab text="Add Toy">
+      <Tab fx:id="btnSave" text="Add Toy">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -87,12 +87,12 @@
                   <Line endX="-100.0" endY="252.0" layoutX="891.0" layoutY="1.0" opacity="0.7" startX="-100.0" startY="13.0" stroke="#756c6c" />
                   <Line endX="-66.0" endY="167.0" layoutX="857.0" layoutY="351.0" opacity="0.7" startX="-66.0" startY="-68.0" stroke="#756c6c" />
                   <Line endX="216.0" layoutX="909.0" layoutY="267.0" opacity="0.7" startX="-106.0" stroke="#756c6c" />
-                  <TextField layoutX="179.0" layoutY="367.0" prefHeight="25.0" prefWidth="160.0" />
-                  <TextField layoutX="179.0" layoutY="330.0" prefHeight="25.0" prefWidth="160.0" />
-                  <TextField layoutX="179.0" layoutY="291.0" prefHeight="25.0" prefWidth="160.0" />
-                  <TextField layoutX="179.0" layoutY="255.0" prefHeight="25.0" prefWidth="160.0" />
-                  <TextField layoutX="179.0" layoutY="220.0" prefHeight="25.0" prefWidth="160.0" />
-                  <TextField layoutX="179.0" layoutY="182.0" prefHeight="25.0" prefWidth="160.0" />
+                  <TextField fx:id="addAge" layoutX="179.0" layoutY="367.0" prefHeight="25.0" prefWidth="160.0" />
+                  <TextField fx:id="addInventory" layoutX="179.0" layoutY="330.0" prefHeight="25.0" prefWidth="160.0" />
+                  <TextField fx:id="addPrice" layoutX="179.0" layoutY="291.0" prefHeight="25.0" prefWidth="160.0" />
+                  <TextField fx:id="addBrand" layoutX="179.0" layoutY="255.0" prefHeight="25.0" prefWidth="160.0" />
+                  <TextField fx:id="addName" layoutX="179.0" layoutY="220.0" prefHeight="25.0" prefWidth="160.0" />
+                  <TextField fx:id="addSN" layoutX="179.0" layoutY="182.0" prefHeight="25.0" prefWidth="160.0" />
                   <Label layoutX="14.0" layoutY="186.0" prefHeight="17.0" prefWidth="94.0" text="Serial Number">
                      <font>
                         <Font size="14.0" />
@@ -138,13 +138,13 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="52.0" layoutY="442.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="271.0" text="Save">
+                  <Button fx:id="btnSave" layoutX="52.0" layoutY="442.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="271.0" text="Save">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <TextField layoutX="559.0" layoutY="147.0" prefHeight="25.0" prefWidth="197.0" />
-                  <TextField layoutX="559.0" layoutY="391.0" prefHeight="25.0" prefWidth="197.0" />
+                  <TextField fx:id="addClassification" layoutX="559.0" layoutY="147.0" prefHeight="25.0" prefWidth="197.0" />
+                  <TextField fx:id="addType" layoutX="559.0" layoutY="391.0" prefHeight="25.0" prefWidth="197.0" />
                   <Label layoutX="559.0" layoutY="301.0" text="Puzzle">
                      <font>
                         <Font size="18.0" />
@@ -185,11 +185,11 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="945.0" layoutY="93.0" prefHeight="25.0" prefWidth="178.0" />
-                  <TextField layoutX="945.0" layoutY="148.0" prefWidth="178.0" />
-                  <TextField layoutX="1034.0" layoutY="369.0" prefHeight="25.0" prefWidth="88.0" />
-                  <TextField layoutX="1034.0" layoutY="413.0" prefHeight="25.0" prefWidth="88.0" />
-                  <TextField layoutX="945.0" layoutY="459.0" prefHeight="25.0" prefWidth="179.0" />
+                  <TextField fx:id="addMaterial" layoutX="945.0" layoutY="93.0" prefHeight="25.0" prefWidth="178.0" />
+                  <TextField fx:id="addSize" layoutX="945.0" layoutY="148.0" prefWidth="178.0" />
+                  <TextField fx:id="addMinPlayer" layoutX="1034.0" layoutY="369.0" prefHeight="25.0" prefWidth="88.0" />
+                  <TextField fx:id="addMaxPlayer" layoutX="1034.0" layoutY="413.0" prefHeight="25.0" prefWidth="88.0" />
+                  <TextField fx:id="addDesigner" layoutX="945.0" layoutY="459.0" prefHeight="25.0" prefWidth="179.0" />
                   <Line endX="103.0" layoutX="579.0" layoutY="68.0" opacity="0.5" startX="-107.0" stroke="#756c6c" />
                   <Line endX="109.0" layoutX="974.0" layoutY="68.0" opacity="0.5" startX="-95.0" stroke="#756c6c" />
                   <Line endX="106.0" layoutX="584.0" layoutY="330.0" opacity="0.5" startX="-112.0" stroke="#756c6c" />
@@ -202,7 +202,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ListView layoutX="292.0" layoutY="20.0" prefHeight="498.0" prefWidth="833.0" />
+                  <ListView fx:id="removeView" layoutX="292.0" layoutY="20.0" prefHeight="498.0" prefWidth="833.0" />
                   <Label layoutX="14.0" layoutY="68.0" prefHeight="27.0" prefWidth="220.0" text="Enter Toy Serial Number:">
                      <font>
                         <Font size="18.0" />
@@ -215,7 +215,7 @@
                      </font>
                   </Label>
                   <TextField layoutX="15.0" layoutY="255.0" prefHeight="25.0" prefWidth="250.0" />
-                  <Button layoutX="41.0" layoutY="417.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="206.0" text="Remove">
+                  <Button fx:id="btnRemove" layoutX="41.0" layoutY="417.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="206.0" text="Remove">
                      <font>
                         <Font size="18.0" />
                      </font>

@@ -26,7 +26,7 @@ public class CustomerViewController implements Initializable{
 	ArrayList<Toy> toys;
 	
 	@FXML
-	private ChoiceBox choiceBox;
+	private ChoiceBox<String> choiceBox;
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
