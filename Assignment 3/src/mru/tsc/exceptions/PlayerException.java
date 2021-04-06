@@ -11,7 +11,7 @@ public class PlayerException extends Exception{
 	/**
 	 * Constructor for creating a error message
 	 * 
-	 * @param error  the message the user will see
+	 * @param error  user input information
 	 */
 	public PlayerException(String error) {
 		super("The minimum number of players exceeds the maximum" + error);

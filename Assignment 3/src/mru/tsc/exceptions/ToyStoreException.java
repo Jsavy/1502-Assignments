@@ -11,7 +11,7 @@ public class ToyStoreException extends Exception{
 	/**
 	 * Constructor for creating a error message
 	 * 
-	 * @param error  the message the user will see
+	 * @param error  user input information
 	 */
 	public ToyStoreException(String error) {
 		super("The price cannot be negative" + error);
