@@ -6,15 +6,15 @@ package mru.tsc.exceptions;
  * @author Austin Thieu
  *
  */
-public class ToyStoreException extends Exception{
+public class PlayerException extends Exception{
 	
 	/**
 	 * Constructor for creating a error message
 	 * 
 	 * @param error  the message the user will see
 	 */
-	public ToyStoreException(String error) {
-		super("The price cannot be negative" + error);
+	public PlayerException(String error) {
+		super("The minimum number of players exceeds the maximum" + error);
 	}
 
 }
