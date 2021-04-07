@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="1139.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="mru.tsc.controller.CustomerViewController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="1139.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mru.tsc.controller.CustomerViewController">
   <tabs>
     <Tab text="Home">
       <content>
@@ -195,6 +195,7 @@
                   <Line endX="106.0" layoutX="584.0" layoutY="330.0" opacity="0.5" startX="-112.0" stroke="#756c6c" />
                   <Line endX="112.0" layoutX="980.0" layoutY="333.0" opacity="0.5" startX="-113.0" stroke="#756c6c" />
                   <ChoiceBox fx:id="choiceBox" layoutX="179.0" layoutY="136.0" prefHeight="25.0" prefWidth="160.0" />
+                  <Label fx:id="addErrorMessage" layoutX="394.0" layoutY="451.0" prefHeight="41.0" prefWidth="330.0" />
                </children></AnchorPane>
          </content>
       </Tab>
