@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="1139.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mru.tsc.controller.CustomerViewController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="1139.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="mru.tsc.controller.CustomerViewController">
   <tabs>
     <Tab text="Home">
       <content>
@@ -203,7 +203,7 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <ListView fx:id="removeView" layoutX="292.0" layoutY="20.0" prefHeight="498.0" prefWidth="833.0" />
-                  <Label layoutX="14.0" layoutY="68.0" prefHeight="27.0" prefWidth="220.0" text="Enter Toy Serial Number:">
+                  <Label layoutX="45.0" layoutY="80.0" prefHeight="27.0" prefWidth="220.0" text="Enter Toy Serial Number">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -214,12 +214,14 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="15.0" layoutY="255.0" prefHeight="25.0" prefWidth="250.0" />
-                  <Button fx:id="btnRemove" layoutX="41.0" layoutY="417.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="206.0" text="Remove">
+                  <TextField fx:id="removeInput" layoutX="15.0" layoutY="255.0" prefHeight="25.0" prefWidth="250.0" />
+                  <Button fx:id="btnRemove" layoutX="41.0" layoutY="417.0" mnemonicParsing="false" onAction="#btnRemoveHandler" prefHeight="55.0" prefWidth="206.0" text="Remove" textFill="RED">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Label fx:id="removeErrorMessage" layoutX="14.0" layoutY="341.0" prefHeight="36.0" prefWidth="272.0" />
+                  <Button fx:id="removeSearchButton" layoutX="14.0" layoutY="294.0" mnemonicParsing="false" onAction="#removeSearchHandler" prefHeight="37.0" prefWidth="252.0" text="Search" />
                </children></AnchorPane>
       </content>
     </Tab>
