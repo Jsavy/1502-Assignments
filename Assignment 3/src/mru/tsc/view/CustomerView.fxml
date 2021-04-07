@@ -138,7 +138,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnSave" layoutX="52.0" layoutY="442.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="271.0" text="Save">
+                  <Button fx:id="btnSave" layoutX="52.0" layoutY="442.0" mnemonicParsing="false" onAction="#saveButtonPushed" prefHeight="51.0" prefWidth="271.0" text="Save">
                      <font>
                         <Font size="24.0" />
                      </font>

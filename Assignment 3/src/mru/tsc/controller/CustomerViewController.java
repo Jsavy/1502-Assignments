@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -43,10 +44,11 @@ public class CustomerViewController implements Initializable{
 	}
 	
 
-	
-	public void saveButtonPushed() {
-	
-	}
+	@FXML
+    void saveButtonPushed(ActionEvent event) {
+		String userSelection = (String) choiceBox.getValue();
+		System.out.println(userSelection);
+    }
 	
 	/**
 	 * A method which loads the file "toys.txt" and adds different types of toys into an arraylist
