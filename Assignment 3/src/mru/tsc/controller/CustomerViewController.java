@@ -76,7 +76,10 @@ public class CustomerViewController implements Initializable {
 	Label removeErrorMessage, addErrorMessage, searchTypeLabel, searchError;
 
 	
-	// Remove toy feature
+	/**
+	 * This handler is used when the user selects the search button on the remove tab and finds the toy object
+	 * @param event when the button on remove screen is clicked
+	 */
 	@FXML
 	void removeSearchHandler(ActionEvent event) {
 
@@ -85,7 +88,10 @@ public class CustomerViewController implements Initializable {
 		removeVerifySN(sn);
 
 	}
-
+	/**
+	 * This handler is used when the user selects the remove button on the remove tab and deletes it from the toys array
+	 * @param event when the remove button on the remove screen is clicked
+	 */
 	@FXML
 	void btnRemoveHandler(ActionEvent event) {
 		Toy selectedToy;
@@ -98,7 +104,10 @@ public class CustomerViewController implements Initializable {
 	}
 
 
-	// Add Toy feature
+	/**
+	 * This handler is used when the user selects the save button on the add tab and adds it to the toy array 
+	 * @param event when the save button on the add toy screen is clicked
+	 */
 	@FXML
 	void saveButtonPushed(ActionEvent event) {
 		String userSelection = choiceBox.getValue();
@@ -117,11 +126,15 @@ public class CustomerViewController implements Initializable {
 		final int EIGHT = 8;
 		final int NINE = 9;
 		String SN;
+		char SNValue;
+		int SNValidation;
 		String name;
 		String brand;
 		double price = -1;
 		boolean priceValidity = false;
 		boolean playerValidity = false;
+		boolean SNLengthValidity = false;
+		boolean SNExists = false;
 		int inventory;
 		int age;
 		char classification;
@@ -135,10 +148,17 @@ public class CustomerViewController implements Initializable {
 		Toy t = null;
 
 		SN = addSN.getText();
+		SNValue = SN.charAt(ZERO);
+		SNValidation = Character.getNumericValue(SNValue);
+		SNLengthValidity = addVerifySN(SN);
+		SNExists = addSNExist(SN);
 		t = searchRemove(SN);
 		if (t != null) {
 			addErrorMessage.setText("Toy already exists");
 		}
+		if(!SNLengthValidity) {
+			addErrorMessage.setText("The Serial number contains letters or is too short or long");
+		}else {
 			name = addName.getText();
 			brand = addBrand.getText();
 			price = Double.parseDouble(addPrice.getText());
@@ -155,39 +175,84 @@ public class CustomerViewController implements Initializable {
 				addErrorMessage.setText(error);
 			}
 		}
-		
-		if (userSelection.equalsIgnoreCase(reference1)) {
-			classification = addClassification.getText().charAt(0);
-			Toy f = new Figure (SN, name, brand, price, inventory, age, classification);
-			toys.add(f);
-			exitFile();
-		}else if (userSelection.equalsIgnoreCase(reference2)) {
-			material = addMaterial.getText();
-			size = addSize.getText().charAt(0);
-			Toy a = new Animal(SN, name, brand, price, inventory, age, material, size);
-			toys.add(a);
-			exitFile();
-		}else if (userSelection.equalsIgnoreCase(reference3)) {
-			minPlayer = Integer.parseInt(addMinPlayer.getText());
-			maxPlayer = Integer.parseInt(addMaxPlayer.getText());
-			designer = addDesigner.getText();
-			numPlayer = minPlayer + "-" + maxPlayer;
-			Toy b = new BoardGame(SN, name, brand, price, inventory, age, numPlayer, designer);
-			toys.add(b);
-			exitFile();
-		}else if (userSelection.equalsIgnoreCase(reference4)) {
-			type = addType.getText().charAt(0);
-			Toy p = new Puzzle (SN, name, brand, price, inventory, age, type);
-			toys.add(p);
-			exitFile();
+		if(priceValidity && SNLengthValidity) {
+			if (userSelection.equalsIgnoreCase(reference1)) {
+				if(SNValidation == ZERO || SNValidation == ONE) {
+					classification = addClassification.getText().charAt(0);
+					Toy f = new Figure (SN, name, brand, price, inventory, age, classification);
+					toys.add(f);
+					exitFile();
+					addErrorMessage.setText("Success");
+				}else {
+					addErrorMessage.setText("Figure Serial error");
+				}
+			}else if (userSelection.equalsIgnoreCase(reference2)) {
+				if(SNValidation == TWO || SNValidation == THREE) {
+					material = addMaterial.getText();
+					size = addSize.getText().charAt(0);
+					Toy a = new Animal(SN, name, brand, price, inventory, age, material, size);
+					toys.add(a);
+					exitFile();
+					addErrorMessage.setText("Success");
+				}else {
+					addErrorMessage.setText("Animal Serial error");
+				}
+			}else if (userSelection.equalsIgnoreCase(reference3)) {
+				minPlayer = Integer.parseInt(addMinPlayer.getText());
+				maxPlayer = Integer.parseInt(addMaxPlayer.getText());
+				if(!playerValidity) {
+					try {
+						playerValidity = isPlayerValid(minPlayer,maxPlayer);
+					} catch (PlayerException e) {
+						String error = e.getMessage();
+						addErrorMessage.setText(error);
+					}
+				}else {
+					if(SNValidation == SEVEN || SNValidation == EIGHT || SNValidation == NINE) {
+						designer = addDesigner.getText();
+						numPlayer = minPlayer + "-" + maxPlayer;
+						Toy b = new BoardGame(SN, name, brand, price, inventory, age, numPlayer, designer);
+						toys.add(b);
+						exitFile();
+						addErrorMessage.setText("Success");
+					}else {
+						addErrorMessage.setText("BoardGame Serial error");
+					}
+				}
+			}else if (userSelection.equalsIgnoreCase(reference4)) {
+				if(SNValidation == FOUR || SNValidation == FIVE || SNValidation == SIX) {
+					type = addType.getText().charAt(0);
+					Toy p = new Puzzle (SN, name, brand, price, inventory, age, type);
+					toys.add(p);
+					exitFile();
+					addErrorMessage.setText("Success");
+				}else {
+					addErrorMessage.setText("Puzzle Serial error");
+				}
+			}
+				}
+			}
 		}
-		
-		addErrorMessage.setText("Success");
-		
+		private boolean addSNExist(String sN) {
+			boolean valid = true;
+			for(Toy t: toys) {
+				String grabber = t.getSN();
+				if(grabber.equalsIgnoreCase(sN)) {
+					valid = false;
+				}
+			}
+			return valid;
 	}
-
-	// Home menu buy feature
+		
+		
 	
+
+
+	/**
+	 * This method is used to determine the label beside the textfield on home tab so the user 
+	 * does not confuse what information he needs to type in
+	 * @param event when a radio button is selected on the home tab
+	 */
 	@FXML
 	public void radioSelected(ActionEvent event) {
 
@@ -199,7 +264,10 @@ public class CustomerViewController implements Initializable {
 			searchTypeLabel.setText("Type");
 		}
 	}
-
+	/**
+	 * This method is used to determine which method is needed needs to be called to display the correct items in listview
+	 * @param event when the search button is clicked on the home page
+	 */
 	@FXML
 	public void btnSearchHandler(ActionEvent event) {
 
@@ -211,13 +279,19 @@ public class CustomerViewController implements Initializable {
 			searchByType(homeSN.getText());
 		}
 	}
-	
+	/**
+	 * This method is used to clear listView on the home page
+	 * @param event when the clear button is clicked on the home page
+	 */
 	@FXML
 	public void clearButtonHandler (ActionEvent event) {
 		
 		homeView.getItems().clear();
 	}
-	
+	/**
+	 * Used by the home tab to search for the Toy object based of SN input and puts it in listview
+	 * @param sn the serial number the user inputted
+	 */
 	private void homeVerifySN(String sn) {
 
 		final int TEN = 10; // constant variable for 10
@@ -283,7 +357,10 @@ public class CustomerViewController implements Initializable {
 	}
 
 	
-
+	/**
+	 * This method is used to display the toys of listview for the remove tab that was found based of serial search
+	 * @param sn the serial number the user inputted
+	 */
 	private void removeVerifySN(String sn) {
 
 		final int TEN = 10; // constant variable for 10
@@ -418,7 +495,11 @@ public class CustomerViewController implements Initializable {
 	}
 
 
-	
+	/**
+	 * this method is used to find the toy object in the array based off user inputted serial number
+	 * @param SN the serial number the user inputted
+	 * @return t the toy object that was found in the array
+	 */
 	private Toy searchRemove(String SN) {
 		Toy t = null; // toy variable used for the method to function
 
@@ -543,6 +624,24 @@ public class CustomerViewController implements Initializable {
 		}
 		fileReader.close(); // close the file reader
 	}
+	/**
+	 * this method is used to validate SN length
+	 * @param sn
+	 * @return
+	 */
+	private boolean addVerifySN(String sn) {
+
+		final int TEN = 10; // constant variable for 10
+		boolean valid = false;
+
+		if (sn.matches("[0-9]+")) {
+			if (sn.length() == TEN) {
+				valid = true;
+			}else {
+					valid = false;
+				}
+		}
+		return valid;
+	}
 	
-		
 }
