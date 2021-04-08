@@ -66,10 +66,7 @@ public class CustomerViewController implements Initializable {
 	private RadioButton serialButton, nameButton, typeButton;
 
 	@FXML
-	private Button btnRemove;
-
-	@FXML
-	Button removeSearchButton;
+	private Button btnRemove, btnClear, removeSearchButton;
 
 	@FXML
 	private TextField removeInput, addSN, addName, addBrand, addPrice, addInventory, addAge, addClassification, addType,
@@ -78,6 +75,8 @@ public class CustomerViewController implements Initializable {
 	@FXML
 	Label removeErrorMessage, addErrorMessage, searchTypeLabel, searchError;
 
+	
+	// Remove toy feature
 	@FXML
 	void removeSearchHandler(ActionEvent event) {
 
@@ -98,25 +97,8 @@ public class CustomerViewController implements Initializable {
 		exitFile();
 	}
 
-	private Toy searchRemove(String SN) {
-		Toy t = null; // toy variable used for the method to function
 
-		for (Toy tt : toys) {
-			if (tt.getSN().equals(SN)) {
-				if (tt instanceof Figure) {
-					t = (Figure) tt;
-				} else if (tt instanceof Animal) {
-					t = (Animal) tt;
-				} else if (tt instanceof Puzzle) {
-					t = (Puzzle) tt;
-				} else if (tt instanceof BoardGame) {
-					t = (BoardGame) tt;
-				}
-			}
-		}
-		return t;
-	}
-
+	// Add Toy feature
 	@FXML
 	void saveButtonPushed(ActionEvent event) {
 		String userSelection = choiceBox.getValue();
@@ -204,6 +186,8 @@ public class CustomerViewController implements Initializable {
 		
 	}
 
+	// Home menu buy feature
+	
 	@FXML
 	public void radioSelected(ActionEvent event) {
 
@@ -227,170 +211,14 @@ public class CustomerViewController implements Initializable {
 			searchByType(homeSN.getText());
 		}
 	}
-
-	/**
-	 * A method which loads the file "toys.txt" and adds different types of toys
-	 * into an arraylist
-	 */
-	private void readFile() {
-		File myFile = new File(FILE_PATH); // file location to read
-		String currentLine; // the current line that has been read of the file
-		String[] splittedLine; // the information for the whole line split into its components based on
-								// criteria
-		Scanner fileReader = null; // scanner for file reader
-		String text; // used for printing the error message
-		int firstDigit; // the first digit of the serial number
-		final int ZERO = 0; // used to determine the PolyMorphism
-		final int ONE = 1; // used to determine the PolyMorphism
-		final int TWO = 2; // used to determine the PolyMorphism
-		final int THREE = 3; // used to determine the PolyMorphism
-		final int FOUR = 4; // used to determine the PolyMorphism
-		final int FIVE = 5; // used to determine the PolyMorphism
-		final int SIX = 6; // used to determine the PolyMorphism
-		final int SEVEN = 7; // used to determine the PolyMorphism
-		final int EIGHT = 8; // used to determine the PolyMorphism
-		final int NINE = 9; // used to determine the PolyMorphism
-
-		try {
-			fileReader = new Scanner(myFile);
-		} catch (FileNotFoundException e) {
-			text = e.getMessage();
-		}
-
-		while (fileReader.hasNextLine()) {
-			currentLine = fileReader.nextLine();
-			splittedLine = currentLine.split(";");
-			firstDigit = Character.getNumericValue(splittedLine[ZERO].charAt(0));
-
-			// Loads in Figure toys
-			if (firstDigit == ZERO || firstDigit == ONE) {
-
-				Toy f = new Figure((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO],
-						Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]),
-						Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
-				toys.add(f);
-				// Loads in Animal toys
-			} else if (firstDigit == TWO || firstDigit == THREE) {
-
-				Toy a = new Animal((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO],
-						Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]),
-						Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX], splittedLine[SEVEN].charAt(0));
-				toys.add(a);
-				// Loads in Puzzle toys
-			} else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX) {
-
-				Toy p = new Puzzle((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO],
-						Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]),
-						Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
-				toys.add(p);
-				// Loads in Board Game toys
-			} else if (firstDigit == SEVEN || firstDigit == EIGHT || firstDigit == NINE) {
-
-				Toy b = new BoardGame((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO],
-						Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]),
-						Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX], splittedLine[SEVEN]);
-				toys.add(b);
-			}
-		}
-		fileReader.close(); // close the file reader
+	
+	@FXML
+	public void clearButtonHandler (ActionEvent event) {
+		
+		homeView.getItems().clear();
 	}
 	
-	/**
-	 * Method which loads the toy data in the file "toys.txt"
-	 * 
-	 */
-	private void exitFile() {
-		File file = new File(FILE_PATH); // file location for export
-		PrintWriter pw; // used for file export
-		String text; // used to print exceptions messages
-			try {
-				pw = new PrintWriter(file);
-				for (Toy t: toys) {
-					if(t instanceof Animal) {
-						Animal cast = (Animal)t;
-						pw.println(cast.format());
-					} else if(t instanceof Figure) {
-						Figure cast = (Figure)t;
-						pw.println(cast.format());
-					} else if(t instanceof Puzzle) {
-						Puzzle cast = (Puzzle)t;
-						pw.println(cast.format());
-					} else if(t instanceof BoardGame) {
-						BoardGame cast = (BoardGame)t;
-						pw.println(cast.format());
-					}
-				}
-				
-				pw.close();
-			} catch (FileNotFoundException e) {
-				text = e.getMessage();
-			}
-	}
-	/**
-	 * Validation class that uses the created ToyStoreException class to throw error
-	 * message if the price is negative
-	 * 
-	 * @param price the price the user inputed for the toy
-	 * @return valid the boolean value of validity
-	 * @throws ToyStoreException exception class used to throw exception
-	 */
-	public boolean isPriceValid(double price) throws ToyStoreException {
-		boolean valid = true; // boolean used to determine if price is valid
-		final double ZERO = 0.00; // value needed for the if condition to see if price is valid
-
-		if (price < ZERO) {
-			valid = false;
-			throw new ToyStoreException(" Inputted value: " + price);
-		}
-		return valid;
-	}
-
-	/**
-	 * Validation class that uses the created ToyStoreException class to throw error
-	 * message if minimum is greater than maximum
-	 * 
-	 * @param min the minimum number of players user inputed for toy
-	 * @param max the maximum number of players user inputed for toy
-	 * @return valid the boolean value of validity
-	 * @throws ToyStoreException exception class used to throw exception
-	 */
-	public boolean isPlayerValid(int min, int max) throws PlayerException {
-		boolean valid = true; // boolean used to determine if player numbers are valid
-
-		if (min > max) {
-			valid = false;
-			throw new PlayerException(" Inputted minimum: " + min + " Inputted maximum: " + max);
-		}
-		return valid;
-	}
-
-	public void removeVerifySN(String sn) {
-
-		final int TEN = 10; // constant variable for 10
-		Toy a = null; // toy object
-		ObservableList<Toy> t;
-
-		if (sn.matches("[0-9]+")) {
-			if (sn.length() == TEN) {
-				a = searchRemove(sn);
-				if (a == null) {
-					removeErrorMessage.setText("Toy does not exist");
-				} else {
-					t = FXCollections.observableArrayList(a);
-					removeView.getItems().addAll(t);
-					t.remove(a);
-				}
-			} else {
-				removeErrorMessage.setText("The Serial Number's length must be 10 digits!");
-
-			}
-		} else {
-			removeErrorMessage.setText("The serial number must only contain digits!");
-
-		}
-	}
-
-	public void homeVerifySN(String sn) {
+	private void homeVerifySN(String sn) {
 
 		final int TEN = 10; // constant variable for 10
 		Toy a = null; // toy object
@@ -413,7 +241,9 @@ public class CustomerViewController implements Initializable {
 			searchError.setText("The serial number must only contain digits!");
 		}
 	}
-
+	
+	
+	
 	/**
 	 * Method that creates a new arrayList based off search criteria the user is
 	 * looking for and updates the database ArrayList according to the actions the
@@ -452,6 +282,34 @@ public class CustomerViewController implements Initializable {
 		names.removeAll(toyName);
 	}
 
+	
+
+	private void removeVerifySN(String sn) {
+
+		final int TEN = 10; // constant variable for 10
+		Toy a = null; // toy object
+		ObservableList<Toy> t;
+
+		if (sn.matches("[0-9]+")) {
+			if (sn.length() == TEN) {
+				a = searchRemove(sn);
+				if (a == null) {
+					removeErrorMessage.setText("Toy does not exist");
+				} else {
+					t = FXCollections.observableArrayList(a);
+					removeView.getItems().addAll(t);
+					t.remove(a);
+				}
+			} else {
+				removeErrorMessage.setText("The Serial Number's length must be 10 digits!");
+
+			}
+		} else {
+			removeErrorMessage.setText("The serial number must only contain digits!");
+
+		}
+	}
+	
 	/**
 	 * Method that creates a new arrayList based off search criteria the user is
 	 * looking for and updates the database ArrayList according to the actions the
@@ -519,6 +377,171 @@ public class CustomerViewController implements Initializable {
 		homeView.getItems().addAll(type);
 		type.removeAll(toyType);
 		
+	}
+	
+	/**
+	 * Validation class that uses the created ToyStoreException class to throw error
+	 * message if the price is negative
+	 * 
+	 * @param price the price the user inputed for the toy
+	 * @return valid the boolean value of validity
+	 * @throws ToyStoreException exception class used to throw exception
+	 */
+	public boolean isPriceValid(double price) throws ToyStoreException {
+		boolean valid = true; // boolean used to determine if price is valid
+		final double ZERO = 0.00; // value needed for the if condition to see if price is valid
+
+		if (price < ZERO) {
+			valid = false;
+			throw new ToyStoreException(" Inputted value: " + price);
+		}
+		return valid;
+	}
+
+	/**
+	 * Validation class that uses the created ToyStoreException class to throw error
+	 * message if minimum is greater than maximum
+	 * 
+	 * @param min the minimum number of players user inputed for toy
+	 * @param max the maximum number of players user inputed for toy
+	 * @return valid the boolean value of validity
+	 * @throws ToyStoreException exception class used to throw exception
+	 */
+	public boolean isPlayerValid(int min, int max) throws PlayerException {
+		boolean valid = true; // boolean used to determine if player numbers are valid
+
+		if (min > max) {
+			valid = false;
+			throw new PlayerException(" Inputted minimum: " + min + " Inputted maximum: " + max);
+		}
+		return valid;
+	}
+
+
+	
+	private Toy searchRemove(String SN) {
+		Toy t = null; // toy variable used for the method to function
+
+		for (Toy tt : toys) {
+			if (tt.getSN().equals(SN)) {
+				if (tt instanceof Figure) {
+					t = (Figure) tt;
+				} else if (tt instanceof Animal) {
+					t = (Animal) tt;
+				} else if (tt instanceof Puzzle) {
+					t = (Puzzle) tt;
+				} else if (tt instanceof BoardGame) {
+					t = (BoardGame) tt;
+				}
+			}
+		}
+		return t;
+	}
+
+
+
+
+
+	
+	// Read file and save methods
+	
+	/**
+	 * Method which loads the toy data in the file "toys.txt"
+	 * 
+	 */
+	private void exitFile() {
+		File file = new File(FILE_PATH); // file location for export
+		PrintWriter pw; // used for file export
+		String text; // used to print exceptions messages
+			try {
+				pw = new PrintWriter(file);
+				for (Toy t: toys) {
+					if(t instanceof Animal) {
+						Animal cast = (Animal)t;
+						pw.println(cast.format());
+					} else if(t instanceof Figure) {
+						Figure cast = (Figure)t;
+						pw.println(cast.format());
+					} else if(t instanceof Puzzle) {
+						Puzzle cast = (Puzzle)t;
+						pw.println(cast.format());
+					} else if(t instanceof BoardGame) {
+						BoardGame cast = (BoardGame)t;
+						pw.println(cast.format());
+					}
+				}
+				
+				pw.close();
+			} catch (FileNotFoundException e) {
+				text = e.getMessage();
+			}
+	}
+	
+	/**
+	 * A method which loads the file "toys.txt" and adds different types of toys
+	 * into an arraylist
+	 */
+	private void readFile() {
+		File myFile = new File(FILE_PATH); // file location to read
+		String currentLine; // the current line that has been read of the file
+		String[] splittedLine; // the information for the whole line split into its components based on
+								// criteria
+		Scanner fileReader = null; // scanner for file reader
+		String text; // used for printing the error message
+		int firstDigit; // the first digit of the serial number
+		final int ZERO = 0; // used to determine the PolyMorphism
+		final int ONE = 1; // used to determine the PolyMorphism
+		final int TWO = 2; // used to determine the PolyMorphism
+		final int THREE = 3; // used to determine the PolyMorphism
+		final int FOUR = 4; // used to determine the PolyMorphism
+		final int FIVE = 5; // used to determine the PolyMorphism
+		final int SIX = 6; // used to determine the PolyMorphism
+		final int SEVEN = 7; // used to determine the PolyMorphism
+		final int EIGHT = 8; // used to determine the PolyMorphism
+		final int NINE = 9; // used to determine the PolyMorphism
+
+		try {
+			fileReader = new Scanner(myFile);
+		} catch (FileNotFoundException e) {
+			text = e.getMessage();
+		}
+
+		while (fileReader.hasNextLine()) {
+			currentLine = fileReader.nextLine();
+			splittedLine = currentLine.split(";");
+			firstDigit = Character.getNumericValue(splittedLine[ZERO].charAt(0));
+
+			// Loads in Figure toys
+			if (firstDigit == ZERO || firstDigit == ONE) {
+
+				Toy f = new Figure((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO],
+						Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]),
+						Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
+				toys.add(f);
+				// Loads in Animal toys
+			} else if (firstDigit == TWO || firstDigit == THREE) {
+
+				Toy a = new Animal((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO],
+						Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]),
+						Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX], splittedLine[SEVEN].charAt(0));
+				toys.add(a);
+				// Loads in Puzzle toys
+			} else if (firstDigit == FOUR || firstDigit == FIVE || firstDigit == SIX) {
+
+				Toy p = new Puzzle((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO],
+						Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]),
+						Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX].charAt(ZERO));
+				toys.add(p);
+				// Loads in Board Game toys
+			} else if (firstDigit == SEVEN || firstDigit == EIGHT || firstDigit == NINE) {
+
+				Toy b = new BoardGame((splittedLine[ZERO]), splittedLine[ONE], splittedLine[TWO],
+						Double.parseDouble(splittedLine[THREE]), Integer.parseInt(splittedLine[FOUR]),
+						Integer.parseInt(splittedLine[FIVE]), splittedLine[SIX], splittedLine[SEVEN]);
+				toys.add(b);
+			}
+		}
+		fileReader.close(); // close the file reader
 	}
 	
 		
