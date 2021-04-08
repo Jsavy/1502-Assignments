@@ -46,7 +46,7 @@ public class CustomerViewController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		toys = new ArrayList<Toy>();
 
-		choiceBox.getItems().add("Figure");
+		choiceBox.setValue("Figure");
 		choiceBox.getItems().add("Animal");
 		choiceBox.getItems().add("Board Game");
 		choiceBox.getItems().add("Puzzle");
@@ -118,7 +118,7 @@ public class CustomerViewController implements Initializable {
 
 	@FXML
 	void saveButtonPushed(ActionEvent event) {
-		String userSelection = (String) choiceBox.getValue();
+		String userSelection = choiceBox.getValue();
 		String reference1 = "Figure";
 		String reference2 = "Animal";
 		String reference3 = "Board Game";
@@ -136,7 +136,7 @@ public class CustomerViewController implements Initializable {
 		String SN;
 		String name;
 		String brand;
-		double price;
+		double price = -1;
 		boolean priceValidity = false;
 		boolean playerValidity = false;
 		int inventory;
@@ -147,9 +147,23 @@ public class CustomerViewController implements Initializable {
 		char size;
 		int minPlayer;
 		int maxPlayer;
+		String numPlayer;
 		String designer;
+		Toy t = null;
 
-		price = Double.valueOf(addPrice.getText());
+		SN = addSN.getText();
+		t = searchRemove(SN);
+		if (t != null) {
+			addErrorMessage.setText("Toy already exists");
+		}
+			name = addName.getText();
+			brand = addBrand.getText();
+			price = Double.parseDouble(addPrice.getText());
+			inventory = Integer.parseInt(addInventory.getText());
+			age = Integer.parseInt(addAge.getText());
+			price = Double.valueOf(addPrice.getText());
+		
+		
 		if (!priceValidity) {
 			try {
 				priceValidity = isPriceValid(price);
@@ -158,86 +172,32 @@ public class CustomerViewController implements Initializable {
 				addErrorMessage.setText(error);
 			}
 		}
-		if (priceValidity) {
-			if (userSelection == reference1) {
-				SN = addSN.getText();
-				char number = SN.charAt(ZERO);
-				int value = number;
-				if (value != ZERO || value != ONE) {
-					addErrorMessage.setText("Invalid SN");
-				} else {
-					name = addName.getText();
-					brand = addBrand.getText();
-					price = Double.valueOf(addPrice.getText());
-					inventory = Integer.valueOf(addInventory.getText());
-					age = Integer.valueOf(addAge.getText());
-					classification = addClassification.getText().charAt(ZERO);
-					Toy f = new Figure(SN, name, brand, price, inventory, age, classification);
-					toys.add(f);
-				}
-			} else if (userSelection == reference2) {
-				SN = addSN.getText();
-				char number = SN.charAt(ZERO);
-				int value = number;
-				if (value != TWO || value != THREE) {
-					addErrorMessage.setText("Invalid SN");
-				} else {
-					name = addName.getText();
-					brand = addBrand.getText();
-					price = Double.valueOf(addPrice.getText());
-					inventory = Integer.valueOf(addInventory.getText());
-					age = Integer.valueOf(addAge.getText());
-					material = addMaterial.getText();
-					size = addSize.getText().charAt(ZERO);
-					Toy a = new Animal(SN, name, brand, price, inventory, age, material, size);
-					toys.add(a);
-				}
-			} else if (userSelection == reference3) {
-				minPlayer = Integer.valueOf(addMinPlayer.getText());
-				maxPlayer = Integer.valueOf(addMaxPlayer.getText());
-				if (!playerValidity) {
-					try {
-						playerValidity = isPlayerValid(minPlayer, maxPlayer);
-					} catch (PlayerException e) {
-						String error = e.getMessage();
-						addErrorMessage.setText(error);
-					}
-				} else {
-					SN = addSN.getText();
-					char number = SN.charAt(ZERO);
-					int value = number;
-					if (value != SEVEN || value != EIGHT || value != NINE) {
-						addErrorMessage.setText("Invalid SN");
-					} else {
-						name = addName.getText();
-						brand = addBrand.getText();
-						price = Double.valueOf(addPrice.getText());
-						inventory = Integer.valueOf(addInventory.getText());
-						age = Integer.valueOf(addAge.getText());
-						String playerFormat = minPlayer + "-" + maxPlayer;
-						designer = addDesigner.getText();
-						Toy b = new BoardGame(SN, name, brand, price, inventory, age, playerFormat, designer);
-						toys.add(b);
-					}
-				}
-			} else if (userSelection == reference4) {
-				SN = addSN.getText();
-				char number = SN.charAt(ZERO);
-				int value = number;
-				if (value != FOUR || value != FIVE || value != SIX) {
-					addErrorMessage.setText("Invalid SN");
-				} else {
-					name = addName.getText();
-					brand = addBrand.getText();
-					price = Double.valueOf(addPrice.getText());
-					inventory = Integer.valueOf(addInventory.getText());
-					age = Integer.valueOf(addAge.getText());
-					type = addType.getText().charAt(ZERO);
-					Toy p = new Puzzle(SN, name, brand, price, inventory, age, type);
-					toys.add(p);
-				}
-			}
+		
+		if (userSelection.equalsIgnoreCase(reference1)) {
+			classification = addClassification.getText().charAt(0);
+			Toy f = new Figure (SN, name, brand, price, inventory, age, classification);
+			toys.add(f);
+		}else if (userSelection.equalsIgnoreCase(reference2)) {
+			material = addMaterial.getText();
+			size = addSize.getText().charAt(0);
+			Toy a = new Animal(SN, name, brand, price, inventory, age, material, size);
+			toys.add(a);
+		}else if (userSelection.equalsIgnoreCase(reference3)) {
+			minPlayer = Integer.parseInt(addMinPlayer.getText());
+			maxPlayer = Integer.parseInt(addMaxPlayer.getText());
+			designer = addDesigner.getText();
+			numPlayer = minPlayer + "-" + maxPlayer;
+			Toy b = new BoardGame(SN, name, brand, price, inventory, age, numPlayer, designer);
+			toys.add(b);
+			
+		}else if (userSelection.equalsIgnoreCase(reference4)) {
+			type = addType.getText().charAt(0);
+			Toy p = new Puzzle (SN, name, brand, price, inventory, age, type);
+			toys.add(p);
 		}
+		
+		addErrorMessage.setText("Success");
+		
 	}
 
 	@FXML
@@ -525,4 +485,6 @@ public class CustomerViewController implements Initializable {
 		type.removeAll(toyType);
 		
 	}
+	
+		
 }
