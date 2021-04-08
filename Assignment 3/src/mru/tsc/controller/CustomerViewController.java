@@ -45,7 +45,7 @@ public class CustomerViewController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		toys = new ArrayList<Toy>();
-
+		choiceBox.getItems().add("Figure");
 		choiceBox.setValue("Figure");
 		choiceBox.getItems().add("Animal");
 		choiceBox.getItems().add("Board Game");
@@ -89,12 +89,13 @@ public class CustomerViewController implements Initializable {
 
 	@FXML
 	void btnRemoveHandler(ActionEvent event) {
-		int selectedToy;
-
-		selectedToy = removeView.getSelectionModel().getSelectedIndex();
+		Toy selectedToy;
+		
+		selectedToy = removeView.getSelectionModel().getSelectedItem();
 		removeView.getItems().remove(selectedToy);
 		toys.remove(selectedToy);
 		removeErrorMessage.setText("Toy successfully removed");
+		exitFile();
 	}
 
 	private Toy searchRemove(String SN) {
@@ -177,11 +178,13 @@ public class CustomerViewController implements Initializable {
 			classification = addClassification.getText().charAt(0);
 			Toy f = new Figure (SN, name, brand, price, inventory, age, classification);
 			toys.add(f);
+			exitFile();
 		}else if (userSelection.equalsIgnoreCase(reference2)) {
 			material = addMaterial.getText();
 			size = addSize.getText().charAt(0);
 			Toy a = new Animal(SN, name, brand, price, inventory, age, material, size);
 			toys.add(a);
+			exitFile();
 		}else if (userSelection.equalsIgnoreCase(reference3)) {
 			minPlayer = Integer.parseInt(addMinPlayer.getText());
 			maxPlayer = Integer.parseInt(addMaxPlayer.getText());
@@ -189,11 +192,12 @@ public class CustomerViewController implements Initializable {
 			numPlayer = minPlayer + "-" + maxPlayer;
 			Toy b = new BoardGame(SN, name, brand, price, inventory, age, numPlayer, designer);
 			toys.add(b);
-			
+			exitFile();
 		}else if (userSelection.equalsIgnoreCase(reference4)) {
 			type = addType.getText().charAt(0);
 			Toy p = new Puzzle (SN, name, brand, price, inventory, age, type);
 			toys.add(p);
+			exitFile();
 		}
 		
 		addErrorMessage.setText("Success");
@@ -290,7 +294,38 @@ public class CustomerViewController implements Initializable {
 		}
 		fileReader.close(); // close the file reader
 	}
-
+	
+	/**
+	 * Method which loads the toy data in the file "toys.txt"
+	 * 
+	 */
+	private void exitFile() {
+		File file = new File(FILE_PATH); // file location for export
+		PrintWriter pw; // used for file export
+		String text; // used to print exceptions messages
+			try {
+				pw = new PrintWriter(file);
+				for (Toy t: toys) {
+					if(t instanceof Animal) {
+						Animal cast = (Animal)t;
+						pw.println(cast.format());
+					} else if(t instanceof Figure) {
+						Figure cast = (Figure)t;
+						pw.println(cast.format());
+					} else if(t instanceof Puzzle) {
+						Puzzle cast = (Puzzle)t;
+						pw.println(cast.format());
+					} else if(t instanceof BoardGame) {
+						BoardGame cast = (BoardGame)t;
+						pw.println(cast.format());
+					}
+				}
+				
+				pw.close();
+			} catch (FileNotFoundException e) {
+				text = e.getMessage();
+			}
+	}
 	/**
 	 * Validation class that uses the created ToyStoreException class to throw error
 	 * message if the price is negative
