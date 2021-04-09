@@ -75,9 +75,10 @@ public class CustomerViewController implements Initializable {
 	@FXML
 	Label removeErrorMessage, addErrorMessage, searchTypeLabel, searchError;
 
-	
 	/**
-	 * This handler is used when the user selects the search button on the remove tab and finds the toy object
+	 * This handler is used when the user selects the search button on the remove
+	 * tab and finds the toy object
+	 * 
 	 * @param event when the button on remove screen is clicked
 	 */
 	@FXML
@@ -88,14 +89,17 @@ public class CustomerViewController implements Initializable {
 		removeVerifySN(sn);
 
 	}
+
 	/**
-	 * This handler is used when the user selects the remove button on the remove tab and deletes it from the toys array
+	 * This handler is used when the user selects the remove button on the remove
+	 * tab and deletes it from the toys array
+	 * 
 	 * @param event when the remove button on the remove screen is clicked
 	 */
 	@FXML
 	void btnRemoveHandler(ActionEvent event) {
 		Toy selectedToy;
-		
+
 		selectedToy = removeView.getSelectionModel().getSelectedItem();
 		removeView.getItems().remove(selectedToy);
 		toys.remove(selectedToy);
@@ -103,9 +107,10 @@ public class CustomerViewController implements Initializable {
 		exitFile();
 	}
 
-
 	/**
-	 * This handler is used when the user selects the save button on the add tab and adds it to the toy array 
+	 * This handler is used when the user selects the save button on the add tab and
+	 * adds it to the toy array
+	 * 
 	 * @param event when the save button on the add toy screen is clicked
 	 */
 	@FXML
@@ -155,102 +160,101 @@ public class CustomerViewController implements Initializable {
 		t = searchRemove(SN);
 		if (t != null) {
 			addErrorMessage.setText("Toy already exists");
-		}
-		if(!SNLengthValidity) {
-			addErrorMessage.setText("The Serial number contains letters or is too short or long");
-		}else {
-			name = addName.getText();
-			brand = addBrand.getText();
-			price = Double.parseDouble(addPrice.getText());
-			inventory = Integer.parseInt(addInventory.getText());
-			age = Integer.parseInt(addAge.getText());
-			price = Double.valueOf(addPrice.getText());
-		
-		
-		if (!priceValidity) {
-			try {
-				priceValidity = isPriceValid(price);
-			} catch (ToyStoreException e) {
-				String error = e.getMessage();
-				addErrorMessage.setText(error);
-			}
-		}
-		if(priceValidity && SNLengthValidity) {
-			if (userSelection.equalsIgnoreCase(reference1)) {
-				if(SNValidation == ZERO || SNValidation == ONE) {
-					classification = addClassification.getText().charAt(0);
-					Toy f = new Figure (SN, name, brand, price, inventory, age, classification);
-					toys.add(f);
-					exitFile();
-					addErrorMessage.setText("Success");
-				}else {
-					addErrorMessage.setText("Figure Serial error");
-				}
-			}else if (userSelection.equalsIgnoreCase(reference2)) {
-				if(SNValidation == TWO || SNValidation == THREE) {
-					material = addMaterial.getText();
-					size = addSize.getText().charAt(0);
-					Toy a = new Animal(SN, name, brand, price, inventory, age, material, size);
-					toys.add(a);
-					exitFile();
-					addErrorMessage.setText("Success");
-				}else {
-					addErrorMessage.setText("Animal Serial error");
-				}
-			}else if (userSelection.equalsIgnoreCase(reference3)) {
-				minPlayer = Integer.parseInt(addMinPlayer.getText());
-				maxPlayer = Integer.parseInt(addMaxPlayer.getText());
-				if(!playerValidity) {
+		} else {
+			if (!SNLengthValidity) {
+				addErrorMessage.setText("The Serial number contains letters or is too short or long");
+			} else {
+				name = addName.getText();
+				brand = addBrand.getText();
+				price = Double.parseDouble(addPrice.getText());
+				inventory = Integer.parseInt(addInventory.getText());
+				age = Integer.parseInt(addAge.getText());
+				price = Double.valueOf(addPrice.getText());
+
+				if (!priceValidity) {
 					try {
-						playerValidity = isPlayerValid(minPlayer,maxPlayer);
-					} catch (PlayerException e) {
+						priceValidity = isPriceValid(price);
+					} catch (ToyStoreException e) {
 						String error = e.getMessage();
 						addErrorMessage.setText(error);
 					}
-				}else {
-					if(SNValidation == SEVEN || SNValidation == EIGHT || SNValidation == NINE) {
-						designer = addDesigner.getText();
-						numPlayer = minPlayer + "-" + maxPlayer;
-						Toy b = new BoardGame(SN, name, brand, price, inventory, age, numPlayer, designer);
-						toys.add(b);
-						exitFile();
-						addErrorMessage.setText("Success");
-					}else {
-						addErrorMessage.setText("BoardGame Serial error");
+				}
+				if (priceValidity && SNLengthValidity) {
+					if (userSelection.equalsIgnoreCase(reference1)) {
+						if (SNValidation == ZERO || SNValidation == ONE) {
+							classification = addClassification.getText().charAt(0);
+							Toy f = new Figure(SN, name, brand, price, inventory, age, classification);
+							toys.add(f);
+							exitFile();
+							addErrorMessage.setText("Success");
+						} else {
+							addErrorMessage.setText("Figure Serial error");
+						}
+					} else if (userSelection.equalsIgnoreCase(reference2)) {
+						if (SNValidation == TWO || SNValidation == THREE) {
+							material = addMaterial.getText();
+							size = addSize.getText().charAt(0);
+							Toy a = new Animal(SN, name, brand, price, inventory, age, material, size);
+							toys.add(a);
+							exitFile();
+							addErrorMessage.setText("Success");
+						} else {
+							addErrorMessage.setText("Animal Serial error");
+						}
+					} else if (userSelection.equalsIgnoreCase(reference3)) {
+						minPlayer = Integer.parseInt(addMinPlayer.getText());
+						maxPlayer = Integer.parseInt(addMaxPlayer.getText());
+						if (!playerValidity) {
+							try {
+								playerValidity = isPlayerValid(minPlayer, maxPlayer);
+							} catch (PlayerException e) {
+								String error = e.getMessage();
+								addErrorMessage.setText(error);
+							}
+						} else {
+							if (SNValidation == SEVEN || SNValidation == EIGHT || SNValidation == NINE) {
+								designer = addDesigner.getText();
+								numPlayer = minPlayer + "-" + maxPlayer;
+								Toy b = new BoardGame(SN, name, brand, price, inventory, age, numPlayer, designer);
+								toys.add(b);
+								exitFile();
+								addErrorMessage.setText("Success");
+							} else {
+								addErrorMessage.setText("BoardGame Serial error");
+							}
+						}
+					} else if (userSelection.equalsIgnoreCase(reference4)) {
+						if (SNValidation == FOUR || SNValidation == FIVE || SNValidation == SIX) {
+							type = addType.getText().charAt(0);
+							Toy p = new Puzzle(SN, name, brand, price, inventory, age, type);
+							toys.add(p);
+							exitFile();
+							addErrorMessage.setText("Success");
+						} else {
+							addErrorMessage.setText("Puzzle Serial error");
+						}
 					}
-				}
-			}else if (userSelection.equalsIgnoreCase(reference4)) {
-				if(SNValidation == FOUR || SNValidation == FIVE || SNValidation == SIX) {
-					type = addType.getText().charAt(0);
-					Toy p = new Puzzle (SN, name, brand, price, inventory, age, type);
-					toys.add(p);
-					exitFile();
-					addErrorMessage.setText("Success");
-				}else {
-					addErrorMessage.setText("Puzzle Serial error");
-				}
-			}
 				}
 			}
 		}
-		private boolean addSNExist(String sN) {
-			boolean valid = true;
-			for(Toy t: toys) {
-				String grabber = t.getSN();
-				if(grabber.equalsIgnoreCase(sN)) {
-					valid = false;
-				}
-			}
-			return valid;
-	}
-		
-		
-	
 
+	}
+
+	private boolean addSNExist(String sN) {
+		boolean valid = true;
+		for (Toy t : toys) {
+			String grabber = t.getSN();
+			if (grabber.equalsIgnoreCase(sN)) {
+				valid = false;
+			}
+		}
+		return valid;
+	}
 
 	/**
-	 * This method is used to determine the label beside the textfield on home tab so the user 
-	 * does not confuse what information he needs to type in
+	 * This method is used to determine the label beside the textfield on home tab
+	 * so the user does not confuse what information he needs to type in
+	 * 
 	 * @param event when a radio button is selected on the home tab
 	 */
 	@FXML
@@ -264,8 +268,11 @@ public class CustomerViewController implements Initializable {
 			searchTypeLabel.setText("Type");
 		}
 	}
+
 	/**
-	 * This method is used to determine which method is needed needs to be called to display the correct items in listview
+	 * This method is used to determine which method is needed needs to be called to
+	 * display the correct items in listview
+	 * 
 	 * @param event when the search button is clicked on the home page
 	 */
 	@FXML
@@ -279,17 +286,22 @@ public class CustomerViewController implements Initializable {
 			searchByType(homeSN.getText());
 		}
 	}
+
 	/**
 	 * This method is used to clear listView on the home page
+	 * 
 	 * @param event when the clear button is clicked on the home page
 	 */
 	@FXML
-	public void clearButtonHandler (ActionEvent event) {
-		
+	public void clearButtonHandler(ActionEvent event) {
+
 		homeView.getItems().clear();
 	}
+
 	/**
-	 * Used by the home tab to search for the Toy object based of SN input and puts it in listview
+	 * Used by the home tab to search for the Toy object based of SN input and puts
+	 * it in listview
+	 * 
 	 * @param sn the serial number the user inputted
 	 */
 	private void homeVerifySN(String sn) {
@@ -315,9 +327,7 @@ public class CustomerViewController implements Initializable {
 			searchError.setText("The serial number must only contain digits!");
 		}
 	}
-	
-	
-	
+
 	/**
 	 * Method that creates a new arrayList based off search criteria the user is
 	 * looking for and updates the database ArrayList according to the actions the
@@ -356,9 +366,10 @@ public class CustomerViewController implements Initializable {
 		names.removeAll(toyName);
 	}
 
-	
 	/**
-	 * This method is used to display the toys of listview for the remove tab that was found based of serial search
+	 * This method is used to display the toys of listview for the remove tab that
+	 * was found based of serial search
+	 * 
 	 * @param sn the serial number the user inputted
 	 */
 	private void removeVerifySN(String sn) {
@@ -386,7 +397,7 @@ public class CustomerViewController implements Initializable {
 
 		}
 	}
-	
+
 	/**
 	 * Method that creates a new arrayList based off search criteria the user is
 	 * looking for and updates the database ArrayList according to the actions the
@@ -453,9 +464,9 @@ public class CustomerViewController implements Initializable {
 		type = FXCollections.observableArrayList(toyType);
 		homeView.getItems().addAll(type);
 		type.removeAll(toyType);
-		
+
 	}
-	
+
 	/**
 	 * Validation class that uses the created ToyStoreException class to throw error
 	 * message if the price is negative
@@ -494,9 +505,10 @@ public class CustomerViewController implements Initializable {
 		return valid;
 	}
 
-
 	/**
-	 * this method is used to find the toy object in the array based off user inputted serial number
+	 * this method is used to find the toy object in the array based off user
+	 * inputted serial number
+	 * 
 	 * @param SN the serial number the user inputted
 	 * @return t the toy object that was found in the array
 	 */
@@ -519,13 +531,8 @@ public class CustomerViewController implements Initializable {
 		return t;
 	}
 
-
-
-
-
-	
 	// Read file and save methods
-	
+
 	/**
 	 * Method which loads the toy data in the file "toys.txt"
 	 * 
@@ -534,30 +541,30 @@ public class CustomerViewController implements Initializable {
 		File file = new File(FILE_PATH); // file location for export
 		PrintWriter pw; // used for file export
 		String text; // used to print exceptions messages
-			try {
-				pw = new PrintWriter(file);
-				for (Toy t: toys) {
-					if(t instanceof Animal) {
-						Animal cast = (Animal)t;
-						pw.println(cast.format());
-					} else if(t instanceof Figure) {
-						Figure cast = (Figure)t;
-						pw.println(cast.format());
-					} else if(t instanceof Puzzle) {
-						Puzzle cast = (Puzzle)t;
-						pw.println(cast.format());
-					} else if(t instanceof BoardGame) {
-						BoardGame cast = (BoardGame)t;
-						pw.println(cast.format());
-					}
+		try {
+			pw = new PrintWriter(file);
+			for (Toy t : toys) {
+				if (t instanceof Animal) {
+					Animal cast = (Animal) t;
+					pw.println(cast.format());
+				} else if (t instanceof Figure) {
+					Figure cast = (Figure) t;
+					pw.println(cast.format());
+				} else if (t instanceof Puzzle) {
+					Puzzle cast = (Puzzle) t;
+					pw.println(cast.format());
+				} else if (t instanceof BoardGame) {
+					BoardGame cast = (BoardGame) t;
+					pw.println(cast.format());
 				}
-				
-				pw.close();
-			} catch (FileNotFoundException e) {
-				text = e.getMessage();
 			}
+
+			pw.close();
+		} catch (FileNotFoundException e) {
+			text = e.getMessage();
+		}
 	}
-	
+
 	/**
 	 * A method which loads the file "toys.txt" and adds different types of toys
 	 * into an arraylist
@@ -624,8 +631,10 @@ public class CustomerViewController implements Initializable {
 		}
 		fileReader.close(); // close the file reader
 	}
+
 	/**
 	 * this method is used to validate SN length
+	 * 
 	 * @param sn
 	 * @return
 	 */
@@ -637,11 +646,11 @@ public class CustomerViewController implements Initializable {
 		if (sn.matches("[0-9]+")) {
 			if (sn.length() == TEN) {
 				valid = true;
-			}else {
-					valid = false;
-				}
+			} else {
+				valid = false;
+			}
 		}
 		return valid;
 	}
-	
+
 }

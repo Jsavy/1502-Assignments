@@ -37,7 +37,7 @@
                      </font>
                   </Label>
                   <Button fx:id="btnSearch" layoutX="29.0" layoutY="394.0" mnemonicParsing="false" onAction="#btnSearchHandler" prefHeight="25.0" prefWidth="119.0" text="Search" />
-                  <Button fx:id="btnClear" layoutX="179.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Clear" />
+                  <Button fx:id="btnClear" layoutX="179.0" layoutY="394.0" mnemonicParsing="false" onAction="#clearButtonHandler" prefHeight="25.0" prefWidth="115.0" text="Clear" />
                   <RadioButton fx:id="serialButton" layoutX="40.0" layoutY="111.0" mnemonicParsing="false" onAction="#radioSelected" text="Serial Number">
                      <toggleGroup>
                         <ToggleGroup fx:id="inventorySelect" />
