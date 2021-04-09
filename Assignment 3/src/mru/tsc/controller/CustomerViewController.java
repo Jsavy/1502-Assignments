@@ -145,6 +145,17 @@ public class CustomerViewController implements Initializable {
 		String reference2 = "Animal";
 		String reference3 = "Board Game";
 		String reference4 = "Puzzle";
+		char figureRestriction1 = 'A';
+		char figureRestriction2 = 'D';
+		char figureRestriction3 = 'H';
+		char animalRestriction1 = 'S';
+		char animalRestriction2 = 'M';
+		char animalRestriction3 = 'L';
+		char puzzleRestriction1 = 'M';
+		char puzzleRestriction2 = 'C';
+		char puzzleRestriction3 = 'L';
+		char puzzleRestriction4 = 'T';
+		char puzzleRestriction5 = 'R';
 		final int ZERO = 0;
 		final int ONE = 1;
 		final int TWO = 2;
@@ -210,11 +221,16 @@ public class CustomerViewController implements Initializable {
 				if (priceValidity && SNLengthValidity) {
 					if (userSelection.equalsIgnoreCase(reference1)) {
 						if (SNValidation == ZERO || SNValidation == ONE) {
-							classification = addClassification.getText().charAt(0);
-							Toy f = new Figure(SN, name, brand, price, inventory, age, classification);
-							toys.add(f);
-							exitFile();
-							addErrorMessage.setText("Success");
+							classification = addClassification.getText().toUpperCase().charAt(0);
+							if(classification == figureRestriction1 || classification == figureRestriction2 || classification == figureRestriction3) {
+								Toy f = new Figure(SN, name, brand, price, inventory, age, classification);
+								toys.add(f);
+								exitFile();
+								addErrorMessage.setText("Success");
+							} else {
+								addErrorMessage.setText("The classification does not follow the database");
+								LOGR.log(Level.WARNING, "The classification letter did not match the A,D,H scheme used in the database");
+							}
 						} else {
 							addErrorMessage.setText("Figure Serial error");
 							LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of Figure");
@@ -222,11 +238,16 @@ public class CustomerViewController implements Initializable {
 					} else if (userSelection.equalsIgnoreCase(reference2)) {
 						if (SNValidation == TWO || SNValidation == THREE) {
 							material = addMaterial.getText();
-							size = addSize.getText().charAt(0);
-							Toy a = new Animal(SN, name, brand, price, inventory, age, material, size);
-							toys.add(a);
-							exitFile();
-							addErrorMessage.setText("Success");
+							size = addSize.getText().toUpperCase().charAt(0);
+							if(size == animalRestriction1 || size == animalRestriction2 || size == animalRestriction3) {
+								Toy a = new Animal(SN, name, brand, price, inventory, age, material, size);
+								toys.add(a);
+								exitFile();
+								addErrorMessage.setText("Success");
+							} else {
+								addErrorMessage.setText("The size does not follow the database");
+								LOGR.log(Level.WARNING, "The size letter did not match the S,M,L scheme used in the database");
+							}
 						} else {
 							addErrorMessage.setText("Animal Serial error");
 							LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of Animal");
@@ -257,11 +278,17 @@ public class CustomerViewController implements Initializable {
 						}
 					} else if (userSelection.equalsIgnoreCase(reference4)) {
 						if (SNValidation == FOUR || SNValidation == FIVE || SNValidation == SIX) {
-							type = addType.getText().charAt(0);
-							Toy p = new Puzzle(SN, name, brand, price, inventory, age, type);
-							toys.add(p);
-							exitFile();
-							addErrorMessage.setText("Success");
+							type = addType.getText().toUpperCase().charAt(0);
+							if(type == puzzleRestriction1 || type == puzzleRestriction2 || type == puzzleRestriction3 
+									|| type == puzzleRestriction4 || type == puzzleRestriction5) {
+								Toy p = new Puzzle(SN, name, brand, price, inventory, age, type);
+								toys.add(p);
+								exitFile();
+								addErrorMessage.setText("Success");
+							} else {
+								addErrorMessage.setText("The type does not follow the database");
+								LOGR.log(Level.WARNING, "The type letter did not match the M,C,L,T,R scheme used in the database");
+							}
 						} else {
 							addErrorMessage.setText("Puzzle Serial error");
 							LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of Puzzle");
