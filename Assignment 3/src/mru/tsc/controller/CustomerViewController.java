@@ -36,7 +36,12 @@ import mru.tsc.model.BoardGame;
 import mru.tsc.model.Figure;
 import mru.tsc.model.Puzzle;
 import mru.tsc.model.Toy;
-
+/**
+ * Controller class for FXML
+ * @author Justin Savenko
+ * @author Austin Thieu
+ *
+ */
 public class CustomerViewController implements Initializable {
 
 	private static final String FILE_PATH = "res/toys.txt"; // file path for toys data
@@ -594,7 +599,7 @@ public class CustomerViewController implements Initializable {
 	 * @param min the minimum number of players user inputed for toy
 	 * @param max the maximum number of players user inputed for toy
 	 * @return valid the boolean value of validity
-	 * @throws ToyStoreException exception class used to throw exception
+	 * @throws PlayerException exception class used to throw exception
 	 */
 	public boolean isPlayerValid(int min, int max) throws PlayerException {
 		boolean valid = true; // boolean used to determine if player numbers are valid
@@ -736,8 +741,8 @@ public class CustomerViewController implements Initializable {
 	/**
 	 * this method is used to validate SN length
 	 * 
-	 * @param sn
-	 * @return
+	 * @param sn - the serial number the user inputted
+	 * @return valid - the boolean value of validity
 	 */
 	private boolean addVerifySN(String sn) {
 

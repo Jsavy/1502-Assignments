@@ -18,3 +18,39 @@ Apr. 08, 2021 9:21:14 P.M. mru.tsc.controller.CustomerViewController setupLogger
 WARNING: First Log
 Apr. 08, 2021 9:22:53 P.M. mru.tsc.controller.CustomerViewController setupLogger
 WARNING: First Log
+Apr. 08, 2021 10:05:28 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 10:06:03 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 10:06:46 P.M. mru.tsc.controller.CustomerViewController btnBuyHandler
+INFO: Successful purchase
+Apr. 08, 2021 10:11:49 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 10:14:37 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 10:26:26 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 10:56:05 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 10:56:29 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 10:57:35 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 10:59:12 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 10:59:22 P.M. mru.tsc.controller.CustomerViewController btnBuyHandler
+INFO: Successful purchase
+Apr. 08, 2021 10:59:44 P.M. mru.tsc.controller.CustomerViewController btnBuyHandler
+INFO: Successful purchase
+Apr. 08, 2021 11:00:26 P.M. mru.tsc.controller.CustomerViewController saveButtonPushed
+WARNING: The price cannot be negative Inputted value: -13.0
+Apr. 08, 2021 11:01:22 P.M. mru.tsc.controller.CustomerViewController setupLogger
+WARNING: First Log
+Apr. 08, 2021 11:01:36 P.M. mru.tsc.controller.CustomerViewController btnBuyHandler
+INFO: Successful purchase
+Apr. 08, 2021 11:02:38 P.M. mru.tsc.controller.CustomerViewController saveButtonPushed
+WARNING: The minimum number of players exceeds the maximum Inputted minimum: 6 Inputted maximum: 2
+Apr. 08, 2021 11:03:01 P.M. mru.tsc.controller.CustomerViewController btnRemoveHandler
+INFO: Toy successfully removed
+Apr. 08, 2021 11:03:04 P.M. mru.tsc.controller.CustomerViewController removeVerifySN
+WARNING: The toy does not exist in the database
