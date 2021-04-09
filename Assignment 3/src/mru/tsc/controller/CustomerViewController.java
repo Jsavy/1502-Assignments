@@ -80,7 +80,6 @@ public class CustomerViewController implements Initializable {
 	}
 
 
-	// Remove item feature
 	@FXML
 	private ListView<Toy> removeView, homeView;
 
@@ -100,6 +99,9 @@ public class CustomerViewController implements Initializable {
 	@FXML
 	Label removeErrorMessage, addErrorMessage, searchTypeLabel, searchError;
 
+	
+	// Remove item feature
+	
 	/**
 	 * This handler is used when the user selects the search button on the remove
 	 * tab and finds the toy object
