@@ -2,11 +2,13 @@ package mru.tsc.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.*;
 
 import com.sun.prism.paint.Color;
 import java.awt.color.*;
@@ -38,6 +40,8 @@ import mru.tsc.model.Toy;
 public class CustomerViewController implements Initializable {
 
 	private static final String FILE_PATH = "res/toys.txt";
+	private static final String LOG_PATH = "doc/myLog.log";
+	private final static Logger LOGR = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	ArrayList<Toy> toys;
 	ArrayList<Toy> toyName;
 	ArrayList<Toy> toyType;
@@ -50,10 +54,31 @@ public class CustomerViewController implements Initializable {
 		choiceBox.getItems().add("Animal");
 		choiceBox.getItems().add("Board Game");
 		choiceBox.getItems().add("Puzzle");
-
+		LogManager.getLogManager().reset();
+		LOGR.setLevel(Level.INFO);
+		setupLogger();
 		readFile();
 
 	}
+	/**
+	 * This method is used to start up the logger and initiate FileHandler and log formatter objects
+	 * the fileHandler allows for appendage to existing file so no log data is lost
+	 */
+	public static void setupLogger() {
+		try {
+			FileHandler fh = new FileHandler(LOG_PATH, true);
+			SimpleFormatter sformatter = new SimpleFormatter();
+			fh.setFormatter(sformatter);
+			LOGR.addHandler(fh);
+			LOGR.log(Level.WARNING, "First Log");
+			LOGR.fine("info");
+			
+		}catch(IOException e) {
+			LOGR.log(Level.SEVERE, e.getMessage(), e);
+		}
+	    LOGR.fine("This message is logged in the file");
+	}
+
 
 	// Remove item feature
 	@FXML
@@ -160,9 +185,11 @@ public class CustomerViewController implements Initializable {
 		t = searchRemove(SN);
 		if (t != null) {
 			addErrorMessage.setText("Toy already exists");
+			LOGR.log(Level.WARNING, "Toy Exists within the database");
 		} else {
 			if (!SNLengthValidity) {
 				addErrorMessage.setText("The Serial number contains letters or is too short or long");
+				LOGR.log(Level.WARNING, "The Serial number is either too long or short. If not then it contains a letter");
 			} else {
 				name = addName.getText();
 				brand = addBrand.getText();
@@ -176,6 +203,7 @@ public class CustomerViewController implements Initializable {
 						priceValidity = isPriceValid(price);
 					} catch (ToyStoreException e) {
 						String error = e.getMessage();
+						LOGR.log(Level.WARNING, e.getMessage());
 						addErrorMessage.setText(error);
 					}
 				}
@@ -189,6 +217,7 @@ public class CustomerViewController implements Initializable {
 							addErrorMessage.setText("Success");
 						} else {
 							addErrorMessage.setText("Figure Serial error");
+							LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of Figure");
 						}
 					} else if (userSelection.equalsIgnoreCase(reference2)) {
 						if (SNValidation == TWO || SNValidation == THREE) {
@@ -200,6 +229,7 @@ public class CustomerViewController implements Initializable {
 							addErrorMessage.setText("Success");
 						} else {
 							addErrorMessage.setText("Animal Serial error");
+							LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of Animal");
 						}
 					} else if (userSelection.equalsIgnoreCase(reference3)) {
 						minPlayer = Integer.parseInt(addMinPlayer.getText());
@@ -209,6 +239,7 @@ public class CustomerViewController implements Initializable {
 								playerValidity = isPlayerValid(minPlayer, maxPlayer);
 							} catch (PlayerException e) {
 								String error = e.getMessage();
+								LOGR.log(Level.WARNING, e.getMessage());
 								addErrorMessage.setText(error);
 							}
 						} else {
@@ -221,6 +252,7 @@ public class CustomerViewController implements Initializable {
 								addErrorMessage.setText("Success");
 							} else {
 								addErrorMessage.setText("BoardGame Serial error");
+								LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of BoardGame");
 							}
 						}
 					} else if (userSelection.equalsIgnoreCase(reference4)) {
@@ -232,6 +264,7 @@ public class CustomerViewController implements Initializable {
 							addErrorMessage.setText("Success");
 						} else {
 							addErrorMessage.setText("Puzzle Serial error");
+							LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of Puzzle");
 						}
 					}
 				}
@@ -315,6 +348,7 @@ public class CustomerViewController implements Initializable {
 				a = searchRemove(sn);
 				if (a == null) {
 					removeErrorMessage.setText("Toy does not exist");
+					LOGR.log(Level.WARNING, "The toy was not found to be in the database");
 				} else {
 					SN = FXCollections.observableArrayList(a);
 					homeView.getItems().addAll(SN);
@@ -322,9 +356,11 @@ public class CustomerViewController implements Initializable {
 				}
 			} else {
 				searchError.setText("The Serial Number's length must be 10 digits!");
+				LOGR.log(Level.WARNING, "The Serial that was entered is either too long or short");
 			}
 		} else {
 			searchError.setText("The serial number must only contain digits!");
+			LOGR.log(Level.WARNING, "The Serial that was entered contains characters outside of 0-9 range");
 		}
 	}
 
@@ -383,6 +419,7 @@ public class CustomerViewController implements Initializable {
 				a = searchRemove(sn);
 				if (a == null) {
 					removeErrorMessage.setText("Toy does not exist");
+					LOGR.log(Level.WARNING, "The toy does not exist in the database");
 				} else {
 					t = FXCollections.observableArrayList(a);
 					removeView.getItems().addAll(t);
@@ -390,10 +427,12 @@ public class CustomerViewController implements Initializable {
 				}
 			} else {
 				removeErrorMessage.setText("The Serial Number's length must be 10 digits!");
+				LOGR.log(Level.WARNING, "The Serial that was entered is either too long or short");
 
 			}
 		} else {
 			removeErrorMessage.setText("The serial number must only contain digits!");
+			LOGR.log(Level.WARNING, "The Serial that was entered contains characters outside the 0-9 range");
 
 		}
 	}
@@ -561,7 +600,7 @@ public class CustomerViewController implements Initializable {
 
 			pw.close();
 		} catch (FileNotFoundException e) {
-			text = e.getMessage();
+			LOGR.log(Level.WARNING, e.getMessage());
 		}
 	}
 
@@ -591,7 +630,7 @@ public class CustomerViewController implements Initializable {
 		try {
 			fileReader = new Scanner(myFile);
 		} catch (FileNotFoundException e) {
-			text = e.getMessage();
+			LOGR.log(Level.WARNING, e.getMessage());
 		}
 
 		while (fileReader.hasNextLine()) {
