@@ -91,7 +91,7 @@ public class CustomerViewController implements Initializable {
 	private RadioButton serialButton, nameButton, typeButton;
 
 	@FXML
-	private Button btnRemove, btnClear, removeSearchButton;
+	private Button btnRemove, btnClear, removeSearchButton, btnBuy;
 
 	@FXML
 	private TextField removeInput, addSN, addName, addBrand, addPrice, addInventory, addAge, addClassification, addType,
@@ -131,6 +131,8 @@ public class CustomerViewController implements Initializable {
 		removeErrorMessage.setText("Toy successfully removed");
 		exitFile();
 	}
+	
+	// add Toy feature
 
 	/**
 	 * This handler is used when the user selects the save button on the add tab and
@@ -175,7 +177,7 @@ public class CustomerViewController implements Initializable {
 		boolean priceValidity = false;
 		boolean playerValidity = false;
 		boolean SNLengthValidity = false;
-		boolean SNExists = false;
+		boolean SNExists;
 		int inventory;
 		int age;
 		char classification;
@@ -309,6 +311,29 @@ public class CustomerViewController implements Initializable {
 			}
 		}
 		return valid;
+	}
+	
+	// Home page 
+	
+	@FXML
+	public void btnBuyHandler (ActionEvent event) {
+		Toy selectedToy;
+		final int ONE = 1; // constant variable to buy 1 instance of a toy
+
+		selectedToy = homeView.getSelectionModel().getSelectedItem();
+		
+		if (selectedToy.getAvaliableCount() == 1) {
+			homeView.getItems().remove(selectedToy);
+			toys.remove(selectedToy);
+			searchError.setText("Successful purchase");
+		}else {
+			homeView.refresh();
+			selectedToy.setAvaliableCount(selectedToy.getAvaliableCount() - ONE);
+			searchError.setText("Successful purchase");
+		}
+		
+		
+		exitFile();
 	}
 
 	/**

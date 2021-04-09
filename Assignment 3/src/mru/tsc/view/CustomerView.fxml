@@ -30,7 +30,7 @@
                      </children>
                   </AnchorPane>
                   <ListView fx:id="homeView" layoutX="366.0" layoutY="69.0" prefHeight="397.0" prefWidth="759.0" />
-                  <Button fx:id="btnBuy" layoutX="663.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Buy" />
+                  <Button fx:id="btnBuy" layoutX="663.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnBuyHandler" prefHeight="25.0" prefWidth="87.0" text="Buy" />
                   <Label layoutX="13.0" layoutY="62.0" prefHeight="38.0" prefWidth="150.0" text="Search Inventory:">
                      <font>
                         <Font size="18.0" />
