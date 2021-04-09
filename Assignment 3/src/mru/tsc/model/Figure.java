@@ -51,7 +51,7 @@ public class Figure extends Toy {
 		return text;
 	}
 	/**
-	 * unformatted toString method to overide the default toString
+	 * unformatted toString method to override the default toString
 	 * 
 	 * @return text   the unformatted display for toString for figures
 	 */

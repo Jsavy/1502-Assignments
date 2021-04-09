@@ -39,25 +39,25 @@ import mru.tsc.model.Toy;
 
 public class CustomerViewController implements Initializable {
 
-	private static final String FILE_PATH = "res/toys.txt";
-	private static final String LOG_PATH = "doc/myLog.log";
+	private static final String FILE_PATH = "res/toys.txt"; // file path for toys data
+	private static final String LOG_PATH = "doc/myLog.log"; // file path for log data
 	private final static Logger LOGR = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-	ArrayList<Toy> toys;
-	ArrayList<Toy> toyName;
-	ArrayList<Toy> toyType;
+	ArrayList<Toy> toys; // ArrayList for all toys
+	ArrayList<Toy> toyName; // ArrayList for searching toy names
+	ArrayList<Toy> toyType; // ArrayList for searching toy types
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		toys = new ArrayList<Toy>();
-		choiceBox.getItems().add("Figure");
+		choiceBox.getItems().add("Figure"); // choice to add a Figure toy
 		choiceBox.setValue("Figure");
-		choiceBox.getItems().add("Animal");
-		choiceBox.getItems().add("Board Game");
-		choiceBox.getItems().add("Puzzle");
+		choiceBox.getItems().add("Animal"); // choice to add a Animal toy
+		choiceBox.getItems().add("Board Game"); // choice to add a Board Game toy
+		choiceBox.getItems().add("Puzzle"); // choice to add a Puzzle toy
+		toys = new ArrayList<Toy>(); // Arraylsit to load all toys
 		LogManager.getLogManager().reset();
 		LOGR.setLevel(Level.INFO);
 		setupLogger();
-		readFile();
+		readFile(); // Reads .txt file and loads toy objects 
 
 	}
 	/**
@@ -100,7 +100,7 @@ public class CustomerViewController implements Initializable {
 	Label removeErrorMessage, addErrorMessage, searchTypeLabel, searchError;
 
 	
-	// Remove item feature
+	// ************************** Remove Toy ***************************************
 	
 	/**
 	 * This handler is used when the user selects the search button on the remove
@@ -131,10 +131,11 @@ public class CustomerViewController implements Initializable {
 		removeView.getItems().remove(selectedToy);
 		toys.remove(selectedToy);
 		removeErrorMessage.setText("Toy successfully removed");
+		LOGR.log(Level.INFO, "Toy successfully removed");
 		exitFile();
 	}
 	
-	// add Toy feature
+	//************************** Add Toy *************************************************
 
 	/**
 	 * This handler is used when the user selects the save button on the add tab and
@@ -144,52 +145,45 @@ public class CustomerViewController implements Initializable {
 	 */
 	@FXML
 	void saveButtonPushed(ActionEvent event) {
-		String userSelection = choiceBox.getValue();
-		String reference1 = "Figure";
-		String reference2 = "Animal";
-		String reference3 = "Board Game";
-		String reference4 = "Puzzle";
-		char figureRestriction1 = 'A';
-		char figureRestriction2 = 'D';
-		char figureRestriction3 = 'H';
-		char animalRestriction1 = 'S';
-		char animalRestriction2 = 'M';
-		char animalRestriction3 = 'L';
-		char puzzleRestriction1 = 'M';
-		char puzzleRestriction2 = 'C';
-		char puzzleRestriction3 = 'L';
-		char puzzleRestriction4 = 'T';
-		char puzzleRestriction5 = 'R';
-		final int ZERO = 0;
-		final int ONE = 1;
-		final int TWO = 2;
-		final int THREE = 3;
-		final int FOUR = 4;
-		final int FIVE = 5;
-		final int SIX = 6;
-		final int SEVEN = 7;
-		final int EIGHT = 8;
-		final int NINE = 9;
-		String SN;
+		String userSelection = choiceBox.getValue(); // user selection
+		String reference1 = "Figure"; // used to confirm user toy type
+		String reference2 = "Animal"; // used to confirm user toy type
+		String reference3 = "Board Game"; // used to confirm user toy type
+		String reference4 = "Puzzle"; // used to confirm user toy type
+		char figureRestriction1 = 'A'; // validate Figure classification
+		char figureRestriction2 = 'D'; // validate Figure classification
+		char figureRestriction3 = 'H'; // validate Figure classification
+		char animalRestriction1 = 'S'; // validate Animal classification
+		char animalRestriction2 = 'M'; // validate Animal classification
+		char animalRestriction3 = 'L'; // validate Animal classification
+		char puzzleRestriction1 = 'M'; // validate Puzzle classification
+		char puzzleRestriction2 = 'C'; // validate Puzzle classification
+		char puzzleRestriction3 = 'L'; // validate Puzzle classification
+		char puzzleRestriction4 = 'T'; // validate Puzzle classification
+		char puzzleRestriction5 = 'R'; // validate Puzzle classification
+		final int NEGONE = -1; // used for price exception
+		final int ZERO = 0; // used to validate SN
+		final int ONE = 1; // used to validate SN
+		final int TWO = 2; // used to validate SN
+		final int THREE = 3; // used to validate SN
+		final int FOUR = 4; // used to validate SN
+		final int FIVE = 5; // used to validate SN
+		final int SIX = 6; // used to validate SN
+		final int SEVEN = 7; // used to validate SN
+		final int EIGHT = 8; // used to validate SN
+		final int NINE = 9; // used to validate SN
+		double price = NEGONE;
+		String SN, name, brand;
 		char SNValue;
 		int SNValidation;
-		String name;
-		String brand;
-		double price = -1;
 		boolean priceValidity = false;
 		boolean playerValidity = false;
 		boolean SNLengthValidity = false;
 		boolean SNExists;
-		int inventory;
-		int age;
-		char classification;
-		char type;
-		String material;
-		char size;
-		int minPlayer;
-		int maxPlayer;
-		String numPlayer;
-		String designer;
+		int inventory, age;
+		char classification, type, size;
+		String material, numPlayer, designer;
+		int minPlayer, maxPlayer;
 		Toy t = null;
 
 		SN = addSN.getText();
@@ -198,6 +192,7 @@ public class CustomerViewController implements Initializable {
 		SNLengthValidity = addVerifySN(SN);
 		SNExists = addSNExist(SN);
 		t = searchRemove(SN);
+		
 		if (t != null) {
 			addErrorMessage.setText("Toy already exists");
 			LOGR.log(Level.WARNING, "Toy Exists within the database");
@@ -223,6 +218,7 @@ public class CustomerViewController implements Initializable {
 					}
 				}
 				if (priceValidity && SNLengthValidity) {
+					// Adding Figure toy
 					if (userSelection.equalsIgnoreCase(reference1)) {
 						if (SNValidation == ZERO || SNValidation == ONE) {
 							classification = addClassification.getText().toUpperCase().charAt(0);
@@ -239,6 +235,7 @@ public class CustomerViewController implements Initializable {
 							addErrorMessage.setText("Figure Serial error");
 							LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of Figure");
 						}
+						// Adding Animal Toy
 					} else if (userSelection.equalsIgnoreCase(reference2)) {
 						if (SNValidation == TWO || SNValidation == THREE) {
 							material = addMaterial.getText();
@@ -256,6 +253,7 @@ public class CustomerViewController implements Initializable {
 							addErrorMessage.setText("Animal Serial error");
 							LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of Animal");
 						}
+						// Adding Board Game toy
 					} else if (userSelection.equalsIgnoreCase(reference3)) {
 						minPlayer = Integer.parseInt(addMinPlayer.getText());
 						maxPlayer = Integer.parseInt(addMaxPlayer.getText());
@@ -280,6 +278,7 @@ public class CustomerViewController implements Initializable {
 								LOGR.log(Level.WARNING, "The Serial that was entered does not follow the first digit criteria of BoardGame");
 							}
 						}
+						// Adding Puzzle toy
 					} else if (userSelection.equalsIgnoreCase(reference4)) {
 						if (SNValidation == FOUR || SNValidation == FIVE || SNValidation == SIX) {
 							type = addType.getText().toUpperCase().charAt(0);
@@ -304,6 +303,12 @@ public class CustomerViewController implements Initializable {
 
 	}
 
+	/**
+	 * Method to checks if SN number already exists
+	 * 
+	 * @param sN - SN number
+	 * @return valid - boolean to find if SN already exists
+	 */
 	private boolean addSNExist(String sN) {
 		boolean valid = true;
 		for (Toy t : toys) {
@@ -315,23 +320,26 @@ public class CustomerViewController implements Initializable {
 		return valid;
 	}
 	
-	// Home page 
+	//***************************** Home Page **************************************
 	
 	@FXML
 	public void btnBuyHandler (ActionEvent event) {
-		Toy selectedToy;
+		Toy selectedToy; // user selected toy
 		final int ONE = 1; // constant variable to buy 1 instance of a toy
 
-		selectedToy = homeView.getSelectionModel().getSelectedItem();
+		selectedToy = homeView.getSelectionModel().getSelectedItem(); // user selection from List View
 		
+		// Buying toy
 		if (selectedToy.getAvaliableCount() == 1) {
 			homeView.getItems().remove(selectedToy);
 			toys.remove(selectedToy);
 			searchError.setText("Successful purchase");
+			LOGR.log(Level.INFO, "Successful purchase");
 		}else {
 			homeView.refresh();
 			selectedToy.setAvaliableCount(selectedToy.getAvaliableCount() - ONE);
 			searchError.setText("Successful purchase");
+			LOGR.log(Level.INFO, "Successful purchase");
 		}
 		
 		
@@ -339,7 +347,7 @@ public class CustomerViewController implements Initializable {
 	}
 
 	/**
-	 * This method is used to determine the label beside the textfield on home tab
+	 * This method is used to determine the label beside the TextField on home tab
 	 * so the user does not confuse what information he needs to type in
 	 * 
 	 * @param event when a radio button is selected on the home tab
@@ -358,7 +366,7 @@ public class CustomerViewController implements Initializable {
 
 	/**
 	 * This method is used to determine which method is needed needs to be called to
-	 * display the correct items in listview
+	 * display the correct items in ListView
 	 * 
 	 * @param event when the search button is clicked on the home page
 	 */
@@ -387,7 +395,7 @@ public class CustomerViewController implements Initializable {
 
 	/**
 	 * Used by the home tab to search for the Toy object based of SN input and puts
-	 * it in listview
+	 * it in ListView
 	 * 
 	 * @param sn the serial number the user inputted
 	 */
@@ -426,7 +434,7 @@ public class CustomerViewController implements Initializable {
 	 * @param name the name of toy based off keyword search
 	 */
 	private void searchByName(String name) {
-		ObservableList<Toy> names;
+		ObservableList<Toy> names; // Observable ArrayList to be used in ListView
 		toyName = new ArrayList<Toy>(); // arraylist for printing just the toys that contain the keyword
 		String nameLow = name.toLowerCase(); // makes the inputed value by user to lowercase to use contains
 		String resultLow; // the resulting name from searching the array in lowercase
@@ -457,7 +465,7 @@ public class CustomerViewController implements Initializable {
 	}
 
 	/**
-	 * This method is used to display the toys of listview for the remove tab that
+	 * This method is used to display the toys of ListView for the remove tab that
 	 * was found based of serial search
 	 * 
 	 * @param sn the serial number the user inputted
@@ -499,7 +507,7 @@ public class CustomerViewController implements Initializable {
 	 * @param types the type of toy based off instance of search
 	 */
 	private void searchByType(String types) {
-		ObservableList<Toy> type;
+		ObservableList<Toy> type; // Observable ArrayList to display on ListView
 		toyType = new ArrayList<Toy>(); // Arraylist used to print the type of toy user requested
 		String a = "Figure"; // reference item used to determine what type of casting required
 		String b = "Animal"; // reference item used to determine what type of casting required
